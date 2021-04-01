@@ -5,7 +5,10 @@ const rightLight = document.querySelector(".right-light");
 const subBtn = document.querySelector(".submit-button");
 const logo = document.querySelector(".logo");
 let suggestionsCity = suggestionsList.children;
-// let cityArray = [];
+
+const myPlace = {
+  lat: 49.092
+}
 
 let cities = [];
 
@@ -35,36 +38,16 @@ function displayMatches(){
     suggestionsList.innerHTML = html;
 
     // test
-
-    if(suggestionsCity[0]){
-      suggestionsCity[0].addEventListener('click', () =>{
-        const foundSuggestion = suggestionsCity[0].innerText;
-        // console.log(foundSuggestion);
-        searchInput.value = foundSuggestion;
-        suggestionsList.style.display = "none";
-        const foundCity = cities.filter(findCity)
-                                .map(mapCity);
-        const displayFound = function(){
-          console.log(foundCity[0]);
-        }
-        displayFound();
-      })
-    }
-    if(suggestionsCity[1]){
-      suggestionsCity[1].addEventListener('click', () =>{
-        const foundSuggestion = suggestionsCity[1].innerText;
-        // console.log(foundSuggestion);
-        searchInput.value = foundSuggestion;
-        suggestionsList.style.display = "none";
-        const foundCity = cities.filter(findCity)
-                                .map(mapCity);
-        const displayFound = function(){
-          console.log(foundCity[0]);
-        }
-        displayFound();
-      })
-    }
-
+for(let i=0; i<3; i++){
+  if(suggestionsCity[i]){
+    suggestionsCity[i].addEventListener('click', () =>{
+      const foundSuggestion = suggestionsCity[i].innerText;
+      // console.log(foundSuggestion);
+      searchInput.value = foundSuggestion;
+      suggestionsList.style.display = "none";
+    })
+  }
+}
     if(suggestionsList.childElementCount == 433){
       suggestionsList.style.display = "none";
     }
@@ -72,40 +55,7 @@ function displayMatches(){
       suggestionsList.style.display = "inline-block";
     }
 
-    // const foundCity = cities.filter((place) => {
-    //     return place.city.includes(searchInput.value);
-    // })
-    //                       .map((place) => {
-    //     return place.lat;
-    // });
-    // console.log(foundCity);
 
-
-    // console.log(displayFound());
-    // subBtn.addEventListener('click', displayFound());
-    function findCity(place){
-      const regex = new RegExp(searchInput.value, 'gi');
-      return place.city.match(regex);
-    }
-
-    function mapCity(place){
-      return place.lat;
-    }
-
-    const foundCity = cities.filter(findCity)
-                            .map(mapCity);
-
-    const displayFound = function(){
-      console.log(foundCity[0]);
-    }
-    displayFound();
-    // logo.addEventListener('click', displayFound);
-
-    // function takeCordinates(displayFound){
-    //   return displayFound*2 + " new";
-    // }
-
-    // logo.addEventListener('click', takeCordinates);
     // end of test
 }
 
@@ -115,6 +65,10 @@ searchInput.addEventListener('keyup', displayMatches);
 searchInput.addEventListener('focusin', () => {
   suggestionsList.style.display = "inline-block";
 });
+
+searchInput.addEventListener('keyup', sendCordi);
+searchInput.addEventListener('change', sendCordi);
+logo.addEventListener('click', sendCordi);
 // searchInput.addEventListener('focusout', () => {
 //   suggestionsList.style.display = "none";
 // });
@@ -122,3 +76,53 @@ searchInput.addEventListener('focusin', () => {
 // suggestionsList.addEventListener("click", (e) => {
 //   console.log("test");
 // });
+
+// sending name of city and values of position
+function sendCordi(){
+  function findCity(place){
+    const regex = new RegExp(searchInput.value, 'gi');
+    return place.city.match(regex);
+  }
+
+  function mapCity(place){
+    return place.lat;
+  }
+
+  const foundCity = cities.filter(findCity)
+                          .map(mapCity);
+
+  const displayFound = function(){
+    // console.log(foundCity[0]);
+  }
+
+  for(let i=0; i<3; i++){
+    if(suggestionsCity[i]){
+      suggestionsCity[i].addEventListener('click', () =>{
+        const foundCity = cities.filter(findCity)
+                                .map(mapCity);
+        const displayFound = function(){
+          // console.log(foundCity[0]);
+        }
+        displayFound();
+        const changed = changeCordi(foundCity[0]);
+      })
+    }
+  }
+  displayFound();
+  const changed = changeCordi(foundCity[0]);
+
+}
+
+//changing string result to number result
+function changeCordi(value){
+  const valueOfFound = value;
+  const valueAsNumber = parseFloat(valueOfFound);
+  console.log(valueAsNumber);
+  if((valueAsNumber - myPlace.lat) < 3){
+    console.log("Very close!");
+  }
+  else{
+    console.log("Very far :(");
+  }
+
+}

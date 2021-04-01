@@ -36,8 +36,8 @@ body{
 
 .bg-box{
   position: absolute;
-  width: 70px;
-  height: 70px;
+  width: 35px;
+  height: 35px;
   border: 3px solid var(--main-color);
   opacity: 0.1;
 }
@@ -50,12 +50,12 @@ body{
 
 .bg-box:nth-child(2){
   top: 330px;
-  left: -20px;
+  left: -10px;
   transform: rotate(76deg);
 }
 
 .bg-box:nth-child(3){
-  bottom: -6%;
+  bottom: 0%;
   left: 15%;
   transform: rotate(27deg);
 }
@@ -68,14 +68,14 @@ body{
 
 .bg-box:nth-child(5){
   top: 80%;
-  left: 94%;
+  left: 96%;
   transform: rotate(73deg);
 }
 
 .bg-box:nth-child(6){
   border-radius: 100%;
   top: 2%;
-  left: 65%;
+  left: 60%;
   transform: rotate(73deg);
 }
 
@@ -263,7 +263,7 @@ input::placeholder{
   display: flex;
   /* border: 1px solid black; */
   align-self: flex-end;
-  margin: 54px 30px 0 0;
+  margin: 50px 30px 0 0;
   font-size: 24px;
 }
 
