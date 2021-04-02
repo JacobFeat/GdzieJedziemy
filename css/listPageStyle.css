@@ -40,38 +40,56 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .lookup-icon {
   transform: scaleX(-1);
   font-size: 32px !important;
   color: #B8B8B8;
-  position: relative;
   margin-left: 10px;
+  z-index: 2;
+  cursor: pointer;
+
 }
 
 .lookup-icon-active{
-
+  margin-left: 320px;
+  transition: 0.5s ease-in-out;
 }
-
 
 .search{
   position: absolute;
   top: -12px;
-  right: -12px;
+  left: 0px;
   width: 54px;
   height: 54px;
-  z-index: -1;
-  border-radius: 20px;
-  border: 1px solid #B8B8B8;
+  z-index: 1;
+  border: 0px solid #fff;
   outline: none;
-  transform: scaleX(-1);
+  border-radius: 25px;
+  font-family: 'Lora', serif;
+  font-weight: 800;
+  color: #636363;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.search-hover{
+  border: 1px solid #B8B8B8;
+  transition: 0.3s ease-in-out;
 
 }
 
 .search-active{
-  width: 300px;
-  transition: width 0.5s ease-in-out;
+  width: 360px;
+  border: 1px solid #B8B8B8;
+  transition: 0.5s ease-in-out;
+  cursor: auto;
+  padding: 5px 50px 5px 15px;
+
+  /* transition: border 1.5s ease-in-out; */
 }
 
 /* .search:hover{
