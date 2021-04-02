@@ -46,7 +46,39 @@ body {
   transform: scaleX(-1);
   font-size: 32px !important;
   color: #B8B8B8;
+  position: relative;
+  margin-left: 10px;
 }
+
+.lookup-icon-active{
+
+}
+
+
+.search{
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 54px;
+  height: 54px;
+  z-index: -1;
+  border-radius: 20px;
+  border: 1px solid #B8B8B8;
+  outline: none;
+  transform: scaleX(-1);
+
+}
+
+.search-active{
+  width: 300px;
+  transition: width 0.5s ease-in-out;
+}
+
+/* .search:hover{
+  border: 2px solid #B8B8B8;
+  cursor: pointer;
+  width: 200px;
+} */
 
 .map-icon {
   font-size: 32px !important;
