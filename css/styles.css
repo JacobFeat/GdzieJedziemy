@@ -42,59 +42,6 @@ body{
   opacity: 0.1;
 }
 
-.bg-box:first-child{
-  top: 100px;
-  left: 40%;
-  transform: rotate(43deg);
-}
-
-.bg-box:nth-child(2){
-  top: 330px;
-  left: -10px;
-  transform: rotate(76deg);
-}
-
-.bg-box:nth-child(3){
-  bottom: 0%;
-  left: 15%;
-  transform: rotate(27deg);
-}
-
-.bg-box:nth-child(4){
-  top: 60%;
-  left: 35%;
-  transform: rotate(73deg);
-}
-
-.bg-box:nth-child(5){
-  top: 80%;
-  left: 96%;
-  transform: rotate(73deg);
-}
-
-.bg-box:nth-child(6){
-  border-radius: 100%;
-  top: 2%;
-  left: 60%;
-  transform: rotate(73deg);
-}
-
-.bg-box:nth-child(7){
-  border-radius: 100%;
-  top: 2%;
-  left: 65%;
-  transform: rotate(73deg);
-  opacity: 0.0;
-}
-
-.bg-box:nth-child(8){
-  border-radius: 100%;
-  top: 2%;
-  left: 65%;
-  transform: rotate(73deg);
-  opacity: 0.0;
-}
-
 .left-container{
   width: 50%;
   height: 100%;

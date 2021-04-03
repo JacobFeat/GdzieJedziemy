@@ -12,6 +12,19 @@ body {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container{
+  z-index: -3;
+  background-image: url('../images/bg-listPage-6p.svg');
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  position: absolute;
 }
 
 .logo {
@@ -19,7 +32,7 @@ body {
   font-family: 'Lora', serif;
   font-size: 24px;
   font-weight: 800;
-  padding-top: 20px;
+  padding-top: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,51 +53,97 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  position: relative;
+  margin-top: 30px;
 }
 
 .lookup-icon {
   transform: scaleX(-1);
   font-size: 32px !important;
   color: #B8B8B8;
-  position: relative;
   margin-left: 10px;
+  z-index: 2;
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  pointer-events: none;
+  transition: 0.5s ease-in-out;
+
 }
 
 .lookup-icon-active{
-
+  /* margin-left: 320px; */
+  left: 310px;
+  transition: 0.5s ease-in-out;
 }
 
 
 .search{
   position: absolute;
   top: -12px;
-  right: -12px;
+  left: 0px;
   width: 54px;
   height: 54px;
-  z-index: -1;
-  border-radius: 20px;
-  border: 1px solid #B8B8B8;
+  z-index: 1;
+  border: 1px solid #fff;
   outline: none;
-  transform: scaleX(-1);
+  border-radius: 25px;
+  font-family: 'Lora', serif;
+  font-weight: 800;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
 
+.search-hover{
+  border: 1px solid #B8B8B8;
+  transition: 0.2s ease-in-out;
 }
 
 .search-active{
-  width: 300px;
-  transition: width 0.5s ease-in-out;
+  color: #636363;
+  width: 360px;
+  border: 1px solid #B8B8B8;
+  transition: 0.5s ease-in-out;
+  cursor: auto;
+  padding: 5px 50px 5px 15px;
 }
 
-/* .search:hover{
-  border: 2px solid #B8B8B8;
+.list-of-suggestions{
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  display: flex;
+}
+
+.list-of-suggestions li::marker{
+  color: #B8B8B8;
+}
+
+.list-of-suggestions li{
+  margin-right: 40px;
   cursor: pointer;
-  width: 200px;
-} */
+  position: relative;
+}
+
+.dot-for-li{
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  background: var(--main-color);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -16px;
+}
 
 .map-icon {
   font-size: 32px !important;
-  color: #B8B8B8;
+  color: var(--main-color);
   position: relative;
   margin-right: 10px;
+  /* z-index: 32; */
 }
 
 .map-icon::after {
@@ -96,16 +155,15 @@ body {
   z-index: -1;
   top: 0;
   left: 0;
-  transform: translate(-12px, -12px);
+  transform: translate(-11px, -11px);
   border-radius: 100%;
 }
 
 .list-of-spots {
   width: 67%;
-  margin: 0 auto;
+  margin: 70px auto 0;
   list-style-type: none;
   padding: 0;
-  margin-top: 50px;
 }
 
 .list-of-spots li {
@@ -113,17 +171,26 @@ body {
   width: 100%;
   background: #F6F6F6;
   margin-bottom: 20px;
-  box-shadow: 8px 8px 12px rgba(8, 189, 170, 0.19);
+  /* box-shadow: 8px 8px 8px rgba(8, 189, 170, 0.19); */
+  box-shadow: 6px 6px 8px #c4c4c4;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   position: relative;
+  cursor: pointer;
+}
+
+.list-of-spots li:hover{
+  left: 8px;
+  top: 8px;
+  box-shadow: none;
+
 }
 
 .list-of-spots li::before{
   content: '';
-  width: 12px;
-  height: 12px;
+  width: 9px;
+  height: 9px;
   background: var(--main-color);
   border-radius: 100%;
   position: absolute;
@@ -137,7 +204,7 @@ body {
   font-size: 18px;
   color: #686868;
   position: relative;
-  width: 25%;
+  width: 22%;
   text-align: left;
 }
 
@@ -175,11 +242,11 @@ body {
   width: 500px;
   height: 500px;
   background: rgb(8, 189, 170);
-  background: linear-gradient(21deg, rgba(8, 189, 170, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  background: linear-gradient(90deg, rgba(8, 189, 170, 1) 0%, rgba(255, 255, 255, 1) 100%);
   border-radius: 100%;
   top: 0;
   right: 0;
-  transform: translate(26%, -27%);
+  transform: translate(25%, -50%);
   z-index: -1;
 }
 
@@ -193,5 +260,5 @@ body {
   bottom: 0;
   left: 0;
   transform: translate(-50%, 60%);
-  z-index: -1;
+  z-index: 0;
 }

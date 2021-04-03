@@ -28,9 +28,6 @@
 
 <body>
   <div class="container">
-    <!-- <span class="material-icons-outlined return-arrow">
-      &#xe166;
-    </span> -->
     <img class="return-arrow" src="../images/curve-arrow.svg" alt="">
     <div class="right-circle"></div>
     <div class="left-circle"></div>
@@ -38,9 +35,11 @@
       Gdzie <span class="logo-circle"></span> Jedziemy
     </p>
     <div class="lookup-and-map">
-      <span class="material-icons lookup-icon lookup-icon-active">&#xe8b6;
-        <input type="text" class="search" maxlength="26">
+      <input type="text" spellcheck="false" class="search" maxlength="26">
+      <span class="material-icons lookup-icon">&#xe8b6;
       </span>
+      <ul class="list-of-suggestions">
+      </ul>
       <span class="material-icons-outlined map-icon">
         &#xe55b;
       </span>
