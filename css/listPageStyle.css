@@ -262,3 +262,13 @@ body {
   transform: translate(-50%, 60%);
   z-index: 0;
 }
+
+@media (max-width: 1100px) {
+.lookup-and-map{
+  width: 90%;
+}
+
+.list-of-spots{
+  width: 90%;
+}
+}
