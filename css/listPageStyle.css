@@ -219,12 +219,16 @@ body {
 .path-img{
   width: 30px;
   height: 30px;
+  /* width: 10%; */
+
 }
 
 .place-distance{
   font-size: 18px;
   font-weight: 500;
   color: #686868;
+  width: 12%;
+  padding-left: 20px;
 }
 
 .return-arrow {
