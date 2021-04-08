@@ -1,64 +1,74 @@
 const searchInput = document.querySelector(".search");
 const suggestionsList = document.querySelector(".list-of-suggestions");
-const spotsList = document.querySelector(".list-of-spots");
 const lookupIcon = document.querySelector(".lookup-icon");
 const lookupAndMap = document.querySelector(".lookup-and-map");
+const spotsList = document.querySelector(".list-of-spots");
 const placeDistanceAll = document.querySelectorAll(".place-distance");
-
 const suggestionsCity = suggestionsList.children;
 
-// const myPlace = {
-//   name: "Kamieniołom Liban",
-//   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-//   lat: 50.09,
-//   lng: 19.32,
-//   km: "3km"
-// }
-// const kamieniolom = new myPlace('Kamieniołom Liban', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 50.09, 19.32);
-
-
-function myPlace(name, description, lat, lng){
-  this.name = name;
-  this.description = description;
-  this.lat = lat;
-  this.lng = lng;
-}
-const myPlaceArray = [
-  {
+const myPlaceArray = [{
     name: 'Kamieniołom Liban',
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    lat :  50.04,
+    lat: 50.04,
     lng: 19.96
   },
   {
     name: 'Pustynia Błędowska',
     description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    lat :  50.36,
+    lat: 50.36,
     lng: 19.52
   },
   {
     name: 'Zakrzówek',
     description: "Volutpat maecenas volutpat blandit aliquam etiam.",
-    lat :  50.04,
+    lat: 50.04,
     lng: 19.91
   },
   {
     name: 'Kopiec Krakusa',
     description: "Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit.",
-    lat :  50.03,
+    lat: 50.03,
     lng: 19.96
   },
   {
     name: 'Kopiec Kościuszki',
     description: "Tempus iaculis urna id volutpat lacus laoreet. Ac feugiat sed lectus vestibulum mattis.",
-    lat :  50.05,
+    lat: 50.05,
     lng: 19.89
+  },
+  {
+    name: 'Zamek Tenczyn',
+    description: "Tempus iaculis urna id volutpat lacus laoreet. Ac feugiat sed lectus vestibulum mattis.",
+    lat: 50.10,
+    lng: 19.58
+  },
+  {
+    name: 'Góra Żar',
+    description: "Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit.",
+    lat: 49.79,
+    lng: 19.22
+  },
+  {
+    name: 'Góra Świętego Marcina',
+    description: "Tempus iaculis urna id volutpat lacus laoreet. Ac feugiat sed lectus vestibulum mattis.",
+    lat: 49.99,
+    lng: 21.01
+  },
+  {
+    name: 'Wieża widokowa w Siekowie',
+    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    lat: 52.06,
+    lng: 16.37
+  },
+  {
+    name: 'Kaszubskie Oko',
+    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    lat: 54.72,
+    lng: 18.05
   }
 ]
 
-const myPlaceSort = myPlaceArray.sort(function(placeOne, placeTwo){
-  return placeOne.lat - placeTwo.lat;
-});
+let mySortedArray = [];
 
 document.addEventListener('mouseover', (e) => {
   e.target.className === "search" ? searchInput.classList.add("search-hover") : searchInput.classList.remove("search-hover");
@@ -80,7 +90,6 @@ document.addEventListener('click', (e) => {
   }
 
   if (e.target.classList.contains('name')) {
-    sendCordi(myPlaceArray);
     // add main-color bullet to clicked suggested name
     let dotForLi = document.createElement('span');
     dotForLi.setAttribute('class', 'dot-for-li');
@@ -109,6 +118,23 @@ document.addEventListener('click', (e) => {
         }
       }
     }
+    sendCordi(myPlaceArray);
+
+    function sortList(ul) {
+      Array.from(ul.getElementsByTagName("LI"))
+        .sort((a, b) => {
+          return Number(a.lastElementChild.innerHTML.replace(' km', '')) - Number(b.lastElementChild.innerHTML.replace(' km', ''))
+        })
+        .forEach(li => ul.appendChild(li));
+    }
+    sortList(spotsList);
+
+    //display just 5 elements of spotsList
+    const lisOfSpotsList = spotsList.querySelectorAll("li");
+    for(let i=5; i<spotsList.childElementCount; i++){
+      lisOfSpotsList[i].style.display = "none";
+    }
+
   }
 }, false);
 
@@ -146,7 +172,6 @@ function displayMatches() {
       suggestionsCity[i].style.display = "none";
     }
   }
-  // sendCordi(kamieniolom);
 }
 
 searchInput.addEventListener('keyup', displayMatches);
@@ -172,8 +197,8 @@ function sendCordi(object) {
       suggestionsCity[i].addEventListener('click', () => {
         const foundCity = cities.filter(findCity)
           .map(mapCity);
-          // const [lat, lng] = foundCity[0].split(", ");
-          // const changed = changeCordi(lat, lng, object);
+        // const [lat, lng] = foundCity[0].split(", ");
+        // const changed = changeCordi(lat, lng, object);
 
       })
     }
@@ -186,49 +211,45 @@ function sendCordi(object) {
 
 //changing string result to number result
 function calculateCordi(latValue, lngValue, object) {
-  const latAsNumber = parseFloat(latValue);
-  const lngAsNumber = parseFloat(lngValue);
-  const latToKm = latAsNumber * 110.574;
-  const earthRadius = 6371e3; // metres
-  const latitude1 = latAsNumber * Math.PI / 180;
-  const latitude2 = object.lat * Math.PI / 180;
-  const deltaLatitude = (object.lat - latAsNumber) * Math.PI / 180;
-  const deltaLongitude = (object.lng - lngAsNumber) * Math.PI / 180;
 
-  const a = Math.sin(deltaLatitude / 2) * Math.sin(deltaLatitude / 2) +
-    Math.cos(latitude1) * Math.cos(latitude2) *
-    Math.sin(deltaLongitude / 2) * Math.sin(deltaLongitude / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-  const distance = earthRadius * c * 0.001; //kilometres
-  let roundDistance = 0;
-  if(distance>10){
-     roundDistance = Math.round(distance);
-  }
-  else{
-     roundDistance = Math.round(distance * 100) / 100;
-  }
-//
+  //
   const html = myPlaceArray.map(place => {
-    const myPlaceSort = myPlaceArray.sort(function(placeOne, placeTwo){
-      return placeOne.lat - placeTwo.lat;
-    });
+
     return `
     <li>
       <span class = "place">${place.name}</span>
       <span class = "place-description">${place.description}</span>
       <img class="path-img" src="../images/finish.svg" alt="">
-      <span class="place-distance">${roundDistance} km</span>
+      <span class="place-distance"></span>
     </li>
     `;
   }).join("");
   spotsList.innerHTML = html;
-  //
-  // const myPlaceSort = myPlaceArray.sort(function(placeOne, placeTwo){
-  //   return placeOne.lat - placeTwo.lat;
-  // });
-  //
-  console.log(myPlaceSort);
-  console.log("distance " + roundDistance + " km");
-  // placeDistanceAll[0].innerText = `${roundDistance} km`;
+  for (let i = 0; i < object.length; i++) {
+    const latAsNumber = parseFloat(latValue);
+    const lngAsNumber = parseFloat(lngValue);
+    const latToKm = latAsNumber * 110.574;
+    const earthRadius = 6371e3; // metres
+    const latitude1 = latAsNumber * Math.PI / 180;
+    const latitude2 = object[i].lat * Math.PI / 180;
+    const deltaLatitude = (object[i].lat - latAsNumber) * Math.PI / 180;
+    const deltaLongitude = (object[i].lng - lngAsNumber) * Math.PI / 180;
+
+    const a = Math.sin(deltaLatitude / 2) * Math.sin(deltaLatitude / 2) +
+      Math.cos(latitude1) * Math.cos(latitude2) *
+      Math.sin(deltaLongitude / 2) * Math.sin(deltaLongitude / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    const distance = earthRadius * c * 0.001; //kilometres
+    let roundDistance = 0;
+    if (distance > 10) {
+      roundDistance = Math.round(distance);
+    } else {
+      roundDistance = Math.round(distance * 100) / 100;
+    }
+    spotsList.querySelectorAll('li')[i].querySelector('.place-distance').innerHTML = roundDistance + " km";
+
+
+  }
+
 }
