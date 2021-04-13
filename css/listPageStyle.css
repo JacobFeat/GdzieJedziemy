@@ -16,6 +16,11 @@
   border-radius: 10px;
 }
 
+html{
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -94,7 +99,6 @@ body {
   left: 310px;
   transition: 0.5s ease-in-out;
 }
-
 
 .search{
   position: absolute;
@@ -203,7 +207,7 @@ body {
 .li-card{
   width: 100%;
   height: 94px;
-  /* background: #F6F6F6; */
+  background: #F6F6F6;
   margin-bottom: 20px;
   /* box-shadow: 8px 8px 8px rgba(8, 189, 170, 0.19); */
   box-shadow: 6px 6px 8px #c4c4c4;
@@ -288,9 +292,25 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   width: 60%;
-  margin-top: 50px;
+  color: #686868;
+
   /* text-align: center; */
+}
+
+.content-start{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.content-end{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
 }
 
 .place-back{
@@ -303,7 +323,7 @@ body {
 }
 
 .how-to-reach{
-  margin: 50px 0 10px;
+  margin-bottom: 10px;
 }
 
 .how-to-reach-button{
