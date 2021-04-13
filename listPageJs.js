@@ -120,8 +120,9 @@ document.addEventListener('click', (e) => {
     }
     sendCordi(myPlaceArray);
 
+    //sort li by distance
     function sortList(ul) {
-      Array.from(ul.getElementsByTagName("LI"))
+      Array.from(ul.querySelectorAll(".li-card"))
         .sort((a, b) => {
           return Number(a.lastElementChild.innerHTML.replace(' km', '')) - Number(b.lastElementChild.innerHTML.replace(' km', ''))
         })
@@ -130,10 +131,10 @@ document.addEventListener('click', (e) => {
     sortList(spotsList);
 
     //display just 5 elements of spotsList
-    const lisOfSpotsList = spotsList.querySelectorAll("li");
-    for(let i=5; i<spotsList.childElementCount; i++){
-      lisOfSpotsList[i].style.display = "none";
-    }
+    // const lisOfSpotsList = spotsList.querySelectorAll(".li-card");
+    // for(let i=5; i<spotsList.childElementCount; i++){
+    //   lisOfSpotsList[i].style.display = "none";
+    // }
 
   }
 }, false);
@@ -217,10 +218,12 @@ function calculateCordi(latValue, lngValue, object) {
 
     return `
     <li>
+      <span class="li-card">
       <span class = "place">${place.name}</span>
       <span class = "place-description">${place.description}</span>
       <img class="path-img" src="../images/finish.svg" alt="">
       <span class="place-distance"></span>
+      </span>
     </li>
     `;
   }).join("");
@@ -247,7 +250,7 @@ function calculateCordi(latValue, lngValue, object) {
     } else {
       roundDistance = Math.round(distance * 100) / 100;
     }
-    spotsList.querySelectorAll('li')[i].querySelector('.place-distance').innerHTML = roundDistance + " km";
+    spotsList.querySelectorAll('.li-card')[i].querySelector('.place-distance').innerHTML = roundDistance + " km";
 
 
   }

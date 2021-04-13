@@ -167,6 +167,21 @@ body {
 }
 
 .list-of-spots li {
+
+}
+
+.list-of-spots li:hover{
+  left: 8px;
+  top: 8px;
+  box-shadow: none;
+
+}
+
+.list-of-spots li::before{
+
+}
+
+.li-card{
   height: 94px;
   width: 100%;
   background: #F6F6F6;
@@ -180,14 +195,7 @@ body {
   cursor: pointer;
 }
 
-.list-of-spots li:hover{
-  left: 8px;
-  top: 8px;
-  box-shadow: none;
-
-}
-
-.list-of-spots li::before{
+.li-card::before{
   content: '';
   width: 9px;
   height: 9px;
