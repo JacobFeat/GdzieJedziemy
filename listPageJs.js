@@ -11,43 +11,52 @@ const myPlaceArray = [{
     name: 'Kamieniołom Liban',
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     lat: 50.04,
-    lng: 19.96
+    lng: 19.96,
+    imgSource: "img1.jpg"
   },
   {
     name: 'Pustynia Błędowska',
     description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     lat: 50.36,
-    lng: 19.52
+    lng: 19.52,
+    imgSource: "img2.jpg"
   },
   {
     name: 'Zakrzówek',
     description: "Volutpat maecenas volutpat blandit aliquam etiam.",
     lat: 50.04,
-    lng: 19.91
+    lng: 19.91,
+    imgSource: "img3.jpg"
   },
   {
     name: 'Kopiec Krakusa',
     description: "Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit.",
     lat: 50.03,
-    lng: 19.96
+    lng: 19.96,
+    imgSource: "img4.jpg"
   },
   {
     name: 'Kopiec Kościuszki',
     description: "Tempus iaculis urna id volutpat lacus laoreet. Ac feugiat sed lectus vestibulum mattis.",
     lat: 50.05,
-    lng: 19.89
+    lng: 19.89,
+    imgSource: "img5.jpg"
+
   },
   {
     name: 'Zamek Tenczyn',
     description: "Tempus iaculis urna id volutpat lacus laoreet. Ac feugiat sed lectus vestibulum mattis.",
     lat: 50.10,
-    lng: 19.58
+    lng: 19.58,
+    imgSource: "img6.jpg"
+
   },
   {
     name: 'Góra Żar',
     description: "Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit.",
     lat: 49.79,
-    lng: 19.22
+    lng: 19.22,
+    imgSource: "img7.jpg"
   },
   {
     name: 'Góra Świętego Marcina',
@@ -59,13 +68,15 @@ const myPlaceArray = [{
     name: 'Wieża widokowa w Siekowie',
     description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     lat: 52.06,
-    lng: 16.37
+    lng: 16.37,
+    imgSource: "img9.jpg"
   },
   {
     name: 'Kaszubskie Oko',
     description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     lat: 54.72,
-    lng: 18.05
+    lng: 18.05,
+    imgSource: "img10.jpg"
   }
 ]
 
@@ -74,18 +85,6 @@ let mySortedArray = [];
 document.addEventListener('mouseover', (e) => {
   e.target.className === "search" ? searchInput.classList.add("search-hover") : searchInput.classList.remove("search-hover");
 
-  // if(e.target.className === "li-card"){
-  //   console.log("work");
-  //   e.target.style.marginBottom = "164px";
-  // }
-  // else{
-  //   frontCardAll.forEach(item => {
-  //     item.style.marginBottom = "20px";
-  //   })
-  //
-  //   // frontCardAll.style.marginBottom = "20px";
-  //
-  // }
 });
 
 document.addEventListener('click', (e) => {
@@ -99,9 +98,10 @@ document.addEventListener('click', (e) => {
 
   }
 
+  //add margin bottom to expanded card
   if(e.target.closest('.li-card')){
     console.log(e.target.closest('li'));
-    e.target.closest('.li-card').style.marginBottom = "164px";
+    e.target.closest('.li-card').style.marginBottom = "364px";
     e.target.closest('.card-container').classList.add('li-active');
   }
 
@@ -153,10 +153,8 @@ document.addEventListener('click', (e) => {
 
     // display just 5 elements of spotsList
     const listOfSpotsList = Array.from(spotsList.querySelectorAll(".card-container"));
-    const listOfSpotsList2 = Array.from(spotsList.querySelectorAll(".li-card"));
     for(let i=5; i<listOfSpotsList.length; i++){
       listOfSpotsList[i].style.display = "none";
-      listOfSpotsList2[i].style.display = "none";
     }
 
   }
@@ -248,6 +246,7 @@ function calculateCordi(latValue, lngValue, object) {
       <span class="place-distance"></span>
       </span>
       <span class="back-card">
+      <img class="card-img" src="/images/${place.imgSource}">
 
       </span>
     </li>
