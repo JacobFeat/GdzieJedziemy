@@ -167,7 +167,9 @@ body {
 }
 
 .list-of-spots li {
-
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
 }
 
 .list-of-spots li:hover{
@@ -205,6 +207,12 @@ body {
   top: 50%;
   left: 20px;
   transform: translateY(-50%);
+}
+
+.back-card{
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .place{
