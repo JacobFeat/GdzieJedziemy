@@ -6,6 +6,7 @@ const spotsList = document.querySelector(".list-of-spots");
 const spotsListLi = spotsList.querySelectorAll(".card-container");
 const frontCardAll = document.querySelectorAll(".li-card");
 const placeDistanceAll = document.querySelectorAll(".place-distance");
+const closeBackCard = document.querySelector(".close-back-card");
 const suggestionsCity = suggestionsList.children;
 
 const myPlaceArray = [
@@ -110,7 +111,6 @@ document.addEventListener('click', (e) => {
     // console.log(Array.from(spotsList).some(atLeastOneExpanded));
     e.target.closest('.card-container').classList.add('li-active');
     if(e.target.closest('.card-container').classList.contains('li-active')){
-      console.log("work");
       document.querySelectorAll('.card-container').forEach(li => {
         li.classList.remove('li-active');
         li.querySelector('.li-card').style.marginBottom = "20px";
@@ -121,8 +121,13 @@ document.addEventListener('click', (e) => {
     }
   }
 
-  if (e.target.closest('li')) {
-    // TODO: add popup feature about particular object
+  //close expanded card
+  if(e.target.classList.contains('close-back-card')){
+    console.log(e.target.parentElement);
+    e.target.parentElement.classList.remove('li-active');
+    document.querySelectorAll('.card-container').forEach(li => li.classList.remove('li-active'));
+    document.querySelectorAll('.li-card').forEach(li => li.style.marginBottom = "20px");
+
   }
 
   if (e.target.classList.contains('name')) {
@@ -264,6 +269,7 @@ function calculateCordi(latValue, lngValue, object) {
       <span class="back-card">
       <img class="card-img" src="/images/${place.imgSource}" alt="image of place">
       <div class="card-content">
+      <div class="close-back-card"></div>
       <span class="content-start">
         <p class="place-back">${place.name}</p>
         <p class="place-description-back">${place.description}</p>
@@ -301,8 +307,6 @@ function calculateCordi(latValue, lngValue, object) {
       roundDistance = Math.round(distance * 100) / 100;
     }
     spotsList.querySelectorAll('.li-card')[i].querySelector('.place-distance').innerHTML = roundDistance + " km";
-
-
   }
 
 }

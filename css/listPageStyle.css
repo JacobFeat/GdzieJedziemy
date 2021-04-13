@@ -274,7 +274,7 @@ body {
   transform: rotateY(180deg);
   width: 100%;
   height: 440px;
-  background: rgba(246, 246, 246, 0.3);
+  background: rgba(246, 246, 246, 1);
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   display: flex;
@@ -295,6 +295,7 @@ body {
   justify-content: space-between;
   width: 60%;
   color: #686868;
+  position: relative;
 
   /* text-align: center; */
 }
@@ -312,6 +313,38 @@ body {
   align-items: center;
   margin-bottom: 50px;
 }
+
+.close-back-card{
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  height: 20px;
+  width: 20px;
+  /* background: #b5b5b5; */
+  cursor: pointer;
+}
+
+.close-back-card::before{
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 2px;
+  left: 50%;
+  background: #b5b5b5;
+  transform: rotate(45deg);
+}
+
+.close-back-card::after{
+  content: "";
+  width: 2px;
+  height: 20px;
+  background: #b5b5b5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
 
 .place-back{
   font-size: 20px;
