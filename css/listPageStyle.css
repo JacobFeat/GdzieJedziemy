@@ -1,7 +1,9 @@
+
+
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   font-family: 'Poppins', sans-serif;
 
 }
@@ -167,16 +169,30 @@ body {
 }
 
 .list-of-spots li {
+
+  /* width: 100%; */
+  /* height: 94px; */
+  /* margin-bottom: 166px; */
+}
+
+.card-container{
   position: relative;
   transform-style: preserve-3d;
   transition: all 0.5s ease;
 }
+/* .list-of-spots li:hover {
+  transform: rotateY(180deg);
+} */
+
+.li-active{
+  transform: rotateY(180deg);
+
+}
 
 .list-of-spots li:hover{
-  left: 8px;
+  /* left: 8px;
   top: 8px;
-  box-shadow: none;
-
+  box-shadow: none; */
 }
 
 .list-of-spots li::before{
@@ -184,8 +200,8 @@ body {
 }
 
 .li-card{
-  height: 94px;
   width: 100%;
+  height: 94px;
   background: #F6F6F6;
   margin-bottom: 20px;
   /* box-shadow: 8px 8px 8px rgba(8, 189, 170, 0.19); */
@@ -194,7 +210,11 @@ body {
   align-items: center;
   justify-content: space-evenly;
   position: relative;
+  top: 0;
+  left: 0;
   cursor: pointer;
+  backface-visibility: hidden;
+
 }
 
 .li-card::before{
@@ -213,6 +233,12 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  width: 100%;
+  height: 240px;
+  background: #F6F6F6;
+
 }
 
 .place{
@@ -271,7 +297,7 @@ body {
 }
 
 .left-circle {
-  position: absolute;
+  position: fixed;
   width: 500px;
   height: 500px;
   background: rgb(8, 189, 170);

@@ -3,6 +3,7 @@ const suggestionsList = document.querySelector(".list-of-suggestions");
 const lookupIcon = document.querySelector(".lookup-icon");
 const lookupAndMap = document.querySelector(".lookup-and-map");
 const spotsList = document.querySelector(".list-of-spots");
+const frontCardAll = document.querySelectorAll(".li-card");
 const placeDistanceAll = document.querySelectorAll(".place-distance");
 const suggestionsCity = suggestionsList.children;
 
@@ -72,6 +73,19 @@ let mySortedArray = [];
 
 document.addEventListener('mouseover', (e) => {
   e.target.className === "search" ? searchInput.classList.add("search-hover") : searchInput.classList.remove("search-hover");
+
+  // if(e.target.className === "li-card"){
+  //   console.log("work");
+  //   e.target.style.marginBottom = "164px";
+  // }
+  // else{
+  //   frontCardAll.forEach(item => {
+  //     item.style.marginBottom = "20px";
+  //   })
+  //
+  //   // frontCardAll.style.marginBottom = "20px";
+  //
+  // }
 });
 
 document.addEventListener('click', (e) => {
@@ -83,6 +97,12 @@ document.addEventListener('click', (e) => {
     searchInput.classList.remove('search-active');
     lookupIcon.classList.remove('lookup-icon-active');
 
+  }
+
+  if(e.target.closest('.li-card')){
+    console.log(e.target.closest('li'));
+    e.target.closest('.li-card').style.marginBottom = "164px";
+    e.target.closest('.card-container').classList.add('li-active');
   }
 
   if (e.target.closest('li')) {
@@ -118,22 +138,25 @@ document.addEventListener('click', (e) => {
         }
       }
     }
+
     sendCordi(myPlaceArray);
 
-    //sort li by distance
+    // sort li by distance
     function sortList(ul) {
-      Array.from(ul.querySelectorAll(".li-card"))
+      Array.from(ul.querySelectorAll(".card-container"))
         .sort((a, b) => {
-          return Number(a.lastElementChild.innerHTML.replace(' km', '')) - Number(b.lastElementChild.innerHTML.replace(' km', ''))
+          return Number(a.firstElementChild.lastElementChild.innerHTML.replace(' km', '')) - Number(b.firstElementChild.lastElementChild.innerHTML.replace(' km', ''))
         })
         .forEach(li => ul.appendChild(li));
     }
     sortList(spotsList);
 
     // display just 5 elements of spotsList
-    const listOfSpotsList = Array.from(spotsList.querySelectorAll(".li-card"));
+    const listOfSpotsList = Array.from(spotsList.querySelectorAll(".card-container"));
+    const listOfSpotsList2 = Array.from(spotsList.querySelectorAll(".li-card"));
     for(let i=5; i<listOfSpotsList.length; i++){
       listOfSpotsList[i].style.display = "none";
+      listOfSpotsList2[i].style.display = "none";
     }
 
   }
@@ -217,12 +240,15 @@ function calculateCordi(latValue, lngValue, object) {
   const html = myPlaceArray.map(place => {
 
     return `
-    <li>
+    <li class="card-container">
       <span class="li-card">
       <span class = "place">${place.name}</span>
       <span class = "place-description">${place.description}</span>
       <img class="path-img" src="../images/finish.svg" alt="">
       <span class="place-distance"></span>
+      </span>
+      <span class="back-card">
+
       </span>
     </li>
     `;
