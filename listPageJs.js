@@ -130,11 +130,11 @@ document.addEventListener('click', (e) => {
     }
     sortList(spotsList);
 
-    //display just 5 elements of spotsList
-    // const lisOfSpotsList = spotsList.querySelectorAll(".li-card");
-    // for(let i=5; i<spotsList.childElementCount; i++){
-    //   lisOfSpotsList[i].style.display = "none";
-    // }
+    // display just 5 elements of spotsList
+    const listOfSpotsList = Array.from(spotsList.querySelectorAll(".li-card"));
+    for(let i=5; i<listOfSpotsList.length; i++){
+      listOfSpotsList[i].style.display = "none";
+    }
 
   }
 }, false);
