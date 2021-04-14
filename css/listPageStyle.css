@@ -16,9 +16,8 @@
   border-radius: 10px;
 }
 
-html{
-  margin: 0;
-  padding: 0;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -26,7 +25,6 @@ body {
   padding: 0;
   overflow-x: hidden;
   font-family: 'Poppins', sans-serif;
-
 }
 
 :root {
@@ -185,7 +183,10 @@ body {
   width: 67%;
   margin: 70px auto 0;
   list-style-type: none;
-  padding: 0;
+  box-sizing: content-box;
+  padding: 0 20px;
+  overflow: hidden;
+
 }
 
 .list-of-spots li {
@@ -198,16 +199,18 @@ body {
   transition: all 0.5s ease;
 }
 
+
 .li-active{
   transform: rotateY(180deg);
 
 }
 
 
-.li-card{
+.front-card{
   width: 100%;
   height: 94px;
   background: #F6F6F6;
+  margin: 0 auto;
   margin-bottom: 20px;
   /* box-shadow: 8px 8px 8px rgba(8, 189, 170, 0.19); */
   box-shadow: 6px 6px 8px #c4c4c4;
@@ -222,7 +225,14 @@ body {
   transition: 0.5s ease;
 }
 
-.li-card::before{
+.front-card:hover{
+  top: 6px;
+  left: 6px;
+  box-shadow: 0px 0px 0px white;
+  transition: 0.1s;
+}
+
+.front-card::before{
   content: '';
   width: 9px;
   height: 9px;
@@ -231,7 +241,22 @@ body {
   position: absolute;
   top: 50%;
   left: 20px;
-  transform: translateY(-50%);;
+  transform: translateY(-50%);
+}
+
+.front-card-dot{
+  width: 9px;
+  height: 9px;
+  background: var(--main-color);
+  border-radius: 100%;
+  display: inline-block;
+  /* position: absolute; */
+  /* position: relative; */
+  top: 50%;
+  left: 20px;
+  /* transform: translateY(-50%); */
+  backface-visibility: hidden;
+  overflow: hidden;
 
 }
 
@@ -274,7 +299,7 @@ body {
   transform: rotateY(180deg);
   width: 100%;
   height: 440px;
-  background: rgba(246, 246, 246, 1);
+  background: rgba(246, 246, 246, 0.2);
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   display: flex;
@@ -380,7 +405,7 @@ body {
   top: 54px;
   left: 60px;
   font-size: 32px !important;
-  color: var(--main-color)
+  color: var(--main-color);
 }
 
 .right-circle {

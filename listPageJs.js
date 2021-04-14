@@ -4,9 +4,10 @@ const lookupIcon = document.querySelector(".lookup-icon");
 const lookupAndMap = document.querySelector(".lookup-and-map");
 const spotsList = document.querySelector(".list-of-spots");
 const spotsListLi = spotsList.querySelectorAll(".card-container");
-const frontCardAll = document.querySelectorAll(".li-card");
+const frontCardAll = document.querySelectorAll(".front-card");
 const placeDistanceAll = document.querySelectorAll(".place-distance");
 const closeBackCard = document.querySelector(".close-back-card");
+const frontCardDot = document.querySelectorAll(".front-card-dot");
 const suggestionsCity = suggestionsList.children;
 
 const myPlaceArray = [
@@ -104,21 +105,33 @@ document.addEventListener('click', (e) => {
 
   }
 
-  //add margin bottom to expanded card
-  if(e.target.closest('.li-card')){
-    // console.log(e.target.closest('.card-container'));
-    e.target.closest('.li-card').style.marginBottom = "364px";
-    // console.log(Array.from(spotsList).some(atLeastOneExpanded));
+
+  //expand card and add margin bottom to expanded card
+  if(e.target.closest('.front-card')){
+    e.target.closest('.front-card').style.marginBottom = "364px";
     e.target.closest('.card-container').classList.add('li-active');
     if(e.target.closest('.card-container').classList.contains('li-active')){
       document.querySelectorAll('.card-container').forEach(li => {
         li.classList.remove('li-active');
-        li.querySelector('.li-card').style.marginBottom = "20px";
-        e.target.closest('.li-card').style.marginBottom = "364px";
+        li.querySelector('.front-card').style.marginBottom = "20px";
+        e.target.closest('.front-card').style.marginBottom = "364px";
       });
       e.target.closest('.card-container').classList.add('li-active');
-
     }
+
+    //find index of picked card
+    const myCardArray = [];
+    for(let i=0; i<5; i++){
+      myCardArray.push(document.querySelectorAll('.card-container')[i]);
+    }
+    const currentIndex = myCardArray.indexOf(e.target.closest('.card-container'));
+    console.log(currentIndex);
+
+    //scroll to picked card
+    function scrollToCertainPoint(index){
+      scrollTo(0, (114+index*114));
+    }
+    setTimeout(scrollToCertainPoint.bind(null, currentIndex), 350);
   }
 
   //close expanded card
@@ -126,7 +139,8 @@ document.addEventListener('click', (e) => {
     console.log(e.target.parentElement);
     e.target.parentElement.classList.remove('li-active');
     document.querySelectorAll('.card-container').forEach(li => li.classList.remove('li-active'));
-    document.querySelectorAll('.li-card').forEach(li => li.style.marginBottom = "20px");
+    document.querySelectorAll('.front-card').forEach(li => li.style.marginBottom = "20px");
+    // frontCardDot.forEach(dot => dot.style.display="block");
 
   }
 
@@ -260,7 +274,7 @@ function calculateCordi(latValue, lngValue, object) {
 
     return `
     <li class="card-container">
-      <span class="li-card">
+      <span class="front-card">
       <span class = "place">${place.name}</span>
       <span class = "place-description">${place.description.slice(0,90)+"..."}</span>
       <img class="path-img" src="../images/finish.svg" alt="">
@@ -306,7 +320,7 @@ function calculateCordi(latValue, lngValue, object) {
     } else {
       roundDistance = Math.round(distance * 100) / 100;
     }
-    spotsList.querySelectorAll('.li-card')[i].querySelector('.place-distance').innerHTML = roundDistance + " km";
+    spotsList.querySelectorAll('.front-card')[i].querySelector('.place-distance').innerHTML = roundDistance + " km";
   }
 
 }
