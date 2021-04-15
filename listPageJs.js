@@ -1,5 +1,5 @@
 const searchInput = document.querySelector(".search");
-const suggestionsList = document.querySelector(".list-of-suggestions");
+let suggestionsList = document.querySelector(".list-of-suggestions");
 const lookupIcon = document.querySelector(".lookup-icon");
 const lookupAndMap = document.querySelector(".lookup-and-map");
 const spotsList = document.querySelector(".list-of-spots");
@@ -94,54 +94,75 @@ document.addEventListener('mouseover', (e) => {
 
 });
 
+
+searchInput.addEventListener('keyup', () => {
+  if (searchInput.value != "") {
+    document.querySelector('.close-search').classList.add('close-search-active');
+  } else {
+    document.querySelector('.close-search').classList.remove('close-search-active');
+  }
+  suggestionsList.style.display="flex";
+
+});
+
 document.addEventListener('click', (e) => {
-  //expand and collapse search input
-  if (e.target.classList.contains('search')) {
+  //find index of picked card
+  const myCardArray = [];
+  for (let i = 0; i < 5; i++) {
+    myCardArray.push(document.querySelectorAll('.card-container')[i]);
+  }
+  const currentIndex = myCardArray.indexOf(e.target.closest('.card-container'));
+  console.log(currentIndex);
+  //expand and collapse search input, display and hide close-search button
+  if (e.target.classList.contains('search') || e.target.classList.contains('close-search')) {
     searchInput.classList.add('search-active');
     lookupIcon.classList.add('lookup-icon-active');
+    if (searchInput.value != "") {
+      document.querySelector('.close-search').classList.add('close-search-active');
+    }
   } else {
     searchInput.classList.remove('search-active');
     lookupIcon.classList.remove('lookup-icon-active');
-
+    document.querySelector('.close-search').classList.remove('close-search-active');
   }
 
+  if (e.target.classList.contains('close-search')) {
+    searchInput.value = "";
+    suggestionsList.style.display="none";
+    document.querySelector('.close-search').classList.remove('close-search-active');
+  }
 
   //expand card and add margin bottom to expanded card
-  if(e.target.closest('.front-card')){
+  if (e.target.closest('.front-card')) {
+
+    //scroll to picked card
+    function scrollToCertainPoint(index) {
+      scrollTo(0, (114 + index * 114));
+    }
+    setTimeout(scrollToCertainPoint.bind(null, currentIndex), 150);
     e.target.closest('.front-card').style.marginBottom = "364px";
     e.target.closest('.card-container').classList.add('li-active');
-    if(e.target.closest('.card-container').classList.contains('li-active')){
+
+    if (e.target.closest('.card-container').classList.contains('li-active')) {
       document.querySelectorAll('.card-container').forEach(li => {
         li.classList.remove('li-active');
+        //display green dot
+        li.querySelector('.front-card-dot').style.display = "inline-block";
         li.querySelector('.front-card').style.marginBottom = "20px";
         e.target.closest('.front-card').style.marginBottom = "364px";
       });
       e.target.closest('.card-container').classList.add('li-active');
     }
-
-    //find index of picked card
-    const myCardArray = [];
-    for(let i=0; i<5; i++){
-      myCardArray.push(document.querySelectorAll('.card-container')[i]);
-    }
-    const currentIndex = myCardArray.indexOf(e.target.closest('.card-container'));
-    console.log(currentIndex);
-
-    //scroll to picked card
-    function scrollToCertainPoint(index){
-      scrollTo(0, (114+index*114));
-    }
-    setTimeout(scrollToCertainPoint.bind(null, currentIndex), 350);
+    //hide green dot
+    document.querySelectorAll('.front-card-dot')[currentIndex].style.display="none";
   }
 
   //close expanded card
-  if(e.target.classList.contains('close-back-card')){
-    console.log(e.target.parentElement);
+  if (e.target.classList.contains('close-back-card')) {
     e.target.parentElement.classList.remove('li-active');
     document.querySelectorAll('.card-container').forEach(li => li.classList.remove('li-active'));
     document.querySelectorAll('.front-card').forEach(li => li.style.marginBottom = "20px");
-    // frontCardDot.forEach(dot => dot.style.display="block");
-
+    e.target.parentElement.parentElement.parentElement.querySelector('.front-card-dot').style.display = "inline-block"; //display green dot
   }
 
   if (e.target.classList.contains('name')) {
@@ -188,7 +209,7 @@ document.addEventListener('click', (e) => {
 
     // display just 5 elements of spotsList
     const listOfSpotsList = Array.from(spotsList.querySelectorAll(".card-container"));
-    for(let i=5; i<listOfSpotsList.length; i++){
+    for (let i = 5; i < listOfSpotsList.length; i++) {
       listOfSpotsList[i].style.display = "none";
     }
 
@@ -275,6 +296,7 @@ function calculateCordi(latValue, lngValue, object) {
     return `
     <li class="card-container">
       <span class="front-card">
+      <div class="front-card-dot"></div>
       <span class = "place">${place.name}</span>
       <span class = "place-description">${place.description.slice(0,90)+"..."}</span>
       <img class="path-img" src="../images/finish.svg" alt="">

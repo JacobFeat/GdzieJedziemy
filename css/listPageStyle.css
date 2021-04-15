@@ -48,17 +48,6 @@ body {
   position: absolute;
 }
 
-.logo {
-  color: var(--main-color);
-  font-family: 'Lora', serif;
-  font-size: 24px;
-  font-weight: 800;
-  padding-top: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .logo-circle {
   width: 40px;
   height: 40px;
@@ -67,6 +56,20 @@ body {
   display: block;
   box-sizing: content-box;
   margin: 0 10px;
+}
+
+.logo-link{
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-color);
+  font-family: 'Lora', serif;
+  font-size: 24px;
+  font-weight: 800;
+  margin: 30px auto 0;
+  width: 270px;
+
 }
 
 .lookup-and-map {
@@ -88,14 +91,13 @@ body {
   position: relative;
   left: 0;
   pointer-events: none;
-  transition: 0.5s ease-in-out;
-
+  transition: 0.3s ease-in-out;
 }
 
 .lookup-icon-active{
   /* margin-left: 320px; */
   left: 310px;
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .search{
@@ -113,7 +115,7 @@ body {
   color: #fff;
   font-size: 18px;
   cursor: pointer;
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .search-hover{
@@ -125,9 +127,39 @@ body {
   color: #636363;
   width: 360px;
   border: 1px solid #B8B8B8;
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
   cursor: auto;
   padding: 5px 50px 5px 15px;
+}
+
+.close-search{
+  position: absolute;
+  color: #B8B8B8;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 300px;
+  font-size: 16px !important;
+  z-index: 3;
+  opacity: 0.0;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.close-search-active{
+  opacity: 1;
+  transition: opacity 1.2s;
+  animation: rotate-close 1s forwards;
+  transform-origin: top;
+}
+
+@keyframes rotate-close {
+  0%{
+    transform: rotate(0deg) translateY(-50%);
+  }
+
+  100%{
+    transform: rotate(360deg) translateY(-50%);
+  }
 }
 
 .list-of-suggestions{
@@ -186,11 +218,6 @@ body {
   box-sizing: content-box;
   padding: 0 20px;
   overflow: hidden;
-
-}
-
-.list-of-spots li {
-
 }
 
 .card-container{
@@ -199,12 +226,9 @@ body {
   transition: all 0.5s ease;
 }
 
-
 .li-active{
   transform: rotateY(180deg);
-
 }
-
 
 .front-card{
   width: 100%;
@@ -223,6 +247,17 @@ body {
   cursor: pointer;
   backface-visibility: hidden;
   transition: 0.5s ease;
+  animation: show-cards 0.7s forwards;
+  transform-origin: top;
+}
+
+@keyframes show-cards {
+  from{
+    transform: scaleY(0.1);
+  }
+  to{
+    transform: scaleY(1.0);
+  }
 }
 
 .front-card:hover{
@@ -232,7 +267,7 @@ body {
   transition: 0.1s;
 }
 
-.front-card::before{
+/* .front-card::before{
   content: '';
   width: 9px;
   height: 9px;
@@ -241,8 +276,8 @@ body {
   position: absolute;
   top: 50%;
   left: 20px;
-  transform: translateY(-50%);
-}
+  transform: translateY(-50%) rotateY(180deg);
+} */
 
 .front-card-dot{
   width: 9px;
@@ -250,14 +285,26 @@ body {
   background: var(--main-color);
   border-radius: 100%;
   display: inline-block;
-  /* position: absolute; */
-  /* position: relative; */
+  position: absolute;
   top: 50%;
   left: 20px;
-  /* transform: translateY(-50%); */
-  backface-visibility: hidden;
-  overflow: hidden;
+  transform: translateY(-50%);
+  animation: pulsing-dot 1s 2;
+}
 
+@keyframes pulsing-dot {
+  0%{
+    background: var(--main-color);
+    transform: scale(1.0) translateY(-50%);
+  }
+  50%{
+    transform: scale(1.3) translateY(-50%);
+    background: #0cc4b1;
+  }
+  100%{
+    transform: scale(1.0) translateY(-50%);
+    background: var(--main-color);
+  }
 }
 
 .place{
@@ -266,7 +313,6 @@ body {
   color: #686868;
   width: 22%;
   text-align: left;
-  /* backface-visibility: hidden; */
 }
 
 .place-description{
@@ -321,6 +367,7 @@ body {
   width: 60%;
   color: #686868;
   position: relative;
+  background: linear-gradient(90deg, rgba(246, 246, 246, 1) 0%, rgba(255, 255, 255, 0.8) 100%);
 
   /* text-align: center; */
 }
@@ -378,24 +425,58 @@ body {
 
 .place-description-back{
   margin: 30px 50px 0;
+  /* font-family: 'Montserrat', sans-serif; */
 }
 
 .how-to-reach{
   margin-bottom: 10px;
+  font-weight: 500;
+
 }
 
 .how-to-reach-button{
   outline: none;
+  display: inline-block;
+  position: relative;
   width: 160px;
   height: 40px;
   background: var(--main-color);
-  border: none;
+  /* background: white; */
+  border: 1px solid white;
   border-radius: 50px;
   color: white;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  transition: 0.5s;
   /* padding: 20px; */
+}
+
+.how-to-reach-button:hover{
+  color: var(--main-color);
+}
+
+.how-to-reach-button::after{
+  content: 'Sprawdź';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 3%;
+  left: 1%;
+  /* transform: translate(-0.2%, -1%); */
+  background: #fff;
+  width: 0%;
+  height: 94%;
+  border-radius: 50px;
+  transform-origin: left;
+  transition: 0.25s ease;
+  z-index: -1;
+}
+
+.how-to-reach-button:hover::after{
+  width: 98%;
+  z-index: 0;
 }
 
 .return-arrow {
