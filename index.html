@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <!-- <meta name="viewport" content=""> -->
   <title>Gdzie Jedziemy</title>
 
   <link rel="stylesheet" href="css/styles.css">
@@ -33,10 +34,16 @@
           Sprawdź gdzie możesz spędzić czas
           w <span>Twojej</span> okolicy
         </div>
-        <form class="search-box">
+        <form class="search-box" autocomplete="off">
           <label for="search">Gdzie jesteś?</label>
-          <input type="text" class="search" placeholder="Nazwa miejscowości..." maxlength="26">
-          <input type="submit" class="submit-button" value="">
+          <input type="text" name="desiredCity" class="search" placeholder="Nazwa miejscowości..." maxlength="26">
+          <a href="listPage.html"><div class="submit-button"></div></a>
+
+        <!-- <form class="search-box" action="/listPage" method="POST" autocomplete="off">
+          <label for="search">Gdzie jesteś?</label>
+          <input type="text" name="desiredCity" class="search" placeholder="Nazwa miejscowości..." maxlength="26">
+          <button type="submit" class="submit-button" name="submit" value="Submit"></button> -->
+          <span class="submit-button-arrow"></span>
           <ul class="list-of-suggestions">
 
           </ul>
@@ -57,7 +64,7 @@
       <nav>
         <ul>
           <li><a href="#">FAQ</a></li>
-          <li><a href="#">Mapa</a></li>
+          <li><a href="/listPage.html">Mapa</a></li>
           <li><a href="#">Kontakt</a></li>
         </ul>
       </nav>

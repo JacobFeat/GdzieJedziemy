@@ -8,7 +8,7 @@ const frontCardAll = document.querySelectorAll(".front-card");
 const placeDistanceAll = document.querySelectorAll(".place-distance");
 const closeBackCard = document.querySelector(".close-back-card");
 const frontCardDot = document.querySelectorAll(".front-card-dot");
-const suggestionsCity = suggestionsList.children;
+let suggestionsCity = suggestionsList.children;
 
 const myPlaceArray = [
   {
@@ -94,6 +94,11 @@ document.addEventListener('mouseover', (e) => {
 
 });
 
+window.addEventListener('load', e => {
+  searchInput.value = window.localStorage.getItem('mySentCity');
+  sendCordi(myPlaceArray, cities);
+  // suggestionsCity[0].innerHTML = "<span class='name'>" + searchInput.value + "<span class='dot-for-li'></span></span>";
+});
 
 searchInput.addEventListener('keyup', () => {
   if (searchInput.value != "") {
@@ -113,6 +118,7 @@ document.addEventListener('click', (e) => {
   }
   const currentIndex = myCardArray.indexOf(e.target.closest('.card-container'));
   console.log(currentIndex);
+
   //expand and collapse search input, display and hide close-search button
   if (e.target.classList.contains('search') || e.target.classList.contains('close-search')) {
     searchInput.classList.add('search-active');
@@ -194,24 +200,7 @@ document.addEventListener('click', (e) => {
         }
       }
     }
-
-    sendCordi(myPlaceArray);
-
-    // sort li by distance
-    function sortList(ul) {
-      Array.from(ul.querySelectorAll(".card-container"))
-        .sort((a, b) => {
-          return Number(a.firstElementChild.lastElementChild.innerHTML.replace(' km', '')) - Number(b.firstElementChild.lastElementChild.innerHTML.replace(' km', ''))
-        })
-        .forEach(li => ul.appendChild(li));
-    }
-    sortList(spotsList);
-
-    // display just 5 elements of spotsList
-    const listOfSpotsList = Array.from(spotsList.querySelectorAll(".card-container"));
-    for (let i = 5; i < listOfSpotsList.length; i++) {
-      listOfSpotsList[i].style.display = "none";
-    }
+    sendCordi(myPlaceArray, cities);
 
   }
 }, false);
@@ -252,11 +241,11 @@ function displayMatches() {
   }
 }
 
+searchInput.addEventListener('change', displayMatches);
 searchInput.addEventListener('keyup', displayMatches);
-// searchInput.addEventListener('change', displayMatches);
 
 // sending name of city and values of position
-function sendCordi(object) {
+function sendCordi(object, arrayOfCities) {
   function findCity(place) {
     const regex = new RegExp(searchInput.value, 'gi');
     return place.city.match(regex);
@@ -266,14 +255,14 @@ function sendCordi(object) {
     return `${place.lat}, ${place.lng}`;
   }
 
-  const foundCity = cities.filter(findCity)
+  const foundCity = arrayOfCities.filter(findCity)
     .map(mapCity);
 
 
   for (let i = 0; i < 3; i++) {
     if (suggestionsCity[i]) {
       suggestionsCity[i].addEventListener('click', () => {
-        const foundCity = cities.filter(findCity)
+        const foundCity = arrayOfCities.filter(findCity)
           .map(mapCity);
         // const [lat, lng] = foundCity[0].split(", ");
         // const changed = changeCordi(lat, lng, object);
@@ -285,6 +274,21 @@ function sendCordi(object) {
 
   const calculated = calculateCordi(lat, lng, object);
 
+  // sort li by distance
+  function sortList(ul) {
+    Array.from(ul.querySelectorAll(".card-container"))
+      .sort((a, b) => {
+        return Number(a.firstElementChild.lastElementChild.innerHTML.replace(' km', '')) - Number(b.firstElementChild.lastElementChild.innerHTML.replace(' km', ''))
+      })
+      .forEach(li => ul.appendChild(li));
+  }
+  sortList(spotsList);
+
+  // display just 5 elements of spotsList
+  const listOfSpotsList = Array.from(spotsList.querySelectorAll(".card-container"));
+  for (let i = 5; i < listOfSpotsList.length; i++) {
+    listOfSpotsList[i].style.display = "none";
+  }
 }
 
 //changing string result to number result

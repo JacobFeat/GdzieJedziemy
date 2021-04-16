@@ -68,7 +68,7 @@ body{
 }
 
 .logo-circle{
-  min-width: 40px;
+  width: 40px;
   height: 40px;
   border: 6px solid var(--main-color);
   border-radius: 100%;
@@ -132,9 +132,14 @@ body{
   transition: 0.5s;
 }
 
+.submit-button:hover{
+  background: var(--main-color);
+  transition: 0.5s;
+}
 
-.submit-button-arrow{
-  width: 1px;
+.search-box::before{
+  content: '';
+  display: inline-block;
   border: solid var(--main-color);
   border-width: 0 2px 2px 0;
   padding: 5px;
@@ -144,19 +149,12 @@ body{
   left: 380px;
   z-index: 1;
   cursor: pointer;
-  pointer-events: none;
 }
 
-.submit-button-active{
-  background: var(--main-color);
-  transition: 0.5s;
-}
-
-.submit-button-arrow-active{
-  border: solid #fff;
+/* .search-box:hover::before{
+  border: solid white;
   border-width: 0 2px 2px 0;
-  transition: 0.5s;
-}
+} */
 
 input::placeholder{
   font-family: 'Lora', serif;
@@ -212,20 +210,19 @@ input::placeholder{
   display: flex;
   /* border: 1px solid black; */
   align-self: flex-end;
-  margin: 40px 30px 0 0;
+  margin: 50px 30px 0 0;
+  font-size: 24px;
 }
 
 .icons a{
   color: #60EEDF;
-  margin: 10px 20px;
-  font-size: 24px;
-
+  margin: 0 20px;
 }
 
 .icons a:hover{
   color: var(--main-color);
   font-size: 26px;
-  margin: 9px 19px;
+  margin: 0 19px;
 }
 
 .lights{

@@ -1,10 +1,18 @@
 const searchInput = document.querySelector(".search");
 const suggestionsList = document.querySelector(".list-of-suggestions");
 const subBtn = document.querySelector(".submit-button");
+const subBtnArrow = document.querySelector(".submit-button-arrow");
 const logo = document.querySelector(".logo");
 let suggestionsCity = suggestionsList.children;
 // const leftLight = document.querySelector(".left-light");
 // const rightLight = document.querySelector(".right-light");
+
+// window.addEventListener('load', () => {
+//   const params = (new URL(document.location)).searchParams;
+//   const cityDesir = params.get('desiredCity')
+//   console.log(cityDesir);
+// });
+
 
 const myPlace = {
   lat: 49.092
@@ -31,7 +39,7 @@ function displayMatches() {
 
     return `
         <li>
-          <span class = "name">${cityName}</span>
+          <span class = "name">${cityName.charAt(0).toUpperCase() + cityName.slice(1).toLowerCase()}</span>
         </li>
       `;
   }).join("");
@@ -58,8 +66,31 @@ function displayMatches() {
   // end of test
 }
 
+//hover event for submit button
+document.addEventListener('mouseover', (e)=>{
+  if(e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')){
+    subBtn.classList.add('submit-button-active');
+    subBtnArrow.classList.add('submit-button-arrow-active');
+  }
+});
+document.addEventListener('mouseout', (e)=>{
+  if(e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')){
+    subBtn.classList.remove('submit-button-active');
+    subBtnArrow.classList.remove('submit-button-arrow-active');
+  }
+});
 
-searchInput.addEventListener('change', displayMatches);
+document.addEventListener('click', (e)=>{
+  if(e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')){
+    // e.preventDefault();
+    function sendCityName(name){
+      window.localStorage.setItem('mySentCity', name);
+    }
+    sendCityName(searchInput.value);
+  }
+});
+
+// searchInput.addEventListener('change', displayMatches);
 searchInput.addEventListener('keyup', displayMatches);
 searchInput.addEventListener('focusin', () => {
   suggestionsList.style.display = "inline-block";
@@ -91,7 +122,6 @@ function sendCordi() {
     .map(mapCity);
 
   const displayFound = function() {
-    // console.log(foundCity[0]);
   }
 
   for (let i = 0; i < 3; i++) {
@@ -100,7 +130,6 @@ function sendCordi() {
         const foundCity = cities.filter(findCity)
           .map(mapCity);
         const displayFound = function() {
-          // console.log(foundCity[0]);
         }
         displayFound();
         const changed = changeCordi(foundCity[0]);
@@ -116,11 +145,4 @@ function sendCordi() {
 function changeCordi(value) {
   const valueOfFound = value;
   const valueAsNumber = parseFloat(valueOfFound);
-  console.log(valueAsNumber);
-  if ((valueAsNumber - myPlace.lat) < 3) {
-    console.log("Very close!");
-  } else {
-    console.log("Very far :(");
-  }
-
 }

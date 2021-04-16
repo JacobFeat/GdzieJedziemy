@@ -247,7 +247,7 @@ body {
   cursor: pointer;
   backface-visibility: hidden;
   transition: 0.5s ease;
-  animation: show-cards 0.7s forwards;
+  animation: show-cards 0.5s forwards;
   transform-origin: top;
 }
 
