@@ -289,21 +289,25 @@ body {
   top: 50%;
   left: 20px;
   transform: translateY(-50%);
-  animation: pulsing-dot 1s 2;
+  animation: pulsing-dot 2s;
 }
 
 @keyframes pulsing-dot {
   0%{
-    background: var(--main-color);
-    transform: scale(1.0) translateY(-50%);
-  }
+    /* border-radius: 100%; */
+    /* transform: rotate(0deg) translateY(-50%); */
+    background: #686868;
+}
+/*
   50%{
-    transform: scale(1.3) translateY(-50%);
-    background: #0cc4b1;
-  }
+    border-radius: 0%;
+    transform: rotate(180deg) translateY(-50%);
+  } */
   100%{
-    transform: scale(1.0) translateY(-50%);
+    /* border-radius: 100%; */
+    /* transform: rotate(0deg) translateY(-50%); */
     background: var(--main-color);
+
   }
 }
 
