@@ -135,7 +135,7 @@ body {
 .close-search{
   position: absolute;
   color: #B8B8B8;
-  top: 50%;
+  top: 42%;
   transform: translateY(-50%);
   left: 300px;
   font-size: 16px !important;
