@@ -186,12 +186,12 @@ function initMap() {
   // });
 
   //Listen for click
-  google.maps.event.addListener(map, 'click', function(event) {
-    //add marker
-    addMarker({
-      coords: event.latLng
-    })
-  });
+  // google.maps.event.addListener(map, 'click', function(event) {
+  //   //add marker
+  //   addMarker({
+  //     coords: event.latLng
+  //   })
+  // });
 
   //array of our places
   const arrayOfPlaces = [{

@@ -286,10 +286,11 @@ function sendCordi(object, arrayOfCities) {
   sortList(spotsList);
 
   // display just 5 elements of spotsList
-  const listOfSpotsList = Array.from(spotsList.querySelectorAll(".card-container"));
-  for (let i = 5; i < listOfSpotsList.length; i++) {
-    listOfSpotsList[i].style.display = "none";
-  }
+  //UPDATE: I made this in css file
+  // const listOfSpotsList = Array.from(spotsList.querySelectorAll(".card-container"));
+  // for (let i = 5; i < listOfSpotsList.length; i++) {
+  //   listOfSpotsList[i].style.display = "none";
+  // }
 }
 
 //changing string result to number result

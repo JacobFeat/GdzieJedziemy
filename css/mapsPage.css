@@ -37,3 +37,15 @@ body{
   box-sizing: content-box;
   margin: 0 10px;
 }
+
+.return-arrow {
+  width: 49px;
+  height: 41px;
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  font-size: 32px !important;
+}
+
+.return-arrow:hover{
+}

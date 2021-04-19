@@ -224,6 +224,11 @@ body {
   position: relative;
   transform-style: preserve-3d;
   transition: all 0.5s ease;
+  display: none;
+}
+
+.card-container:nth-child(-n+5){
+  display: block;
 }
 
 .li-active{
