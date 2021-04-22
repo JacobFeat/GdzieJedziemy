@@ -90,11 +90,26 @@ document.addEventListener('click', (e)=>{
   }
 
   if(e.target.closest('.hamburger')){
-    console.log("work");
+    // console.log("work");
     document.querySelectorAll(".hamburger span")[0].classList.toggle("span-active-first");
     document.querySelectorAll(".hamburger span")[1].classList.toggle("span-active-second");
     document.querySelectorAll(".hamburger span")[2].classList.toggle("span-active-third");
     document.querySelector(".hamburger-bg").classList.toggle("hamburger-bg-active");
+    // if(!document.querySelector(".hamburger-bg").classList.contains("hamburger-bg-active")){
+    //   let children = document.querySelector(".hamburger-bg").children;
+    //   const arrChild = Array.from(children);
+    //   arrChild.forEach(element => element.style.display="none");
+    //   console.log(arrChild);
+    // }
+    // else{
+    //   let children = document.querySelector(".hamburger-bg").children;
+    //   const arrChild = Array.from(children);
+    //   arrChild[0].style.display="flex";
+    //   for(let i=1; i<arrChild.length; i++){
+    //     arrChild[i].style.display="block";
+    //   }
+    //   console.log(arrChild);
+    // }
   };
 });
 

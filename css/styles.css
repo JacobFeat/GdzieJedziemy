@@ -335,9 +335,9 @@ input::placeholder {
 
 .non-hamburger a:hover {}
 
-.hamburger-bg{
-  display: none;
-}
+  .hamburger-bg .logo, ul, li, .hamburger-menu-li, .my-face {
+    display: none;
+  }
 
 @media (max-width: 1100px) {
   .main-container {
@@ -350,8 +350,8 @@ input::placeholder {
 
   .bus-img {
     /* transform: scale(0.8); */
-    right: -6vw;
-    margin-top: 20px;
+    right: -10vw;
+    margin-top: 90px;
   }
 
   .right-container {
@@ -396,6 +396,7 @@ input::placeholder {
     flex-direction: column;
     justify-content: space-evenly;
     cursor: pointer;
+    z-index: 3;
   }
 
   .hamburger-bg {
@@ -404,7 +405,7 @@ input::placeholder {
     height: 0px;
     margin: 0;
     border-radius: 100%;
-    position: absolute;
+    position: fixed;
     top: 70px;
     right: 115px;
     /* z-index: -1; */
@@ -419,7 +420,7 @@ input::placeholder {
     top: 0;
     right: 0;
     border-radius: 0%;
-    transition: 0.3s ease;
+    transition: 0.5s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
