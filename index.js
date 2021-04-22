@@ -88,6 +88,14 @@ document.addEventListener('click', (e)=>{
     }
     sendCityName(searchInput.value);
   }
+
+  if(e.target.closest('.hamburger')){
+    console.log("work");
+    document.querySelectorAll(".hamburger span")[0].classList.toggle("span-active-first");
+    document.querySelectorAll(".hamburger span")[1].classList.toggle("span-active-second");
+    document.querySelectorAll(".hamburger span")[2].classList.toggle("span-active-third");
+    document.querySelector(".hamburger-bg").classList.toggle("hamburger-bg-active");
+  };
 });
 
 // searchInput.addEventListener('change', displayMatches);

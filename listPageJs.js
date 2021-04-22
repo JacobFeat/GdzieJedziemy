@@ -242,7 +242,7 @@ function displayMatches() {
 }
 
 searchInput.addEventListener('keyup', displayMatches);
-searchInput.addEventListener('change', displayMatches);
+// searchInput.addEventListener('change', displayMatches);
 
 
 // sending name of city and values of position
