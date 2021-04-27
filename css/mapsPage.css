@@ -8,7 +8,7 @@ body {
 }
 
 #map {
-  height: 90vh;
+  min-height: calc(100vh - 70px);
   width: 100%;
 }
 
@@ -17,7 +17,7 @@ body {
   top: 0;
   left: 0;
   z-index: 1;
-  height: 10vh;
+  height: 70px;
   width: 100%;
   background: #fff;
   box-shadow: 2px 0px 10px #000;
@@ -34,7 +34,7 @@ body {
   font-family: 'Lora', serif;
   font-size: 24px;
   font-weight: 800;
-  margin: 15px auto 0;
+  margin: 10px auto 0;
   width: 270px;
   position: absolute;
   top: 0;
@@ -120,7 +120,7 @@ body {
 }
 
 .hamburger-bg-active {
-  clip-path: circle(1500px at 89% 9%);
+  clip-path: circle(1800px at 89% 9%);
   transition: 0.8s ease;
 }
 
@@ -232,7 +232,6 @@ body {
   bottom: 30px;
   border: none;
   box-shadow: 0px 0px 2px #636363;
-  background: var(--main-color);
   font-size: 16px;
   font-weight: 500;
   font-family: 'Poppins', sans-serif;
@@ -241,6 +240,15 @@ body {
   display: flex;
   align-items: center;
   cursor: pointer;
+  background: var(--main-color);
+  background: linear-gradient(to right, var(--main-color) 50%, #686868 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  transition: all .3s ease-out;
+}
+
+.my-location-btn:hover{
+  background-position: left;
 }
 
 .my-location-icon {
@@ -261,6 +269,15 @@ body {
   padding: 10px;
   color: #fff;
   cursor: pointer;
+  background: linear-gradient(to right, var(--main-color) 50%, #686868 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  transition: all .3s ease-out;
+}
+
+.route-btn:hover{
+  background-position: left;
+
 }
 
 .map-box * {
@@ -271,7 +288,8 @@ body {
 .place-img {
   width: 300px;
   height: 300px;
-  border-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .place {
@@ -293,7 +311,7 @@ body {
   border: none;
   /* border-radius: 20px; */
   padding: 8px;
-  margin: 10px auto;
+  margin: 10px auto 20px;
   cursor: pointer;
 
   background: linear-gradient(to right, var(--main-color) 50%, #686868 50%);
@@ -304,4 +322,75 @@ body {
 
 .place-btn:hover {
   background-position: left;
+}
+
+/* .place-close{
+  position: absolute;
+  top: 0;
+  left:0;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border: none;
+  cursor: pointer;
+} */
+
+/* Custom close infoWindow button */
+.gm-ui-hover-effect{
+  background: #686868 !important;
+  opacity: 1.0 !important;
+  z-index: 42 !important;
+  position: absolute !important;
+  top: -10px !important;
+  right: -10px !important;
+  transition: background .4s;
+
+}
+
+.gm-ui-hover-effect:hover{
+  background: var(--main-color) !important;
+  transition: background .4s;
+}
+
+.gm-ui-hover-effect::before{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 20px;
+  height: 4px;
+  background: white;
+}
+
+.gm-ui-hover-effect::after{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: 20px;
+  height: 4px;
+  background: white;
+}
+
+
+.gm-ui-hover-effect img{
+  transform: rotate(45deg);
+  width: 0 !important;
+}
+
+/* Change infoWindow style */
+.gm-style .gm-style-iw-c{
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+.gm-style .gm-style-iw{
+  overflow: visible !important;
+}
+
+/* Change infoWindow style */
+.gm-style-iw-d{
+  overflow: hidden !important;
 }

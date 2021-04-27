@@ -8,8 +8,7 @@ const krakow = {
   lng: 19.944544
 }
 
-const myPlaceArray = [
-  {
+const myPlaceArray = [{
     name: 'Kamieniołom Liban',
     description: "Maecenas accumsan lacus vel facilisis. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Bibendum arcu vitae elementum curabitur vitae nunc sed. Sit amet massa vitae tortor condimentum lacinia quis vel. Sagittis eu volutpat odio facilisis mauris sit amet. Ultrices neque ornare aenean euismod elementum nisi quis. Diam volutpat commodo sed egestas. ",
     coords: {
@@ -112,8 +111,7 @@ function initMap() {
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [
-      {
+    styles: [{
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"
@@ -253,50 +251,12 @@ function initMap() {
   };
   document.querySelector('.route-btn').addEventListener('click', onChangeHandler);
 
-
-
-  // const svgMarker = {
-  //   path: 'M17.7459 0C7.96076 0 0 7.96076 0 17.7458C0 29.8893 15.8808 47.7168 16.557 48.4698C17.1921 49.1771 18.3009 49.1759 18.9348 48.4698C19.611 47.7168 35.4918 29.8893 35.4918 17.7458C35.4916 7.96076 27.5309 0 17.7459 0ZM17.7459 26.6742C12.8228 26.6742 8.81758 22.6689 8.81758 17.7458C8.81758 12.8227 12.8228 8.81749 17.7459 8.81749C22.6689 8.81749 26.6741 12.8228 26.6741 17.7459C26.6741 22.669 22.6689 26.6742 17.7459 26.6742Z',
-  // }
-
-  // const marker = new google.maps.Marker({
-  //   position: libiaz,
-  //   map: map,
-  //   icon: 'images/mint-marker-shadow.svg',
-  // });
-
-  //Listen for click
-  // google.maps.event.addListener(map, 'click', function(event) {
-  //   //add marker
-  //   addMarker({
-  //     coords: event.latLng
-  //   })
-  // });
-
-  //array of our places
-  const arrayOfPlaces = [{
-      coords: {
-        lat: 50.104,
-        lng: 19.316
-      },
-      content: "<h3>Poczta</h3> It\'s my first place"
-    },
-    {
-      coords: {
-        lat: 50.112,
-        lng: 19.323
-      },
-      content: "<div class='map-box'><h3 class='customH'>Kolejowa</h3> It\'s my second place</div>"
-    }
-  ];
-
   myPlaceArray.forEach(place => {
     addMarker(place)
   });
 
-  arrayOfPlaces.forEach(place => {
-    // addMarker(place);
-  });
+  //make array where all infoWindows will be stored
+  const infoWindows= [];
 
   //add marker on the map
   function addMarker(city) {
@@ -306,18 +266,33 @@ function initMap() {
       icon: 'images/mint-marker-shadow.svg',
     });
 
+    //add content to infoWindow
     const cityContent = `
     <img class="place-img" src="/images/${city.imgSource}" alt="image of place">
     <p class="place">${city.name}</p>
     <button class="place-btn">Jak dojechać</button>
+    <button class="place-close"></button>
     `;
+
+
     if (city.name) {
       const infoWindow = new google.maps.InfoWindow({
         content: cityContent
       });
-
+      //display infoWindow
       marker.addListener('click', function() {
-        infoWindow.open(map, marker);
+
+        infoWindows.push(infoWindow);
+        infoWindows.forEach(infoWindow=>{
+          infoWindow.close();
+        });
+
+				infoWindow.open( map, marker );
+        setTimeout(function(){map.panTo(city.coords);}, 100);
+
+        const infoWindowCloseBtn = document.querySelector('.place-close');
+        // console.log(infoWindowCloseBtn);
+        // setTimeout(function(){infoWindow.close();}, 5000);
       })
     }
   }
@@ -338,7 +313,7 @@ function initMap() {
           const marker = new google.maps.Marker({
             position: pos,
             map: map,
-            icon: 'images/hereV2-bigger.svg',
+            icon: 'images/hereV4.svg',
           });
         },
         () => {
@@ -352,9 +327,9 @@ function initMap() {
 }
 
 //active hamburger
-document.addEventListener('click', (e)=>{
+document.addEventListener('click', (e) => {
 
-  if(e.target.closest('.hamburger')){
+  if (e.target.closest('.hamburger')) {
     // console.log("work");
     document.querySelectorAll(".hamburger span")[0].classList.toggle("span-active-first");
     document.querySelectorAll(".hamburger span")[1].classList.toggle("span-active-second");
