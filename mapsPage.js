@@ -102,6 +102,8 @@ const myPlaceArray = [{
   }
 ]
 
+const markers = [];
+
 function initMap() {
   const options = {
     // mapId: "8e0a97af9386fef",
@@ -247,16 +249,17 @@ function initMap() {
 
   directionsRenderer.setMap(map);
   const onChangeHandler = function() {
-    calcRoute(directionsService, directionsRenderer);
+    calcRoute(directionsService, directionsRenderer, krakow);
   };
+
   document.querySelector('.route-btn').addEventListener('click', onChangeHandler);
 
   myPlaceArray.forEach(place => {
-    addMarker(place)
+    addMarker(place);
   });
 
   //make array where all infoWindows will be stored
-  const infoWindows= [];
+  const infoWindows = [];
 
   //add marker on the map
   function addMarker(city) {
@@ -266,37 +269,47 @@ function initMap() {
       icon: 'images/mint-marker-shadow.svg',
     });
 
+    markers.push(marker);
+    // clearMarkers();
+    setTimeout(function() {
+      marker.setAnimation(google.maps.Animation.DROP);
+    }, 50);
     //add content to infoWindow
     const cityContent = `
     <img class="place-img" src="/images/${city.imgSource}" alt="image of place">
     <p class="place">${city.name}</p>
     <button class="place-btn">Jak dojechać</button>
-    <button class="place-close"></button>
     `;
-
 
     if (city.name) {
       const infoWindow = new google.maps.InfoWindow({
         content: cityContent
       });
+
       //display infoWindow
-      marker.addListener('click', function() {
-
+      marker.addListener('click', function(e) {
         infoWindows.push(infoWindow);
-        infoWindows.forEach(infoWindow=>{
-          infoWindow.close();
+        //close all infoWindow
+        infoWindows.forEach(infoWindow => {
+        infoWindow.close();
         });
-
-				infoWindow.open( map, marker );
-        setTimeout(function(){map.panTo(city.coords);}, 100);
-
-        const infoWindowCloseBtn = document.querySelector('.place-close');
-        // console.log(infoWindowCloseBtn);
-        // setTimeout(function(){infoWindow.close();}, 5000);
+        //open just one infoWindow
+        infoWindow.open(map, marker);
+        setTimeout(function() {
+          map.panTo(city.coords);
+          var placeBtn = document.querySelector('.place-btn');
+          placeBtn.addEventListener('click', ()=>{
+            //take coords of choosen place
+            const destinationCoords = `{"lat": ${city.coords.lat}, "lng": ${city.coords.lng}}`;
+            //json parse them to the object
+            const jsonDestinationCoords = JSON.parse(destinationCoords);
+            calcRoute(directionsService, directionsRenderer, jsonDestinationCoords);
+            // infoWindow.close();
+          });
+        }, 100);
       })
     }
   }
-
   //find my location
   locationButton.addEventListener('click', () => {
     if (navigator.geolocation) {
@@ -309,7 +322,7 @@ function initMap() {
           // infoWindow.setPosition(pos);
           // infoWindow.setContent(`${pos.lat}`);
           // infoWindow.open(map);
-          map.setCenter(pos);
+          map.panTo(pos);
           const marker = new google.maps.Marker({
             position: pos,
             map: map,
@@ -344,17 +357,17 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
     browserHasGeolocation ?
-    "Error: The Geolocation service failed." :
-    "Error: Your browser doesn't support geolocation."
+    "Błąd: Usługa geolokalizacyjna zawiodła." :
+    "Błąd: Twoja przeglądarka nie wspiera geolokalizacji."
   );
   infoWindow.open(map);
 }
 
 //show route to the place
-function calcRoute(directionsService, directionsRenderer) {
+function calcRoute(directionsService, directionsRenderer, place) {
   var request = {
     origin: libiaz,
-    destination: krakow,
+    destination: place,
     travelMode: 'DRIVING',
   };
   directionsService.route(request, (result, status) => {
@@ -362,4 +375,9 @@ function calcRoute(directionsService, directionsRenderer) {
       directionsRenderer.setDirections(result);
     }
   });
+}
+
+//clear all markers
+function cleanMarkers() {
+
 }

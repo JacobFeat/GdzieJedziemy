@@ -29,7 +29,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--main-color);
+  color: #686868;
   /* background: #F5F5F5; */
   font-family: 'Lora', serif;
   font-size: 24px;
@@ -46,7 +46,7 @@ body {
 .logo-circle {
   width: 40px;
   height: 40px;
-  border: 6px solid var(--main-color);
+  border: 6px solid #686868;
   border-radius: 100%;
   display: block;
   box-sizing: content-box;
@@ -72,13 +72,17 @@ body {
 
 .hamburger span {
   width: 100%;
-  height: 11%;
-  background: var(--main-color);
+  height: 13%;
+  background: #686868;
   cursor: pointer;
   /* transform: rotate(0deg) translate(0, 0px); */
   transition: transform 0.5s, opacity 0.5s, background 0.5s;
   transform-origin: 0 100% !important;
   z-index: 8;
+}
+
+.hamburger:hover span{
+  background: var(--main-color);
 }
 
 .span-active-first {
@@ -393,4 +397,48 @@ body {
 /* Change infoWindow style */
 .gm-style-iw-d{
   overflow: hidden !important;
+}
+
+
+/* Change zoom style */
+.gm-control-active{
+  background: #686868 !important;
+  transition: .4s;
+}
+
+.gm-control-active:hover{
+  background: var(--main-color) !important;
+  transition: .4s;
+}
+
+.gm-control-active::before{
+  /* background: #fff !important; */
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  width: 20px;
+  height: 4px;
+  background: #fff;
+}
+
+.gm-control-active::after{
+  /* background: #686868 !important; */
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  width: 20px;
+  height: 4px;
+  background: #fff;
+}
+
+.gm-control-active:last-child::before{
+  display: none;
+}
+
+.gm-control-active img{
+  display: none !important;
 }
