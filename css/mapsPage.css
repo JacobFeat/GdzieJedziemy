@@ -317,12 +317,16 @@ body {
   margin-left: 3px;
   cursor: pointer;
   transition: background .4s;
-  
+
 }
 
 .drive-mode:hover{
-  background: var(--main-color) !important;
+  background: #0d7a6f !important;
   transition: background .4s;
+}
+
+.drive-mode-active{
+  background: var(--main-color) !important;
 }
 
 .map-box * {

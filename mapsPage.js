@@ -8,6 +8,7 @@ const krakow = {
   lng: 19.944544
 }
 
+
 const myPlaceArray = [{
     name: 'Kamieniołom Liban',
     description: "Maecenas accumsan lacus vel facilisis. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Bibendum arcu vitae elementum curabitur vitae nunc sed. Sit amet massa vitae tortor condimentum lacinia quis vel. Sagittis eu volutpat odio facilisis mauris sit amet. Ultrices neque ornare aenean euismod elementum nisi quis. Diam volutpat commodo sed egestas. ",
@@ -242,6 +243,9 @@ function initMap() {
 
   const map = new google.maps.Map(document.getElementById("map"), options);
   const locationButton = document.querySelector('.my-location-btn');
+  const carModeBtn = document.querySelector('.car-mode');
+  const bikeModeBtn = document.querySelector('.bike-mode');
+  const walkModeBtn = document.querySelector('.walk-mode');
 
   const infoWindow = new google.maps.InfoWindow();
 
@@ -308,6 +312,7 @@ function initMap() {
             const jsonDestinationCoords = JSON.parse(destinationCoords);
             calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, 'DRIVING');
             infoWindow.close();
+            window.localStorage.setItem('myCurrentCoords', destinationCoords);
           });
         }, 100);
       })
@@ -340,7 +345,36 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
+
+  carModeBtn.addEventListener('click', () => {
+    carModeBtn.classList.add('drive-mode-active');
+    bikeModeBtn.classList.remove('drive-mode-active');
+    walkModeBtn.classList.remove('drive-mode-active');
+    const mode = 'DRIVING';
+    const myCurrentCoords = window.localStorage.getItem('myCurrentCoords');
+    const jsonDestinationCoords = JSON.parse(myCurrentCoords);
+    calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, mode);
+  });
+  bikeModeBtn.addEventListener('click', () => {
+    bikeModeBtn.classList.add('drive-mode-active');
+    carModeBtn.classList.remove('drive-mode-active');
+    walkModeBtn.classList.remove('drive-mode-active');
+    const mode = 'BICYCLING';
+    const myCurrentCoords = window.localStorage.getItem('myCurrentCoords');
+    const jsonDestinationCoords = JSON.parse(myCurrentCoords);
+    calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, mode);
+  });
+  walkModeBtn.addEventListener('click', () => {
+    walkModeBtn.classList.add('drive-mode-active');
+    carModeBtn.classList.remove('drive-mode-active');
+    bikeModeBtn.classList.remove('drive-mode-active');
+    const mode = 'WALKING';
+    const myCurrentCoords = window.localStorage.getItem('myCurrentCoords');
+    const jsonDestinationCoords = JSON.parse(myCurrentCoords);
+    calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, mode);
+  });
 }
+
 
 //active hamburger
 document.addEventListener('click', (e) => {
