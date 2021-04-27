@@ -104,6 +104,7 @@ const myPlaceArray = [{
 
 const markers = [];
 
+
 function initMap() {
   const options = {
     // mapId: "8e0a97af9386fef",
@@ -113,7 +114,8 @@ function initMap() {
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [{
+    styles: [
+      {
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"
@@ -240,6 +242,7 @@ function initMap() {
 
   const map = new google.maps.Map(document.getElementById("map"), options);
   const locationButton = document.querySelector('.my-location-btn');
+
   const infoWindow = new google.maps.InfoWindow();
 
   //declare a object that we use get a result for our request
@@ -249,7 +252,7 @@ function initMap() {
 
   directionsRenderer.setMap(map);
   const onChangeHandler = function() {
-    calcRoute(directionsService, directionsRenderer, krakow);
+    calcRoute(directionsService, directionsRenderer, krakow, 'DRIVING');
   };
 
   document.querySelector('.route-btn').addEventListener('click', onChangeHandler);
@@ -303,8 +306,8 @@ function initMap() {
             const destinationCoords = `{"lat": ${city.coords.lat}, "lng": ${city.coords.lng}}`;
             //json parse them to the object
             const jsonDestinationCoords = JSON.parse(destinationCoords);
-            calcRoute(directionsService, directionsRenderer, jsonDestinationCoords);
-            // infoWindow.close();
+            calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, 'DRIVING');
+            infoWindow.close();
           });
         }, 100);
       })
@@ -326,7 +329,7 @@ function initMap() {
           const marker = new google.maps.Marker({
             position: pos,
             map: map,
-            icon: 'images/hereV4.svg',
+            icon: 'images/hereBlue.svg',
           });
         },
         () => {
@@ -364,15 +367,17 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 //show route to the place
-function calcRoute(directionsService, directionsRenderer, place) {
+function calcRoute(directionsService, directionsRenderer, place, travelMode) {
   var request = {
     origin: libiaz,
     destination: place,
-    travelMode: 'DRIVING',
+    travelMode: travelMode,
   };
   directionsService.route(request, (result, status) => {
     if (status == 'OK') {
       directionsRenderer.setDirections(result);
+      const distanceField = document.querySelector('.distance-display');
+      distanceField.innerHTML = `Odległość: ${result.routes[0].legs[0].distance.text}`;
     }
   });
 }
