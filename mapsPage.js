@@ -8,7 +8,8 @@ const krakow = {
   lng: 19.944544
 }
 
-const myPlaceArray = [{
+const myPlaceArray = [
+  {
     name: 'Kamieniołom Liban',
     description: "Maecenas accumsan lacus vel facilisis. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Bibendum arcu vitae elementum curabitur vitae nunc sed. Sit amet massa vitae tortor condimentum lacinia quis vel. Sagittis eu volutpat odio facilisis mauris sit amet. Ultrices neque ornare aenean euismod elementum nisi quis. Diam volutpat commodo sed egestas. ",
     coords: {
@@ -111,7 +112,8 @@ function initMap() {
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [{
+    styles: [
+      {
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"
@@ -290,20 +292,12 @@ function initMap() {
 
   myPlaceArray.forEach(place => {
     addMarker(place)
-    // console.log(placeCoords);
-    // addMarker(placeCoords);
   });
 
   arrayOfPlaces.forEach(place => {
     // addMarker(place);
   });
 
-  const crds = {
-    lat: 50.112,
-    lng: 19.323
-  };
-  // addMarker(crds);
-  console.log(crds);
   //add marker on the map
   function addMarker(city) {
     const marker = new google.maps.Marker({
@@ -312,9 +306,14 @@ function initMap() {
       icon: 'images/mint-marker-shadow.svg',
     });
 
+    const cityContent = `
+    <img class="place-img" src="/images/${city.imgSource}" alt="image of place">
+    <p class="place">${city.name}</p>
+    <button class="place-btn">Jak dojechać</button>
+    `;
     if (city.name) {
       const infoWindow = new google.maps.InfoWindow({
-        content: city.name
+        content: cityContent
       });
 
       marker.addListener('click', function() {
@@ -332,10 +331,15 @@ function initMap() {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Tutaj jesteś.');
-          infoWindow.open(map);
+          // infoWindow.setPosition(pos);
+          // infoWindow.setContent(`${pos.lat}`);
+          // infoWindow.open(map);
           map.setCenter(pos);
+          const marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            icon: 'images/hereV2-bigger.svg',
+          });
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -345,10 +349,22 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
-
-
 }
 
+//active hamburger
+document.addEventListener('click', (e)=>{
+
+  if(e.target.closest('.hamburger')){
+    // console.log("work");
+    document.querySelectorAll(".hamburger span")[0].classList.toggle("span-active-first");
+    document.querySelectorAll(".hamburger span")[1].classList.toggle("span-active-second");
+    document.querySelectorAll(".hamburger span")[2].classList.toggle("span-active-third");
+    document.querySelector(".hamburger-bg").classList.toggle("hamburger-bg-active");
+  };
+});
+
+
+//error if your browser fail with geolocation
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
@@ -359,8 +375,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 }
 
+//show route to the place
 function calcRoute(directionsService, directionsRenderer) {
-
   var request = {
     origin: libiaz,
     destination: krakow,

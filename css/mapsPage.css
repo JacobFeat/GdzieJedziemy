@@ -8,19 +8,20 @@ body {
 }
 
 #map {
-  height: 100vh;
+  height: 90vh;
   width: 100%;
 }
 
-.bg{
-  position: fixed;
+.top-header {
+  position: relative;
   top: 0;
   left: 0;
   z-index: 1;
-  height: 100px;
+  height: 10vh;
   width: 100%;
-  /* background: #F5F5F5; */
-  opacity: 0.8;
+  background: #fff;
+  box-shadow: 2px 0px 10px #000;
+  /* opacity: 0.8; */
 }
 
 .logo-link {
@@ -33,14 +34,13 @@ body {
   font-family: 'Lora', serif;
   font-size: 24px;
   font-weight: 800;
-  margin: 30px auto 0;
+  margin: 15px auto 0;
   width: 270px;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-
 }
 
 .logo-circle {
@@ -52,7 +52,166 @@ body {
   box-sizing: content-box;
   margin: 0 10px;
   z-index: 2;
+}
 
+.hamburger {
+  position: absolute;
+  top: 24px;
+  right: 30px;
+  width: 40px;
+  height: 30px;
+  /* border: 3px solid var(--main-color); */
+  box-sizing: content-box;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  cursor: pointer;
+  z-index: 8;
+}
+
+.hamburger span {
+  width: 100%;
+  height: 11%;
+  background: var(--main-color);
+  cursor: pointer;
+  /* transform: rotate(0deg) translate(0, 0px); */
+  transition: transform 0.5s, opacity 0.5s, background 0.5s;
+  transform-origin: 0 100% !important;
+  z-index: 8;
+}
+
+.span-active-first {
+  background: #fff !important;
+  transform: rotate(45deg) translate(-2px, -8px);
+  transition: transform 0.5s;
+  /* transform-origin: 0% 100%; */
+  transform-origin: left;
+}
+
+.span-active-second {
+  opacity: 0;
+  transition: 0.1s;
+}
+
+.span-active-third {
+  background: #fff !important;
+  transform: rotate(-45deg) translate(2px, 8px);
+  transition: transform 0.5s;
+  /* transform-origin: 0% 100%; */
+  transform-origin: left;
+}
+
+.hamburger-bg {
+  background: linear-gradient(197.88deg, #08BDAA 20.42%, #16D9C4 99.54%);
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  clip-path: circle(0px at 98% 5%);
+  z-index: 5;
+}
+
+.hamburger-bg-active {
+  clip-path: circle(1500px at 89% 9%);
+  transition: 0.8s ease;
+}
+
+.hamburger-bg .logo {
+  color: white;
+  z-index: 6;
+  margin: 15px 0 0 0px;
+  display: flex;
+  align-items: center;
+  font-family: 'Lora', serif;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.hamburger-bg .logo-circle {
+  border: 5px solid #fff;
+  z-index: 6;
+  display: flex;
+}
+
+.hamburger-bg ul {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  text-align: center;
+  display: block;
+}
+
+.hamburger-bg li {
+  padding-bottom: 30px;
+  display: block;
+}
+
+.hamburger-menu-li a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  display: block;
+  position: relative;
+}
+
+.hamburger-menu-li {
+  position: relative;
+}
+
+.hamburger-menu-li::before {
+  content: '';
+  display: inline-block;
+  width: 0px;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  bottom: 25px;
+  left: -5px;
+  transition: 0.3s ease-out;
+}
+
+.hamburger-menu-li:hover::before {
+  width: 157px;
+  transition: 0.3s ease-out;
+}
+
+.first-li::before {
+  content: '';
+  display: inline-block;
+  width: 50px;
+  height: 2px;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: -120px;
+}
+
+.first-li::after {
+  content: '';
+  display: inline-block;
+  width: 50px;
+  height: 2px;
+  background: white;
+  position: absolute;
+  top: 50%;
+  right: -120px;
+}
+
+.my-face {
+  font-size: 30px;
+  color: #fff;
+  margin-bottom: 44px;
+  display: inline-block;
+}
 }
 
 .return-arrow {
@@ -63,7 +222,6 @@ body {
   left: 30px;
   font-size: 32px !important;
   z-index: 2;
-
 }
 
 .return-arrow:hover {}
@@ -85,11 +243,11 @@ body {
   cursor: pointer;
 }
 
-.my-location-icon{
+.my-location-icon {
   margin-left: 10px;
 }
 
-.route-btn{
+.route-btn {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -105,11 +263,45 @@ body {
   cursor: pointer;
 }
 
-.map-box *{
+.map-box * {
   padding: 0;
   margin: 0;
 }
 
-.customH{
-  color: red;
+.place-img {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+}
+
+.place {
+  font-weight: 700;
+  font-size: 20px;
+  color: #686868;
+  text-align: center;
+  margin: 20px 0 10px;
+}
+
+.place-btn {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  border: none;
+  /* border-radius: 20px; */
+  padding: 8px;
+  margin: 10px auto;
+  cursor: pointer;
+
+  background: linear-gradient(to right, var(--main-color) 50%, #686868 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  transition: all .3s ease-out;
+}
+
+.place-btn:hover {
+  background-position: left;
 }
