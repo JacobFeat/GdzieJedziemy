@@ -115,8 +115,7 @@ function initMap() {
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [
-      {
+    styles: [{
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"
@@ -141,10 +140,35 @@ function initMap() {
         }]
       },
       {
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      },
+      {
+        "featureType": "administrative.land_parcel",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      },
+      {
         "featureType": "administrative.land_parcel",
         "elementType": "labels.text.fill",
         "stylers": [{
           "color": "#bdbdbd"
+        }]
+      },
+      {
+        "featureType": "administrative.neighborhood",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      },
+      {
+        "featureType": "poi",
+        "stylers": [{
+          "visibility": "off"
         }]
       },
       {
@@ -183,6 +207,20 @@ function initMap() {
         }]
       },
       {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      },
+      {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      },
+      {
         "featureType": "road.arterial",
         "elementType": "labels.text.fill",
         "stylers": [{
@@ -211,6 +249,12 @@ function initMap() {
         }]
       },
       {
+        "featureType": "transit",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      },
+      {
         "featureType": "transit.line",
         "elementType": "geometry",
         "stylers": [{
@@ -233,12 +277,19 @@ function initMap() {
       },
       {
         "featureType": "water",
+        "elementType": "labels.text",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      },
+      {
+        "featureType": "water",
         "elementType": "labels.text.fill",
         "stylers": [{
           "color": "#9e9e9e"
         }]
       }
-    ],
+    ]
   };
 
   const map = new google.maps.Map(document.getElementById("map"), options);
@@ -246,8 +297,11 @@ function initMap() {
   const carModeBtn = document.querySelector('.car-mode');
   const bikeModeBtn = document.querySelector('.bike-mode');
   const walkModeBtn = document.querySelector('.walk-mode');
-
   const infoWindow = new google.maps.InfoWindow();
+
+  //set DRIVING as a default travel mode
+  window.localStorage.setItem('currentTravelMode', 'DRIVING');
+  carModeBtn.classList.add('drive-mode-active');
 
   //declare a object that we use get a result for our request
   var directionsService = new google.maps.DirectionsService();
@@ -255,11 +309,12 @@ function initMap() {
   var directionsRenderer = new google.maps.DirectionsRenderer();
 
   directionsRenderer.setMap(map);
-  const onChangeHandler = function() {
-    calcRoute(directionsService, directionsRenderer, krakow, 'DRIVING');
-  };
 
-  document.querySelector('.route-btn').addEventListener('click', onChangeHandler);
+  // const onChangeHandler = function() {
+  //   calcRoute(directionsService, directionsRenderer, krakow, 'DRIVING');
+  // };
+
+  // document.querySelector('.route-btn').addEventListener('click', onChangeHandler);
 
   myPlaceArray.forEach(place => {
     addMarker(place);
@@ -298,20 +353,23 @@ function initMap() {
         infoWindows.push(infoWindow);
         //close all infoWindow
         infoWindows.forEach(infoWindow => {
-        infoWindow.close();
+          infoWindow.close();
         });
         //open just one infoWindow
         infoWindow.open(map, marker);
         setTimeout(function() {
           map.panTo(city.coords);
           var placeBtn = document.querySelector('.place-btn');
-          placeBtn.addEventListener('click', ()=>{
+          placeBtn.addEventListener('click', () => {
             //take coords of choosen place
             const destinationCoords = `{"lat": ${city.coords.lat}, "lng": ${city.coords.lng}}`;
             //json parse them to the object
             const jsonDestinationCoords = JSON.parse(destinationCoords);
-            calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, 'DRIVING');
+            //get travel mode from localStorage and put to the calcRoute()
+            const travelMode = window.localStorage.getItem('currentTravelMode');
+            calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, travelMode);
             infoWindow.close();
+            //save coords to localStorage
             window.localStorage.setItem('myCurrentCoords', destinationCoords);
           });
         }, 100);
@@ -334,7 +392,7 @@ function initMap() {
           const marker = new google.maps.Marker({
             position: pos,
             map: map,
-            icon: 'images/hereBlue.svg',
+            icon: 'images/hereStrokeBlack.svg',
           });
         },
         () => {
@@ -345,34 +403,43 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
-
+  const distanceField = document.querySelector('.distance-display');
+  console.log(distanceField.innerHTML.includes("..."));
   carModeBtn.addEventListener('click', () => {
-    carModeBtn.classList.add('drive-mode-active');
-    bikeModeBtn.classList.remove('drive-mode-active');
-    walkModeBtn.classList.remove('drive-mode-active');
-    const mode = 'DRIVING';
-    const myCurrentCoords = window.localStorage.getItem('myCurrentCoords');
-    const jsonDestinationCoords = JSON.parse(myCurrentCoords);
-    calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, mode);
+      carModeBtn.classList.add('drive-mode-active');
+      bikeModeBtn.classList.remove('drive-mode-active');
+      walkModeBtn.classList.remove('drive-mode-active');
+      const mode = 'DRIVING';
+      changeTravelMode(mode);
   });
   bikeModeBtn.addEventListener('click', () => {
-    bikeModeBtn.classList.add('drive-mode-active');
-    carModeBtn.classList.remove('drive-mode-active');
-    walkModeBtn.classList.remove('drive-mode-active');
-    const mode = 'BICYCLING';
-    const myCurrentCoords = window.localStorage.getItem('myCurrentCoords');
-    const jsonDestinationCoords = JSON.parse(myCurrentCoords);
-    calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, mode);
+      setTimeout(function(){bikeModeBtn.classList.add('drive-mode-active');
+      carModeBtn.classList.remove('drive-mode-active');
+      walkModeBtn.classList.remove('drive-mode-active');
+      const mode = 'BICYCLING';
+      console.log(this);
+      changeTravelMode(mode);}, 0);
+
+
   });
   walkModeBtn.addEventListener('click', () => {
-    walkModeBtn.classList.add('drive-mode-active');
-    carModeBtn.classList.remove('drive-mode-active');
-    bikeModeBtn.classList.remove('drive-mode-active');
-    const mode = 'WALKING';
+      walkModeBtn.classList.add('drive-mode-active');
+      carModeBtn.classList.remove('drive-mode-active');
+      bikeModeBtn.classList.remove('drive-mode-active');
+      const mode = 'WALKING';
+      changeTravelMode(mode);
+  });
+
+  function changeTravelMode(mode){
+    window.localStorage.setItem('currentTravelMode', mode);
+    if (!distanceField.innerHTML.includes("...")) {
     const myCurrentCoords = window.localStorage.getItem('myCurrentCoords');
     const jsonDestinationCoords = JSON.parse(myCurrentCoords);
     calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, mode);
-  });
+    }
+  }
+
+  //end of initMap()
 }
 
 
@@ -411,7 +478,10 @@ function calcRoute(directionsService, directionsRenderer, place, travelMode) {
     if (status == 'OK') {
       directionsRenderer.setDirections(result);
       const distanceField = document.querySelector('.distance-display');
+      const timeField = document.querySelector('.time-display');
       distanceField.innerHTML = `Odległość: ${result.routes[0].legs[0].distance.text}`;
+      timeField.innerHTML = `Czas: ${result.routes[0].legs[0].duration.text}`;
+      // distanceField.classList.toggle('distance-display-active');
     }
   });
 }
