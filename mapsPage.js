@@ -9,7 +9,8 @@ const krakow = {
 }
 
 
-const myPlaceArray = [{
+const myPlaceArray = [
+  {
     name: 'Kamieniołom Liban',
     description: "Maecenas accumsan lacus vel facilisis. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Bibendum arcu vitae elementum curabitur vitae nunc sed. Sit amet massa vitae tortor condimentum lacinia quis vel. Sagittis eu volutpat odio facilisis mauris sit amet. Ultrices neque ornare aenean euismod elementum nisi quis. Diam volutpat commodo sed egestas. ",
     coords: {
@@ -106,10 +107,40 @@ const myPlaceArray = [{
 const markers = [];
 const originPlaceBtn = document.querySelector('.lookup-icon');
 const originInput = document.querySelector('.origin-input');
+const closeSearch = document.querySelector('.close-search');
 const carModeBtn = document.querySelector('.car-mode');
 const bikeModeBtn = document.querySelector('.bike-mode');
 const walkModeBtn = document.querySelector('.walk-mode');
 const distanceField = document.querySelector('.distance-display');
+
+window.addEventListener('load', e => {
+  originInput.value = window.localStorage.getItem('originPlace');
+  closeSearch.classList.add('close-search-active');
+
+  // suggestionsCity[0].innerHTML = "<span class='name'>" + searchInput.value + "<span class='dot-for-li'></span></span>";
+});
+
+//add delete's input button when input is filling 
+originInput.addEventListener('keyup', () => {
+  if (originInput.value != "") {
+    closeSearch.classList.add('close-search-active');
+  } else {
+    closeSearch.classList.remove('close-search-active');
+  }
+});
+//
+// originInput.addEventListener('focusin', () => {
+//     closeSearch.classList.add('close-search-active');
+// });
+// originInput.addEventListener('focusout', () => {
+//     closeSearch.classList.remove('close-search-active');
+// });
+
+closeSearch.addEventListener('click', () => {
+  originInput.value="";
+  closeSearch.classList.remove('close-search-active');
+  originInput.focus();
+});
 
 function initMap() {
   const optionsMap = {
@@ -120,7 +151,8 @@ function initMap() {
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [{
+    styles: [
+      {
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"
@@ -344,6 +376,7 @@ function initMap() {
     });
 
     markers.push(marker);
+    console.log(markers);
     // clearMarkers();
     setTimeout(function() {
       marker.setAnimation(google.maps.Animation.DROP);
@@ -482,6 +515,7 @@ function initMap() {
     window.localStorage.setItem('originPlace', originPlace);
     calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
   }
+
 
   //end of initMap()
 }

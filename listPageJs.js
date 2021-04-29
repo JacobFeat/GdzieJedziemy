@@ -199,6 +199,9 @@ document.addEventListener('click', (e) => {
           suggestionsCity[myCurrentCityIndex].style.display = "inline-block";
         }
       }
+      //Set current city as a local storage's origin place when you click suggestion city 
+      window.localStorage.setItem('originPlace',suggestionsCity[myCurrentCityIndex].innerText);
+      console.log(window.localStorage.getItem('originPlace'));
     }
     sendCordi(myPlaceArray, cities);
 

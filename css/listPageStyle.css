@@ -29,6 +29,7 @@ body {
 
 :root {
   --main-color: #08BDAA;
+  --dark-main-color: #686868;
 }
 
 * {
@@ -301,7 +302,7 @@ body {
   0%{
     /* border-radius: 100%; */
     /* transform: rotate(0deg) translateY(-50%); */
-    background: #686868;
+    background: var(--dark-main-color);
 }
 /*
   50%{
@@ -319,7 +320,7 @@ body {
 .place{
   font-weight: 700;
   font-size: 18px;
-  color: #686868;
+  color: var(--dark-main-color);
   width: 22%;
   text-align: left;
 }
@@ -341,7 +342,7 @@ body {
 .place-distance{
   font-size: 18px;
   font-weight: 500;
-  color: #686868;
+  color: var(--dark-main-color);
   width: 12%;
   padding-left: 20px;
 }
@@ -374,7 +375,7 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 60%;
-  color: #686868;
+  color: var(--dark-main-color);
   position: relative;
   background: linear-gradient(90deg, rgba(246, 246, 246, 1) 0%, rgba(255, 255, 255, 0.8) 100%);
 
@@ -413,6 +414,7 @@ body {
   left: 50%;
   background: #b5b5b5;
   transform: rotate(45deg);
+  transition: 0.2s;
 }
 
 .close-back-card::after{
@@ -424,8 +426,14 @@ body {
   top: 50%;
   left: 50%;
   transform: translateY(-50%) rotate(-45deg);
+  transition: 0.2s;
+
 }
 
+.close-back-card:hover::after, .close-back-card:hover::before{
+  background: var(--main-color);
+  transition: 0.2s;
+}
 
 .place-back{
   font-size: 20px;
@@ -449,7 +457,7 @@ body {
   position: relative;
   width: 160px;
   height: 40px;
-  background: var(--main-color);
+  /* background: var(--main-color); */
   /* background: white; */
   border: 1px solid white;
   border-radius: 50px;
@@ -457,35 +465,16 @@ body {
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  transition: 0.5s;
   /* padding: 20px; */
+  background: linear-gradient(to right, var(--main-color) 50%, var(--dark-main-color) 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  transition: all .3s ease-out;
 }
 
 .how-to-reach-button:hover{
-  color: var(--main-color);
-}
-
-.how-to-reach-button::after{
-  content: 'Sprawdź';
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 3%;
-  left: 1%;
-  /* transform: translate(-0.2%, -1%); */
-  background: #fff;
-  width: 0%;
-  height: 94%;
-  border-radius: 50px;
-  transform-origin: left;
-  transition: 0.25s ease;
-  z-index: -1;
-}
-
-.how-to-reach-button:hover::after{
-  width: 98%;
-  z-index: 0;
+  /* color: var(--main-color); */
+  background-position: left;
 }
 
 .return-arrow {
@@ -524,7 +513,7 @@ body {
   z-index: 0;
 }
 
-@media (max-width: 1100px) {
+@media screen and (max-width: 1300px) {
 .lookup-and-map{
   width: 90%;
 }

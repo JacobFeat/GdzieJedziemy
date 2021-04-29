@@ -11,6 +11,7 @@ body {
 
 :root {
   --main-color: #08BDAA;
+  --dark-main-color: #686868;
 }
 
 * {
