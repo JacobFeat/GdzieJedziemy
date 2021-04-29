@@ -1,92 +1,174 @@
 const searchInput = document.querySelector(".search");
-const suggestionsList = document.querySelector(".list-of-suggestions");
+let suggestionsList = document.querySelector(".list-of-suggestions");
 const lookupIcon = document.querySelector(".lookup-icon");
 const lookupAndMap = document.querySelector(".lookup-and-map");
 const spotsList = document.querySelector(".list-of-spots");
+const spotsListLi = spotsList.querySelectorAll(".card-container");
+const frontCardAll = document.querySelectorAll(".front-card");
 const placeDistanceAll = document.querySelectorAll(".place-distance");
-const suggestionsCity = suggestionsList.children;
+const closeBackCard = document.querySelector(".close-back-card");
+const frontCardDot = document.querySelectorAll(".front-card-dot");
+let suggestionsCity = suggestionsList.children;
 
-const myPlaceArray = [{
+const myPlaceArray = [
+  {
     name: 'Kamieniołom Liban',
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    description: "Maecenas accumsan lacus vel facilisis. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Bibendum arcu vitae elementum curabitur vitae nunc sed. Sit amet massa vitae tortor condimentum lacinia quis vel. Sagittis eu volutpat odio facilisis mauris sit amet. Ultrices neque ornare aenean euismod elementum nisi quis. Diam volutpat commodo sed egestas. ",
     lat: 50.04,
-    lng: 19.96
+    lng: 19.96,
+    imgSource: "img1.jpg"
   },
   {
     name: 'Pustynia Błędowska',
-    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id consectetur purus ut faucibus pulvinar elementum integer enim neque. Blandit turpis cursus in hac habitasse platea.",
     lat: 50.36,
-    lng: 19.52
+    lng: 19.52,
+    imgSource: "img2.jpg"
   },
   {
     name: 'Zakrzówek',
-    description: "Volutpat maecenas volutpat blandit aliquam etiam.",
+    description: "Lacus laoreet non curabitur gravida arcu ac. Tincidunt arcu non sodales neque sodales ut. Commodo odio aenean sed adipiscing diam donec adipiscing tristique risus. Facilisis gravida neque convallis a cras semper.",
     lat: 50.04,
-    lng: 19.91
+    lng: 19.91,
+    imgSource: "img3.jpg"
   },
   {
     name: 'Kopiec Krakusa',
-    description: "Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit.",
+    description: "Proin fermentum leo vel orci porta. Tincidunt eget nullam non nisi est sit amet facilisis. Lobortis elementum nibh tellus molestie nunc. Bibendum enim facilisis gravida neque convallis.",
     lat: 50.03,
-    lng: 19.96
+    lng: 19.96,
+    imgSource: "img4.jpg"
   },
   {
     name: 'Kopiec Kościuszki',
-    description: "Tempus iaculis urna id volutpat lacus laoreet. Ac feugiat sed lectus vestibulum mattis.",
+    description: "Vitae justo eget magna fermentum iaculis eu. Id donec ultrices tincidunt arcu non sodales neque. Sem et tortor consequat id porta nibh venenatis.",
     lat: 50.05,
-    lng: 19.89
+    lng: 19.89,
+    imgSource: "img5.jpg"
+
   },
   {
     name: 'Zamek Tenczyn',
-    description: "Tempus iaculis urna id volutpat lacus laoreet. Ac feugiat sed lectus vestibulum mattis.",
+    description: "Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. Velit sed ullamcorper morbi tincidunt. Nunc id cursus metus aliquam. Mi ipsum faucibus vitae aliquet nec ullamcorper sit. Accumsan tortor posuere ac ut consequat semper.",
     lat: 50.10,
-    lng: 19.58
+    lng: 19.58,
+    imgSource: "img6.jpg"
+
   },
   {
     name: 'Góra Żar',
-    description: "Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit.",
+    description: "Sed augue lacus viverra vitae congue eu. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et. Amet dictum sit amet justo donec.",
     lat: 49.79,
-    lng: 19.22
+    lng: 19.22,
+    imgSource: "img7.jpg"
   },
   {
     name: 'Góra Świętego Marcina',
-    description: "Tempus iaculis urna id volutpat lacus laoreet. Ac feugiat sed lectus vestibulum mattis.",
+    description: "Nisl purus in mollis nunc sed. Tortor aliquam nulla facilisi cras fermentum. Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque sit.",
     lat: 49.99,
-    lng: 21.01
+    lng: 21.01,
+    imgSource: "img8.jpg"
   },
   {
     name: 'Wieża widokowa w Siekowie',
-    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    description: "Leo integer malesuada nunc vel risus commodo viverra maecenas accumsan. A iaculis at erat pellentesque adipiscing commodo elit at. Pretium viverra suspendisse potenti nullam ac tortor vitae.",
     lat: 52.06,
-    lng: 16.37
+    lng: 16.37,
+    imgSource: "img9.jpg"
   },
   {
     name: 'Kaszubskie Oko',
-    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    description: "Ultricies integer quis auctor elit sed vulputate mi sit amet. Ultrices in iaculis nunc sed augue. Ut porttitor leo a diam sollicitudin tempor id. Id velit ut tortor pretium viverra suspendisse potenti.",
     lat: 54.72,
-    lng: 18.05
+    lng: 18.05,
+    imgSource: "img10.jpg"
   }
 ]
 
 let mySortedArray = [];
-
+const atLeastOneExpanded = (element) => {
+  element.classList.contains('li-active');
+};
 document.addEventListener('mouseover', (e) => {
   e.target.className === "search" ? searchInput.classList.add("search-hover") : searchInput.classList.remove("search-hover");
+
+});
+
+window.addEventListener('load', e => {
+  searchInput.value = window.localStorage.getItem('mySentCity');
+  sendCordi(myPlaceArray, cities);
+  // suggestionsCity[0].innerHTML = "<span class='name'>" + searchInput.value + "<span class='dot-for-li'></span></span>";
+});
+
+searchInput.addEventListener('keyup', () => {
+  if (searchInput.value != "") {
+    document.querySelector('.close-search').classList.add('close-search-active');
+  } else {
+    document.querySelector('.close-search').classList.remove('close-search-active');
+  }
+  suggestionsList.style.display="flex";
+
 });
 
 document.addEventListener('click', (e) => {
-  //expand and collapse search input
-  if (e.target.classList.contains('search')) {
+  //find index of picked card
+  const myCardArray = [];
+  for (let i = 0; i < 5; i++) {
+    myCardArray.push(document.querySelectorAll('.card-container')[i]);
+  }
+  const currentIndex = myCardArray.indexOf(e.target.closest('.card-container'));
+  console.log(currentIndex);
+
+  //expand and collapse search input, display and hide close-search button
+  if (e.target.classList.contains('search') || e.target.classList.contains('close-search')) {
     searchInput.classList.add('search-active');
     lookupIcon.classList.add('lookup-icon-active');
+    if (searchInput.value != "") {
+      document.querySelector('.close-search').classList.add('close-search-active');
+    }
   } else {
     searchInput.classList.remove('search-active');
     lookupIcon.classList.remove('lookup-icon-active');
-
+    document.querySelector('.close-search').classList.remove('close-search-active');
   }
 
-  if (e.target.closest('li')) {
-    // TODO: add popup feature about particular object
+  if (e.target.classList.contains('close-search')) {
+    searchInput.value = "";
+    suggestionsList.style.display="none";
+    document.querySelector('.close-search').classList.remove('close-search-active');
+  }
+
+  //expand card and add margin bottom to expanded card
+  if (e.target.closest('.front-card')) {
+
+    //scroll to picked card
+    function scrollToCertainPoint(index) {
+      scrollTo(0, (114 + index * 114));
+    }
+    setTimeout(scrollToCertainPoint.bind(null, currentIndex), 150);
+    e.target.closest('.front-card').style.marginBottom = "364px";
+    e.target.closest('.card-container').classList.add('li-active');
+
+    if (e.target.closest('.card-container').classList.contains('li-active')) {
+      document.querySelectorAll('.card-container').forEach(li => {
+        li.classList.remove('li-active');
+        //display green dot
+        li.querySelector('.front-card-dot').style.display = "inline-block";
+        li.querySelector('.front-card').style.marginBottom = "20px";
+        e.target.closest('.front-card').style.marginBottom = "364px";
+      });
+      e.target.closest('.card-container').classList.add('li-active');
+    }
+    //hide green dot
+    document.querySelectorAll('.front-card-dot')[currentIndex].style.display="none";
+  }
+
+  //close expanded card
+  if (e.target.classList.contains('close-back-card')) {
+    e.target.parentElement.classList.remove('li-active');
+    document.querySelectorAll('.card-container').forEach(li => li.classList.remove('li-active'));
+    document.querySelectorAll('.front-card').forEach(li => li.style.marginBottom = "20px");
+    e.target.parentElement.parentElement.parentElement.querySelector('.front-card-dot').style.display = "inline-block"; //display green dot
   }
 
   if (e.target.classList.contains('name')) {
@@ -118,22 +200,7 @@ document.addEventListener('click', (e) => {
         }
       }
     }
-    sendCordi(myPlaceArray);
-
-    function sortList(ul) {
-      Array.from(ul.getElementsByTagName("LI"))
-        .sort((a, b) => {
-          return Number(a.lastElementChild.innerHTML.replace(' km', '')) - Number(b.lastElementChild.innerHTML.replace(' km', ''))
-        })
-        .forEach(li => ul.appendChild(li));
-    }
-    sortList(spotsList);
-
-    //display just 5 elements of spotsList
-    const lisOfSpotsList = spotsList.querySelectorAll("li");
-    for(let i=5; i<spotsList.childElementCount; i++){
-      lisOfSpotsList[i].style.display = "none";
-    }
+    sendCordi(myPlaceArray, cities);
 
   }
 }, false);
@@ -177,8 +244,9 @@ function displayMatches() {
 searchInput.addEventListener('keyup', displayMatches);
 // searchInput.addEventListener('change', displayMatches);
 
+
 // sending name of city and values of position
-function sendCordi(object) {
+function sendCordi(object, arrayOfCities) {
   function findCity(place) {
     const regex = new RegExp(searchInput.value, 'gi');
     return place.city.match(regex);
@@ -188,14 +256,14 @@ function sendCordi(object) {
     return `${place.lat}, ${place.lng}`;
   }
 
-  const foundCity = cities.filter(findCity)
+  const foundCity = arrayOfCities.filter(findCity)
     .map(mapCity);
 
 
   for (let i = 0; i < 3; i++) {
     if (suggestionsCity[i]) {
       suggestionsCity[i].addEventListener('click', () => {
-        const foundCity = cities.filter(findCity)
+        const foundCity = arrayOfCities.filter(findCity)
           .map(mapCity);
         // const [lat, lng] = foundCity[0].split(", ");
         // const changed = changeCordi(lat, lng, object);
@@ -207,6 +275,22 @@ function sendCordi(object) {
 
   const calculated = calculateCordi(lat, lng, object);
 
+  // sort li by distance
+  function sortList(ul) {
+    Array.from(ul.querySelectorAll(".card-container"))
+      .sort((a, b) => {
+        return Number(a.firstElementChild.lastElementChild.innerHTML.replace(' km', '')) - Number(b.firstElementChild.lastElementChild.innerHTML.replace(' km', ''))
+      })
+      .forEach(li => ul.appendChild(li));
+  }
+  sortList(spotsList);
+
+  // display just 5 elements of spotsList
+  //UPDATE: I made this in css file
+  // const listOfSpotsList = Array.from(spotsList.querySelectorAll(".card-container"));
+  // for (let i = 5; i < listOfSpotsList.length; i++) {
+  //   listOfSpotsList[i].style.display = "none";
+  // }
 }
 
 //changing string result to number result
@@ -216,11 +300,28 @@ function calculateCordi(latValue, lngValue, object) {
   const html = myPlaceArray.map(place => {
 
     return `
-    <li>
+    <li class="card-container">
+      <span class="front-card">
+      <div class="front-card-dot"></div>
       <span class = "place">${place.name}</span>
-      <span class = "place-description">${place.description}</span>
+      <span class = "place-description">${place.description.slice(0,90)+"..."}</span>
       <img class="path-img" src="../images/finish.svg" alt="">
       <span class="place-distance"></span>
+      </span>
+      <span class="back-card">
+      <img class="card-img" src="/images/${place.imgSource}" alt="image of place">
+      <div class="card-content">
+      <div class="close-back-card"></div>
+      <span class="content-start">
+        <p class="place-back">${place.name}</p>
+        <p class="place-description-back">${place.description}</p>
+        </span>
+        <span class="content-end">
+        <p class="how-to-reach">Jak dojechać?</p>
+        <button type="button" class="how-to-reach-button">Sprawdź</button>
+        </span>
+      </div>
+      </span>
     </li>
     `;
   }).join("");
@@ -247,9 +348,7 @@ function calculateCordi(latValue, lngValue, object) {
     } else {
       roundDistance = Math.round(distance * 100) / 100;
     }
-    spotsList.querySelectorAll('li')[i].querySelector('.place-distance').innerHTML = roundDistance + " km";
-
-
+    spotsList.querySelectorAll('.front-card')[i].querySelector('.place-distance').innerHTML = roundDistance + " km";
   }
 
 }

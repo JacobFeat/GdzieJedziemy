@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <!-- <meta name="viewport" content=""> -->
   <title>Gdzie Jedziemy</title>
 
   <link rel="stylesheet" href="css/styles.css">
@@ -29,38 +30,62 @@
       <p class="logo">
         Gdzie <span class="logo-circle"></span> Jedziemy
       </p>
-        <div class="content">
-          Sprawdź gdzie możesz spędzić czas
-          w <span>Twojej</span> okolicy
-        </div>
-        <form class="search-box">
-          <label for="search">Gdzie jesteś?</label>
-          <input type="text" class="search" placeholder="Nazwa miejscowości..." maxlength="26">
-          <input type="submit" class="submit-button" value="">
-          <ul class="list-of-suggestions">
+      <p class="content">
+        Sprawdź gdzie możesz spędzić czas
+        w <span>Twojej</span> okolicy
+      </p>
+      <form action="listPage.html" class="search-box" autocomplete="off">
+        <label for="search">Gdzie jesteś?</label>
+        <input type="text" class="search" placeholder="Nazwa miejscowości..." maxlength="26" required>
+        <button type="submit" class="submit-button"></button>
 
-          </ul>
-        </form>
+        <!-- <form class="search-box" action="/listPage" method="POST" autocomplete="off">
+          <label for="search">Gdzie jesteś?</label>
+          <input type="text" name="desiredCity" class="search" placeholder="Nazwa miejscowości..." maxlength="26">
+          <button type="submit" class="submit-button" name="submit" value="Submit"></button> -->
+        <span class="submit-button-arrow"></span>
+        <ul class="list-of-suggestions">
+
+        </ul>
+      </form>
     </div>
+    <!-- <img class="bg-curve" src="../images/bg-dt.svg" alt=""> -->
 
     <div class="right-container">
       <div class="icons">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.facebook.com/JK.KitaK/"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
       </div>
       <div class="lights">
-      <img src="../images/bus.png" alt="">
+        <img class="bus-img" src="../images/bus2.png" alt="">
         <div class="left-light"></div>
         <div class="right-light"></div>
       </div>
-      <nav>
+      <nav class="non-hamburger">
         <ul>
           <li><a href="#">FAQ</a></li>
-          <li><a href="#">Mapa</a></li>
+          <li><a href="/mapsPage.html">Mapa</a></li>
           <li><a href="#">Kontakt</a></li>
         </ul>
       </nav>
+      <nav class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </nav>
+    </div>
+    <div class="hamburger-bg">
+      <p class="logo">
+        Gdzie <span class="logo-circle"></span> Jedziemy
+      </p>
+      <ul>
+        <li class="hamburger-menu-li"><a class="first-li" href="#">Strona Główna</a></li>
+        <li class="hamburger-menu-li"><a href="#">FAQ</a></li>
+        <li class="hamburger-menu-li"><a href="/mapsPage.html">Mapa</a></li>
+        <li class="hamburger-menu-li"><a href="https://www.facebook.com/JK.KitaK/">Kontakt</a></li>
+      </ul>
+      <a class="my-face" href="https://www.facebook.com/JK.KitaK/"><i class="far fa-grin-beam"></i></a>
     </div>
 
   </div>

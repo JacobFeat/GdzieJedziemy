@@ -1,0 +1,290 @@
+body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Lora', serif;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+:root{
+  --main-color: #08BDAA;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+.main-container{
+  width: 100vw;
+  /* max-width: 2000px; */
+  height: 100vh;
+  display: flex;
+  background-image: url('../images/bg-dt.svg');
+  background-position: 104% 0;
+  /* background-size: 50%; */
+  background: contain;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+@media (min-width: 1800px ) {
+  .main-container{
+    background-size: 50%;
+  }
+}
+
+.bg-box{
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border: 3px solid var(--main-color);
+  opacity: 0.1;
+}
+
+.left-container{
+  width: 50%;
+  height: 100%;
+  padding-left: 100px;
+  position: relative;
+  color: #636363;
+  z-index: 0;
+}
+
+@media (min-width: 1800px ) {
+  .left-container{
+    padding-left: 200px;
+  }
+}
+
+
+.logo{
+  color: var(--main-color);
+  font-size: 24px;
+  font-weight: 800;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo-circle{
+  width: 40px;
+  height: 40px;
+  border: 6px solid var(--main-color);
+  border-radius: 100%;
+  display: block;
+  box-sizing: content-box;
+  margin: 0 10px;
+}
+
+.content{
+  font-family: 'Poppins', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  width: 540px;
+  padding-top: 130px;
+  /* position: absolute; */
+  /* top: 30%; */
+}
+
+.content span{
+  color: var(--main-color);
+}
+
+.search-box{
+  margin-top: 10%;
+  font-size: 22px;
+  font-weight: 600;
+  position: relative;
+}
+
+
+.search{
+  box-sizing: content-box;
+  display: flex;
+  width: 400px;
+  height: 36px;
+  border: 2px solid var(--main-color);
+  background: #F3F3F3;
+  border-radius: 25px;
+  padding: 5px 15px;
+  margin-top: 10px;
+  outline: none;
+  position: relative;
+  left: -15px;
+  font-family: 'Lora', serif;
+  font-weight: 800;
+  color: #636363;
+  font-size: 18px;
+}
+
+.submit-button{
+  position: absolute;
+  top: 44px;
+  left: 370px;
+  border-radius: 100%;
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: white;
+  outline: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.submit-button:hover{
+  background: var(--main-color);
+  transition: 0.5s;
+}
+
+.search-box::before{
+  content: '';
+  display: inline-block;
+  border: solid var(--main-color);
+  border-width: 0 2px 2px 0;
+  padding: 5px;
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 56px;
+  left: 380px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+/* .search-box:hover::before{
+  border: solid white;
+  border-width: 0 2px 2px 0;
+} */
+
+input::placeholder{
+  font-family: 'Lora', serif;
+  font-weight: 800;
+  color: #adadad;
+}
+
+.list-of-suggestions{
+  box-sizing: content-box;
+  list-style: none;
+  width: 400px;
+  padding: 0;
+  margin: 0;
+}
+
+.list-of-suggestions li{
+  background: #F3F3F3;
+  width: 90%;
+  height: 40px;
+  border: 1px solid var(--main-color);
+  margin: 0 auto 5px;
+  padding: 10px;
+  display: none;
+  cursor: pointer;
+  align-items: center;
+  font-size: 18px;
+}
+
+.list-of-suggestions li:nth-child(-n+3){
+  display: flex;
+}
+
+.change-city-color{
+  background: var(--main-color);
+  color: white;
+
+}
+
+.right-container{
+  /* z-index: 2; */
+  /* overflow: hidden; */
+  width: 50%;
+  height: 100%;
+
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.icons{
+  display: flex;
+  /* border: 1px solid black; */
+  align-self: flex-end;
+  margin: 50px 30px 0 0;
+  font-size: 24px;
+}
+
+.icons a{
+  color: #60EEDF;
+  margin: 0 20px;
+}
+
+.icons a:hover{
+  color: var(--main-color);
+  font-size: 26px;
+  margin: 0 19px;
+}
+
+.lights{
+  position: relative;
+}
+
+.right-container img{
+  max-width: 100%;
+  vertical-align: middle;
+  transform: scale(0.9);
+  /* margin-left: 60px; */
+  position: relative;
+}
+
+
+.right-container img[width], .right-container img[height]{
+  max-width: none;
+}
+
+/* TODO: Make pseudo elements for img */
+
+/* .left-light{
+  width: 40px;
+  height: 57px;
+  background-color: yellow;
+  opacity: 0.5;
+  border-radius: 100%;
+  position: absolute;
+  top: 290px;
+  left: 104px;
+}
+
+.right-light{
+  width: 64px;
+  height: 60px;
+  background-color: yellow;
+  opacity: 0.5;
+  border-radius: 100%;
+  position: absolute;
+  top: 292px;
+  left: 355px;
+} */
+
+nav ul{
+  margin-bottom: 40px;
+  list-style-type: none;
+  display: flex;
+  /* border: 1px solid white; */
+
+}
+
+nav li{
+  margin-right: 40px;
+}
+
+nav a{
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+nav a:hover{
+
+}
