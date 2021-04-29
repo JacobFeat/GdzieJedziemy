@@ -104,10 +104,15 @@ const myPlaceArray = [{
 ]
 
 const markers = [];
-
+const originPlaceBtn = document.querySelector('.lookup-icon');
+const originInput = document.querySelector('.origin-input');
+const carModeBtn = document.querySelector('.car-mode');
+const bikeModeBtn = document.querySelector('.bike-mode');
+const walkModeBtn = document.querySelector('.walk-mode');
+const distanceField = document.querySelector('.distance-display');
 
 function initMap() {
-  const options = {
+  const optionsMap = {
     // mapId: "8e0a97af9386fef",
     zoom: 14,
     center: krakow,
@@ -292,11 +297,16 @@ function initMap() {
     ]
   };
 
-  const map = new google.maps.Map(document.getElementById("map"), options);
+  const map = new google.maps.Map(document.getElementById("map"), optionsMap);
   const locationButton = document.querySelector('.my-location-btn');
-  const carModeBtn = document.querySelector('.car-mode');
-  const bikeModeBtn = document.querySelector('.bike-mode');
-  const walkModeBtn = document.querySelector('.walk-mode');
+
+  //add autocomplete feature
+  const optionAutocomplete = {
+    types: ['(cities)'],
+    componentRestrictions: { country: "pl" },
+  }
+  const autocomplete = new google.maps.places.Autocomplete(originInput, optionAutocomplete);
+
   const infoWindow = new google.maps.InfoWindow();
 
   //set DRIVING as a default travel mode
@@ -367,10 +377,12 @@ function initMap() {
             const jsonDestinationCoords = JSON.parse(destinationCoords);
             //get travel mode from localStorage and put to the calcRoute()
             const travelMode = window.localStorage.getItem('currentTravelMode');
-            calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, travelMode);
+            const originPlace = window.localStorage.getItem('originPlace');
+
+            calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
             infoWindow.close();
             //save coords to localStorage
-            window.localStorage.setItem('myCurrentCoords', destinationCoords);
+            window.localStorage.setItem('currentDestination', destinationCoords);
           });
         }, 100);
       })
@@ -403,12 +415,13 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
-  const distanceField = document.querySelector('.distance-display');
-  console.log(distanceField.innerHTML.includes("..."));
+
+//click listener for each travel mode button
   carModeBtn.addEventListener('click', () => {
       carModeBtn.classList.add('drive-mode-active');
       bikeModeBtn.classList.remove('drive-mode-active');
       walkModeBtn.classList.remove('drive-mode-active');
+      window.localStorage.setItem('currentTravelMode', 'DRIVING');
       const mode = 'DRIVING';
       changeTravelMode(mode);
   });
@@ -416,28 +429,43 @@ function initMap() {
       setTimeout(function(){bikeModeBtn.classList.add('drive-mode-active');
       carModeBtn.classList.remove('drive-mode-active');
       walkModeBtn.classList.remove('drive-mode-active');
+      window.localStorage.setItem('currentTravelMode', 'BICYCLING');
       const mode = 'BICYCLING';
       console.log(this);
       changeTravelMode(mode);}, 0);
-
-
   });
   walkModeBtn.addEventListener('click', () => {
       walkModeBtn.classList.add('drive-mode-active');
       carModeBtn.classList.remove('drive-mode-active');
       bikeModeBtn.classList.remove('drive-mode-active');
+      window.localStorage.setItem('currentTravelMode', 'WALKING');
       const mode = 'WALKING';
       changeTravelMode(mode);
   });
 
+
+//function which change travel mode
   function changeTravelMode(mode){
     window.localStorage.setItem('currentTravelMode', mode);
     if (!distanceField.innerHTML.includes("...")) {
-    const myCurrentCoords = window.localStorage.getItem('myCurrentCoords');
-    const jsonDestinationCoords = JSON.parse(myCurrentCoords);
-    calcRoute(directionsService, directionsRenderer, jsonDestinationCoords, mode);
+    const currentDestination = window.localStorage.getItem('currentDestination');
+    const jsonDestinationCoords = JSON.parse(currentDestination);
+    const originPlace = window.localStorage.getItem('originPlace');
+    calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, mode);
     }
   }
+
+  //set input value as a origin place
+  originPlaceBtn.addEventListener('click', () =>{
+    // console.log(originInput.value);
+    const originPlace = originInput.value;
+    const currentDestination = window.localStorage.getItem('currentDestination');
+    const travelMode = window.localStorage.getItem('currentTravelMode');
+    const jsonDestinationCoords = JSON.parse(currentDestination);
+    window.localStorage.setItem('originPlace', originPlace);
+    console.log(originInput.value == "");
+    calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
+  });
 
   //end of initMap()
 }
@@ -456,6 +484,7 @@ document.addEventListener('click', (e) => {
 });
 
 
+
 //error if your browser fail with geolocation
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
@@ -468,10 +497,10 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 //show route to the place
-function calcRoute(directionsService, directionsRenderer, place, travelMode) {
+function calcRoute(directionsService, directionsRenderer, originPlace, destinationPlace, travelMode) {
   var request = {
-    origin: libiaz,
-    destination: place,
+    origin: originPlace,
+    destination: destinationPlace,
     travelMode: travelMode,
   };
   directionsService.route(request, (result, status) => {
