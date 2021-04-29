@@ -587,3 +587,8 @@ body {
   max-width: 250px;
   margin-left: 20px;
 }
+
+.pac-matched{
+  background: #e3e3e3;
+  /* color: white; */
+}

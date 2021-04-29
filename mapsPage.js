@@ -303,7 +303,9 @@ function initMap() {
   //add autocomplete feature
   const optionAutocomplete = {
     types: ['(cities)'],
-    componentRestrictions: { country: "pl" },
+    componentRestrictions: {
+      country: "pl"
+    },
   }
   const autocomplete = new google.maps.places.Autocomplete(originInput, optionAutocomplete);
 
@@ -416,56 +418,70 @@ function initMap() {
     }
   });
 
-//click listener for each travel mode button
+  //click listener for each travel mode button
   carModeBtn.addEventListener('click', () => {
-      carModeBtn.classList.add('drive-mode-active');
-      bikeModeBtn.classList.remove('drive-mode-active');
-      walkModeBtn.classList.remove('drive-mode-active');
-      window.localStorage.setItem('currentTravelMode', 'DRIVING');
-      const mode = 'DRIVING';
-      changeTravelMode(mode);
+    carModeBtn.classList.add('drive-mode-active');
+    bikeModeBtn.classList.remove('drive-mode-active');
+    walkModeBtn.classList.remove('drive-mode-active');
+    window.localStorage.setItem('currentTravelMode', 'DRIVING');
+    const mode = 'DRIVING';
+    changeTravelMode(mode);
   });
   bikeModeBtn.addEventListener('click', () => {
-      setTimeout(function(){bikeModeBtn.classList.add('drive-mode-active');
+    setTimeout(function() {
+      bikeModeBtn.classList.add('drive-mode-active');
       carModeBtn.classList.remove('drive-mode-active');
       walkModeBtn.classList.remove('drive-mode-active');
       window.localStorage.setItem('currentTravelMode', 'BICYCLING');
       const mode = 'BICYCLING';
       console.log(this);
-      changeTravelMode(mode);}, 0);
+      changeTravelMode(mode);
+    }, 0);
   });
   walkModeBtn.addEventListener('click', () => {
-      walkModeBtn.classList.add('drive-mode-active');
-      carModeBtn.classList.remove('drive-mode-active');
-      bikeModeBtn.classList.remove('drive-mode-active');
-      window.localStorage.setItem('currentTravelMode', 'WALKING');
-      const mode = 'WALKING';
-      changeTravelMode(mode);
+    walkModeBtn.classList.add('drive-mode-active');
+    carModeBtn.classList.remove('drive-mode-active');
+    bikeModeBtn.classList.remove('drive-mode-active');
+    window.localStorage.setItem('currentTravelMode', 'WALKING');
+    const mode = 'WALKING';
+    changeTravelMode(mode);
   });
 
 
-//function which change travel mode
-  function changeTravelMode(mode){
+
+  //set input value as a origin place
+  originPlaceBtn.addEventListener('click', () => {
+    // console.log(originInput.value);
+    providePlaces();
+  });
+
+  //start calcRoute() when you press Enter while typing city
+  originInput.addEventListener('keydown', (e) => {
+    if (e.key == "Enter") {
+      providePlaces();
+    };
+  });
+
+  //function which change travel mode
+  function changeTravelMode(mode) {
     window.localStorage.setItem('currentTravelMode', mode);
     if (!distanceField.innerHTML.includes("...")) {
-    const currentDestination = window.localStorage.getItem('currentDestination');
-    const jsonDestinationCoords = JSON.parse(currentDestination);
-    const originPlace = window.localStorage.getItem('originPlace');
-    calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, mode);
+      const currentDestination = window.localStorage.getItem('currentDestination');
+      const jsonDestinationCoords = JSON.parse(currentDestination);
+      const originPlace = window.localStorage.getItem('originPlace');
+      calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, mode);
     }
   }
 
-  //set input value as a origin place
-  originPlaceBtn.addEventListener('click', () =>{
-    // console.log(originInput.value);
+  //function which provides origin and destination places to calcRoute()
+  function providePlaces() {
     const originPlace = originInput.value;
     const currentDestination = window.localStorage.getItem('currentDestination');
     const travelMode = window.localStorage.getItem('currentTravelMode');
     const jsonDestinationCoords = JSON.parse(currentDestination);
     window.localStorage.setItem('originPlace', originPlace);
-    console.log(originInput.value == "");
     calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
-  });
+  }
 
   //end of initMap()
 }
