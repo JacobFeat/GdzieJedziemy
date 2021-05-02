@@ -113,14 +113,9 @@ const bikeModeBtn = document.querySelector('.bike-mode');
 const walkModeBtn = document.querySelector('.walk-mode');
 const distanceField = document.querySelector('.distance-display');
 
-window.addEventListener('load', e => {
-  originInput.value = window.localStorage.getItem('originPlace');
-  closeSearch.classList.add('close-search-active');
 
-  // suggestionsCity[0].innerHTML = "<span class='name'>" + searchInput.value + "<span class='dot-for-li'></span></span>";
-});
 
-//add delete's input button when input is filling 
+//add delete's input button when input is filling
 originInput.addEventListener('keyup', () => {
   if (originInput.value != "") {
     closeSearch.classList.add('close-search-active');
@@ -376,7 +371,7 @@ function initMap() {
     });
 
     markers.push(marker);
-    console.log(markers);
+    // console.log(markers);
     // clearMarkers();
     setTimeout(function() {
       marker.setAnimation(google.maps.Animation.DROP);
@@ -423,6 +418,26 @@ function initMap() {
       })
     }
   }
+
+  window.addEventListener('load', e => {
+    //get origin place on load
+    originInput.value = window.localStorage.getItem('originPlace');
+    closeSearch.classList.add('close-search-active');
+
+    //when page is loading and place's route button was clicked, show route
+    if(window.localStorage.getItem('buttonCurrentDestination')){
+      const buttonCurrentDestination = window.localStorage.getItem('buttonCurrentDestination');
+      const jsonDestinationCoords = JSON.parse(buttonCurrentDestination);
+
+      calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, 'DRIVING');
+      localStorage.removeItem('buttonCurrentDestination');
+
+      // setTimeout(calcRoute.bind(null, directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, 'DRIVING'), 150);
+      // setTimeout(function(){localStorage.removeItem('button, CurrentDestination');}, 300);
+    }
+
+  });
+
   //find my location
   locationButton.addEventListener('click', () => {
     if (navigator.geolocation) {
@@ -467,7 +482,7 @@ function initMap() {
       walkModeBtn.classList.remove('drive-mode-active');
       window.localStorage.setItem('currentTravelMode', 'BICYCLING');
       const mode = 'BICYCLING';
-      console.log(this);
+      // console.log(this);
       changeTravelMode(mode);
     }, 0);
   });

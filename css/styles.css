@@ -25,7 +25,7 @@ body {
   display: flex;
   background-image: url('../images/bg-dt.svg');
   background-position: 104% 0;
-  /* background-size: 50%; */
+  background-size: 110vh;
   /* background: contain; */
   background-repeat: no-repeat;
   position: relative;
@@ -340,6 +340,10 @@ input::placeholder {
 .non-hamburger a:hover {}
 
 .hamburger-bg * {
+  display: none;
+}
+
+.hamburger{
   display: none;
 }
 

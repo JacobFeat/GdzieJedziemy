@@ -26,7 +26,7 @@ body {
   /* opacity: 0.8; */
 }
 
-.origin-input{
+.origin-input {
   position: absolute;
   top: 55%;
   transform: translateY(-50%);
@@ -44,16 +44,15 @@ body {
   color: var(--dark-main-color);
 }
 
-.origin-input::placeholder{
+.origin-input::placeholder {
   color: #adadad;
 }
 
-.origin-input:focus{
+.origin-input:focus {
   border: 2px solid var(--dark-main-color);
-
 }
 
-.close-search{
+.close-search {
   position: absolute;
   color: #B8B8B8;
   top: 55%;
@@ -66,12 +65,12 @@ body {
   transition: opacity 0.2s;
 }
 
-.close-search-active:hover{
+.close-search-active:hover {
   color: var(--main-color);
   transition: 0.3s;
 }
 
-.close-search-active{
+.close-search-active {
   opacity: 1;
   transition: opacity 1.2s;
   animation: rotate-close 1s forwards;
@@ -79,16 +78,16 @@ body {
 }
 
 @keyframes rotate-close {
-  0%{
+  0% {
     transform: rotate(0deg) translateY(-50%);
   }
 
-  100%{
+  100% {
     transform: rotate(360deg) translateY(-50%);
   }
 }
 
-.lookup-icon{
+.lookup-icon {
   position: absolute;
   top: 55%;
   transform: translateY(-50%);
@@ -116,9 +115,18 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+  background: linear-gradient(to right, var(--main-color), var(--main-color) 50%, var(--dark-main-color) 50%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position 275ms ease;
 }
 
-
+.logo-link:hover {
+  background-position: 0 100%;
+}
 
 .logo-circle {
   width: 40px;
@@ -129,6 +137,12 @@ body {
   box-sizing: content-box;
   margin: 0 10px;
   z-index: 2;
+  transition: border 275ms ease;
+}
+
+.logo-link:hover .logo-circle{
+  border: 6px solid var(--main-color);
+  transition: border 275ms ease;
 }
 
 .hamburger {
@@ -447,7 +461,6 @@ body {
   background: var(--main-color) !important;
 }
 
-
 .map-box * {
   padding: 0;
   margin: 0;
@@ -602,6 +615,10 @@ body {
   display: none !important;
 }
 
+.gm-style .gm-style-iw-t::after{
+  top: -1px !important; 
+}
+
 /* Loading route classes*/
 .cycle-loading {
   position: fixed;
@@ -629,18 +646,19 @@ body {
     /* opacity: 1; */
     left: 0;
   }
+
   100% {
     opacity: 0;
     /* left: 200vh; */
   }
 }
 
-.pac-container{
+.pac-container {
   max-width: 250px;
   margin-left: 20px;
 }
 
-.pac-matched{
+.pac-matched {
   background: #e3e3e3;
   /* color: white; */
 }

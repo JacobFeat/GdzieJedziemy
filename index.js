@@ -36,10 +36,11 @@ function displayMatches() {
   const html = matchCities.map(place => {
     const regex = new RegExp(this.value, 'gi');
     const cityName = place.city.replace(regex, `<span class="change-city-color">${this.value}</span>`);
-
+    // <span class="change-city-color">
+    // console.log(cityName);
     return `
         <li>
-          <span class = "name">${cityName.charAt(0).toUpperCase() + cityName.slice(1).toLowerCase()}</span>
+          <span class = "name">${cityName}</span>
         </li>
       `;
   }).join("");
@@ -85,6 +86,7 @@ document.addEventListener('click', (e)=>{
     // e.preventDefault();
     function sendCityName(name){
       window.localStorage.setItem('mySentCity', name);
+      // window.localStorage.setItem('originPlace', name);
     }
     sendCityName(searchInput.value);
   }
@@ -95,21 +97,7 @@ document.addEventListener('click', (e)=>{
     document.querySelectorAll(".hamburger span")[1].classList.toggle("span-active-second");
     document.querySelectorAll(".hamburger span")[2].classList.toggle("span-active-third");
     document.querySelector(".hamburger-bg").classList.toggle("hamburger-bg-active");
-    // if(!document.querySelector(".hamburger-bg").classList.contains("hamburger-bg-active")){
-    //   let children = document.querySelector(".hamburger-bg").children;
-    //   const arrChild = Array.from(children);
-    //   arrChild.forEach(element => element.style.display="none");
-    //   console.log(arrChild);
-    // }
-    // else{
-    //   let children = document.querySelector(".hamburger-bg").children;
-    //   const arrChild = Array.from(children);
-    //   arrChild[0].style.display="flex";
-    //   for(let i=1; i<arrChild.length; i++){
-    //     arrChild[i].style.display="block";
-    //   }
-    //   console.log(arrChild);
-    // }
+
   };
 });
 
@@ -122,10 +110,12 @@ searchInput.addEventListener('focusin', () => {
 searchInput.addEventListener('keyup', sendCordi);
 searchInput.addEventListener('change', sendCordi);
 logo.addEventListener('click', sendCordi);
-// searchInput.addEventListener('focusout', () => {
+// searchInput.addEventListener('focusout', (e) => {
+//   // if(e.target.className)
+//   console.log(e.target);
 //   suggestionsList.style.display = "none";
 // });
-//
+// //
 // suggestionsList.addEventListener("click", (e) => {
 //   console.log("test");
 // });
@@ -142,7 +132,7 @@ function sendCordi() {
   }
 
   const foundCity = cities.filter(findCity)
-    .map(mapCity);
+                          .map(mapCity);
 
   const displayFound = function() {
   }
