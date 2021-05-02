@@ -429,7 +429,6 @@ function initMap() {
     if(window.localStorage.getItem('currentDestination')){
       const currentDestination = window.localStorage.getItem('currentDestination');
       const jsonDestinationCoords = JSON.parse(currentDestination);
-      console.log(jsonDestinationCoords);
       calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, 'DRIVING');
       // localStorage.removeItem('buttonCurrentDestination');
 
@@ -450,10 +449,14 @@ function initMap() {
           };
           infoWindow.setPosition(pos);
           const infoWindowContent = `
-          <p>${pos.lat}</p>
-          <button>
+          <div class="my-position-box">
+          <p class="my-position">Tutaj jestem</p>
+          <button type="button" class="my-position-btn">Stąd ruszam</button>
+          </div>
           `;
           infoWindow.setContent(infoWindowContent);
+
+
           // infoWindow.open(map);
           map.panTo(pos);
           const marker = new google.maps.Marker({
@@ -463,7 +466,13 @@ function initMap() {
           });
           marker.addListener('click', (e) => {
             infoWindow.open(map);
-
+            //style infoWindow
+            setTimeout(changeClose, 0);
+            function changeClose(){
+              const closeBtn = document.querySelector('.my-position-box').parentElement.parentElement.parentElement.querySelector('.gm-ui-hover-effect');
+              closeBtn.style.transform="scale(0.7)";
+              closeBtn.style.transition="0.2s";
+            }
           });
         },
         () => {
@@ -537,7 +546,14 @@ function initMap() {
     window.localStorage.setItem('originPlace', originPlace);
     calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
   }
+  // new MarkerClusterer(map, markers, {
+  //     imagePath:
+  //       "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+  //   });
 
+  var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: `../images/clusters/m`});
+  console.log(markers);
 
   //end of initMap()
 }
