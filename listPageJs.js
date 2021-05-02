@@ -1,3 +1,5 @@
+
+
 const searchInput = document.querySelector(".search");
 let suggestionsList = document.querySelector(".list-of-suggestions");
 const lookupIcon = document.querySelector(".lookup-icon");
@@ -117,7 +119,7 @@ document.addEventListener('mouseover', (e) => {
 window.addEventListener('load', e => {
   searchInput.value = window.localStorage.getItem('mySentCity');
   window.localStorage.setItem('originPlace', searchInput.value);
-  sendCordi(myPlaceArray, cities);
+  // sendCordi(myPlaceArray, cities);
   setTimeout(sendCordi.bind(null, myPlaceArray, cities), 150);
   // suggestionsCity[0].style.display = "inline-block";
   // suggestionsCity[0].innerHTML = "<span class='name'>" + searchInput.value + "<span class='dot-for-li'></span></span>";
@@ -160,6 +162,8 @@ document.addEventListener('click', (e) => {
     document.querySelector('.close-search').classList.remove('close-search-active');
   }
 
+
+
   //expand card and add margin bottom to expanded card
   if (e.target.closest('.front-card')) {
 
@@ -191,6 +195,20 @@ document.addEventListener('click', (e) => {
     document.querySelectorAll('.card-container').forEach(li => li.classList.remove('li-active'));
     document.querySelectorAll('.front-card').forEach(li => li.style.marginBottom = "20px");
     e.target.parentElement.parentElement.parentElement.querySelector('.front-card-dot').style.display = "inline-block"; //display green dot
+  }
+
+  if(e.target.classList.contains('how-to-reach-button')){
+    const placeName = e.target.parentElement.parentElement.parentElement.querySelector('.place-back').textContent;
+    const searchPlace = myPlaceArray.filter(place => place.name == placeName)
+                                    .map(keys => `{"lat": ${keys.coords.lat}, "lng": ${keys.coords.lng}}`)
+    // console.log(placeName);
+    // console.log(searchPlace[0]);
+    // const jsonDestinationCoords = JSON.parse(searchPlace[0]);
+    window.localStorage.setItem('currentDestination', searchPlace[0]);
+    // console.log(jsonDestinationCoords);
+    console.log(  window.localStorage.getItem('currentDestination'));
+
+    // e.preventDefault();
   }
 
   if (e.target.classList.contains('name')) {
@@ -229,15 +247,7 @@ document.addEventListener('click', (e) => {
 
   }
 
-  if(e.target.classList.contains('how-to-reach-button')){
-    const placeName = e.target.parentElement.parentElement.parentElement.querySelector('.place-back').textContent;
-    const searchPlace = myPlaceArray.filter(place => place.name == placeName)
-                                    .map(keys => `{"lat": ${keys.coords.lat}, "lng": ${keys.coords.lng}}`)
-    console.log(placeName);
-    console.log(searchPlace[0]);
-    window.localStorage.setItem('buttonCurrentDestination', searchPlace[0]);
-    // e.preventDefault();
-  }
+
 }, false);
 
 //search city function

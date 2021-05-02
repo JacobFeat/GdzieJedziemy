@@ -421,16 +421,17 @@ function initMap() {
 
   window.addEventListener('load', e => {
     //get origin place on load
-    originInput.value = window.localStorage.getItem('originPlace');
+    const originPlace = window.localStorage.getItem('originPlace');
+    originInput.value = originPlace;
     closeSearch.classList.add('close-search-active');
 
     //when page is loading and place's route button was clicked, show route
-    if(window.localStorage.getItem('buttonCurrentDestination')){
-      const buttonCurrentDestination = window.localStorage.getItem('buttonCurrentDestination');
-      const jsonDestinationCoords = JSON.parse(buttonCurrentDestination);
-
+    if(window.localStorage.getItem('currentDestination')){
+      const currentDestination = window.localStorage.getItem('currentDestination');
+      const jsonDestinationCoords = JSON.parse(currentDestination);
+      console.log(jsonDestinationCoords);
       calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, 'DRIVING');
-      localStorage.removeItem('buttonCurrentDestination');
+      // localStorage.removeItem('buttonCurrentDestination');
 
       // setTimeout(calcRoute.bind(null, directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, 'DRIVING'), 150);
       // setTimeout(function(){localStorage.removeItem('button, CurrentDestination');}, 300);
@@ -447,14 +448,22 @@ function initMap() {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          // infoWindow.setPosition(pos);
-          // infoWindow.setContent(`${pos.lat}`);
+          infoWindow.setPosition(pos);
+          const infoWindowContent = `
+          <p>${pos.lat}</p>
+          <button>
+          `;
+          infoWindow.setContent(infoWindowContent);
           // infoWindow.open(map);
           map.panTo(pos);
           const marker = new google.maps.Marker({
             position: pos,
             map: map,
             icon: 'images/hereStrokeBlack.svg',
+          });
+          marker.addListener('click', (e) => {
+            infoWindow.open(map);
+
           });
         },
         () => {
@@ -494,8 +503,6 @@ function initMap() {
     const mode = 'WALKING';
     changeTravelMode(mode);
   });
-
-
 
   //set input value as a origin place
   originPlaceBtn.addEventListener('click', () => {
