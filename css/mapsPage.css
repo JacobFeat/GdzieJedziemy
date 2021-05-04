@@ -515,23 +515,13 @@ body {
   cursor: pointer;
 } */
 
-
-.my-position{
-  font-family: 'Poppins', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--dark-main-color);
-  padding: 0px 20px;
-  margin: 15px 0;
-}
-
 .my-position-btn{
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
   width: 100%;
-  /* background: var(--dark-main-color); */
   border: none;
   color: #fff;
+  padding: 15px 10px;
   font-size: 14px;
   font-weight: 500;
   background: linear-gradient(to right, #0097EC 50%, var(--dark-main-color) 50%);

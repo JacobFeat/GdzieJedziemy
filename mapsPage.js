@@ -407,7 +407,7 @@ function initMap() {
             const jsonDestinationCoords = JSON.parse(destinationCoords);
             //get travel mode from localStorage and put to the calcRoute()
             const travelMode = window.localStorage.getItem('currentTravelMode');
-            const originPlace = window.localStorage.getItem('originPlace');
+            const originPlace = JSON.parse(window.localStorage.getItem('originPlace'));
 
             calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
             infoWindow.close();
@@ -421,7 +421,7 @@ function initMap() {
 
   window.addEventListener('load', e => {
     //get origin place on load
-    const originPlace = window.localStorage.getItem('originPlace');
+    const originPlace = JSON.parse(window.localStorage.getItem('originPlace'));
     originInput.value = originPlace;
     closeSearch.classList.add('close-search-active');
 
@@ -450,7 +450,7 @@ function initMap() {
           infoWindow.setPosition(pos);
           const infoWindowContent = `
           <div class="my-position-box">
-          <p class="my-position">Tutaj jestem</p>
+
           <button type="button" class="my-position-btn">Stąd ruszam</button>
           </div>
           `;
@@ -467,11 +467,22 @@ function initMap() {
           marker.addListener('click', (e) => {
             infoWindow.open(map);
             //style infoWindow
-            setTimeout(changeClose, 0);
-            function changeClose(){
+            setTimeout(styleInfoWindow, 0);
+            function styleInfoWindow(){
               const closeBtn = document.querySelector('.my-position-box').parentElement.parentElement.parentElement.querySelector('.gm-ui-hover-effect');
+              const myPositionBtn = document.querySelector('.my-position-btn');
               closeBtn.style.transform="scale(0.7)";
               closeBtn.style.transition="0.2s";
+              document.querySelector('.my-position-box').parentElement.parentElement.parentElement.parentElement.style.top = "-70px";
+              //set my position as a origin place
+              myPositionBtn.addEventListener('click', () => {
+                console.log(pos);
+                const currentDestination = window.localStorage.getItem('currentDestination');
+                const jsonDestinationCoords = JSON.parse(currentDestination);
+                const travelMode = window.localStorage.getItem('currentTravelMode');
+                window.localStorage.setItem('originPlace', JSON.stringify(pos));
+                calcRoute(directionsService, directionsRenderer, pos, jsonDestinationCoords, travelMode);
+              })
             }
           });
         },
@@ -532,8 +543,14 @@ function initMap() {
     if (!distanceField.innerHTML.includes("...")) {
       const currentDestination = window.localStorage.getItem('currentDestination');
       const jsonDestinationCoords = JSON.parse(currentDestination);
-      const originPlace = window.localStorage.getItem('originPlace');
+
+      const originPlace = JSON.parse(window.localStorage.getItem('originPlace'));
+      console.log(originPlace);
+
       calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, mode);
+      // if(typeof originPlace === 'object'){
+      //   console.log("OBJECT!!");
+      // }
     }
   }
 
@@ -543,7 +560,7 @@ function initMap() {
     const currentDestination = window.localStorage.getItem('currentDestination');
     const travelMode = window.localStorage.getItem('currentTravelMode');
     const jsonDestinationCoords = JSON.parse(currentDestination);
-    window.localStorage.setItem('originPlace', originPlace);
+    window.localStorage.setItem('originPlace', JSON.stringify(originPlace));
     calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
   }
   // new MarkerClusterer(map, markers, {
@@ -553,7 +570,8 @@ function initMap() {
 
   var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: `../images/clusters/m`});
-  console.log(markers);
+  // console.log(markers);
+
 
   //end of initMap()
 }
