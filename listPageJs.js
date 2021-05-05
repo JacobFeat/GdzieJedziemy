@@ -118,7 +118,7 @@ document.addEventListener('mouseover', (e) => {
 
 window.addEventListener('load', e => {
   searchInput.value = window.localStorage.getItem('mySentCity');
-  window.localStorage.setItem('originPlace', JSON.stringify(searchInput.value));
+  window.localStorage.setItem('originPlace', searchInput.value);
   // sendCordi(myPlaceArray, cities);
   setTimeout(sendCordi.bind(null, myPlaceArray, cities), 150);
   // suggestionsCity[0].style.display = "inline-block";
@@ -241,7 +241,7 @@ document.addEventListener('click', (e) => {
         }
       }
       //Set current city as a local storage's origin place when you click suggestion city
-      window.localStorage.setItem('originPlace',JSON.stringify(suggestionsCity[myCurrentCityIndex].innerText));
+      window.localStorage.setItem('originPlace',suggestionsCity[myCurrentCityIndex].innerText);
     }
     sendCordi(myPlaceArray, cities);
 

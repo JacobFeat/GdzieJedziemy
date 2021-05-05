@@ -26,7 +26,7 @@ body {
   /* opacity: 0.8; */
 }
 
-.origin-input {
+.origin-input-container{
   position: absolute;
   top: 55%;
   transform: translateY(-50%);
@@ -38,6 +38,16 @@ body {
   padding: 10px 20px;
   border: 2px solid #adadad;
   border-radius: 20px;
+}
+
+.origin-input {
+  position: absolute;
+  left: 14px;
+  top: 5px;
+  width: 75%;
+  border: none;
+  padding-bottom: 5px;
+  /* transform: translateY(10px); */
   font-family: 'Lora', serif;
   font-weight: 800;
   font-size: 18px;
@@ -48,15 +58,17 @@ body {
   color: #adadad;
 }
 
-.origin-input:focus {
-  border: 2px solid var(--dark-main-color);
+.origin-input:focus  {
+  /* border: 2px solid var(--dark-main-color); */
+  outline: none;
 }
+
 
 .close-search {
   position: absolute;
   color: #B8B8B8;
   top: 55%;
-  left: 275px;
+  left: 245px;
   transform: translateY(-50%);
   font-size: 16px !important;
   z-index: 3;
@@ -91,7 +103,7 @@ body {
   position: absolute;
   top: 55%;
   transform: translateY(-50%);
-  left: 290px;
+  left: 260px;
   color: var(--dark-main-color);
   cursor: pointer;
   background: none;

@@ -9,8 +9,7 @@ const krakow = {
 }
 
 
-const myPlaceArray = [
-  {
+const myPlaceArray = [{
     name: 'Kamieniołom Liban',
     description: "Maecenas accumsan lacus vel facilisis. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Bibendum arcu vitae elementum curabitur vitae nunc sed. Sit amet massa vitae tortor condimentum lacinia quis vel. Sagittis eu volutpat odio facilisis mauris sit amet. Ultrices neque ornare aenean euismod elementum nisi quis. Diam volutpat commodo sed egestas. ",
     coords: {
@@ -132,7 +131,7 @@ originInput.addEventListener('keyup', () => {
 // });
 
 closeSearch.addEventListener('click', () => {
-  originInput.value="";
+  originInput.value = "";
   closeSearch.classList.remove('close-search-active');
   originInput.focus();
 });
@@ -146,8 +145,7 @@ function initMap() {
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [
-      {
+    styles: [{
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"
@@ -349,6 +347,31 @@ function initMap() {
 
   directionsRenderer.setMap(map);
 
+  //declare a object that we use to change coords to name of place
+  const geocoder = new google.maps.Geocoder;
+  //function that change our coords to name of place
+  function geocodeLatLng(latlng) {
+    geocoder.geocode({
+      'location': latlng
+    }, function(results, status) {
+      if (status == 'OK') {
+        if (results[0]) {
+          originInput.value = results[0].formatted_address;
+          window.localStorage.setItem('originPlace', results[0].formatted_address);
+          const currentDestination = window.localStorage.getItem('currentDestination');
+          const jsonDestinationCoords = JSON.parse(currentDestination);
+          const travelMode = window.localStorage.getItem('currentTravelMode');
+          calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, travelMode);
+          
+        } else {
+          window.alert('Nie znaleziono');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+    });
+  };
+
   // const onChangeHandler = function() {
   //   calcRoute(directionsService, directionsRenderer, krakow, 'DRIVING');
   // };
@@ -407,7 +430,7 @@ function initMap() {
             const jsonDestinationCoords = JSON.parse(destinationCoords);
             //get travel mode from localStorage and put to the calcRoute()
             const travelMode = window.localStorage.getItem('currentTravelMode');
-            const originPlace = JSON.parse(window.localStorage.getItem('originPlace'));
+            const originPlace = window.localStorage.getItem('originPlace');
 
             calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
             infoWindow.close();
@@ -421,12 +444,16 @@ function initMap() {
 
   window.addEventListener('load', e => {
     //get origin place on load
-    const originPlace = JSON.parse(window.localStorage.getItem('originPlace'));
+    const originPlace = window.localStorage.getItem('originPlace');
     originInput.value = originPlace;
+    //if coordinates are in input value, don't show them
+    // if(originInput.value.includes("object")){
+    //   originInput.value = "Moja lokalizacja";
+    // }
     closeSearch.classList.add('close-search-active');
 
     //when page is loading and place's route button was clicked, show route
-    if(window.localStorage.getItem('currentDestination')){
+    if (window.localStorage.getItem('currentDestination')) {
       const currentDestination = window.localStorage.getItem('currentDestination');
       const jsonDestinationCoords = JSON.parse(currentDestination);
       calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, 'DRIVING');
@@ -455,9 +482,8 @@ function initMap() {
           </div>
           `;
           infoWindow.setContent(infoWindowContent);
-
-
           // infoWindow.open(map);
+          map.setZoom(16);
           map.panTo(pos);
           const marker = new google.maps.Marker({
             position: pos,
@@ -468,20 +494,24 @@ function initMap() {
             infoWindow.open(map);
             //style infoWindow
             setTimeout(styleInfoWindow, 0);
-            function styleInfoWindow(){
+
+            function styleInfoWindow() {
               const closeBtn = document.querySelector('.my-position-box').parentElement.parentElement.parentElement.querySelector('.gm-ui-hover-effect');
               const myPositionBtn = document.querySelector('.my-position-btn');
-              closeBtn.style.transform="scale(0.7)";
-              closeBtn.style.transition="0.2s";
+              closeBtn.style.transform = "scale(0.7)";
+              closeBtn.style.transition = "0.2s";
               document.querySelector('.my-position-box').parentElement.parentElement.parentElement.parentElement.style.top = "-70px";
+
               //set my position as a origin place
               myPositionBtn.addEventListener('click', () => {
-                console.log(pos);
-                const currentDestination = window.localStorage.getItem('currentDestination');
-                const jsonDestinationCoords = JSON.parse(currentDestination);
-                const travelMode = window.localStorage.getItem('currentTravelMode');
-                window.localStorage.setItem('originPlace', JSON.stringify(pos));
-                calcRoute(directionsService, directionsRenderer, pos, jsonDestinationCoords, travelMode);
+                // const currentDestination = window.localStorage.getItem('currentDestination');
+                // const jsonDestinationCoords = JSON.parse(currentDestination);
+                // const travelMode = window.localStorage.getItem('currentTravelMode');
+                // window.localStorage.setItem('originPlace', pos);
+                // calcRoute(directionsService, directionsRenderer, pos, jsonDestinationCoords, travelMode);
+                infoWindow.close(map);
+                geocodeLatLng(pos);
+
               })
             }
           });
@@ -544,8 +574,8 @@ function initMap() {
       const currentDestination = window.localStorage.getItem('currentDestination');
       const jsonDestinationCoords = JSON.parse(currentDestination);
 
-      const originPlace = JSON.parse(window.localStorage.getItem('originPlace'));
-      console.log(originPlace);
+      const originPlace = window.localStorage.getItem('originPlace');
+      // console.log(originPlace);
 
       calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, mode);
       // if(typeof originPlace === 'object'){
@@ -560,7 +590,7 @@ function initMap() {
     const currentDestination = window.localStorage.getItem('currentDestination');
     const travelMode = window.localStorage.getItem('currentTravelMode');
     const jsonDestinationCoords = JSON.parse(currentDestination);
-    window.localStorage.setItem('originPlace', JSON.stringify(originPlace));
+    window.localStorage.setItem('originPlace', originPlace);
     calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
   }
   // new MarkerClusterer(map, markers, {
@@ -568,8 +598,9 @@ function initMap() {
   //       "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
   //   });
 
-  var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: `../images/clusters/m`});
+  var markerCluster = new MarkerClusterer(map, markers, {
+    imagePath: `../images/clusters/m`
+  });
   // console.log(markers);
 
 
