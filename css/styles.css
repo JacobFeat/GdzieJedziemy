@@ -562,9 +562,9 @@ input::placeholder {
 
 @media (max-width: 530px) {
   .main-container {
-    background-image: url('../images/bg-small.svg');
+    background-image: url('../images/bg-small-3.svg');
     background-size: cover;
-    /* background-position: center; */
+    background-position: 10%;
     /* background: cover; */
     background-repeat: no-repeat;
   }
@@ -579,5 +579,9 @@ input::placeholder {
 
   .hamburger{
     margin-right: 10px;
+  }
+
+  .bus-img{
+    margin-top: 350px;
   }
 }

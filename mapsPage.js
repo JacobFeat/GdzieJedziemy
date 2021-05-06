@@ -511,8 +511,10 @@ function initMap() {
                 geocodeLatLng(pos);
                 const travelMode = window.localStorage.getItem('currentTravelMode');
                 infoWindow.close(map);
+                //if destination is not chosen, first choose
                 if(!window.localStorage.getItem('currentDestination'))
                   alert('Wybierz miejsce docelowe z mapy...');
+                //if destination is chosen, show route from your current position
                 else{
                   const currentDestination = window.localStorage.getItem('currentDestination');
                   const jsonDestinationCoords = JSON.parse(currentDestination);
