@@ -202,14 +202,10 @@ document.addEventListener('click', (e) => {
     const placeName = e.target.parentElement.parentElement.parentElement.querySelector('.place-back').textContent;
     const searchPlace = myPlaceArray.filter(place => place.name == placeName)
                                     .map(keys => `{"lat": ${keys.coords.lat}, "lng": ${keys.coords.lng}}`)
-    // console.log(placeName);
-    // console.log(searchPlace[0]);
-    // const jsonDestinationCoords = JSON.parse(searchPlace[0]);
+
     window.localStorage.setItem('currentDestination', searchPlace[0]);
-    // console.log(jsonDestinationCoords);
     console.log(  window.localStorage.getItem('currentDestination'));
 
-    // e.preventDefault();
   }
 
   if (e.target.classList.contains('name')) {

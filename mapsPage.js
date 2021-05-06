@@ -14,7 +14,8 @@ const center = {
 }
 
 
-const myPlaceArray = [{
+const myPlaceArray = [
+  {
     name: 'Kamieniołom Liban',
     description: "Maecenas accumsan lacus vel facilisis. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Bibendum arcu vitae elementum curabitur vitae nunc sed. Sit amet massa vitae tortor condimentum lacinia quis vel. Sagittis eu volutpat odio facilisis mauris sit amet. Ultrices neque ornare aenean euismod elementum nisi quis. Diam volutpat commodo sed egestas. ",
     coords: {
@@ -119,10 +120,6 @@ const walkModeBtn = document.querySelector('.walk-mode');
 const distanceField = document.querySelector('.distance-display');
 
 
-window.addEventListener('change', () => {
-  // console.log(marginLeftDistanceBox);
-  console.log("work");
-});
 
 //add delete's input button when input is filling
 originInput.addEventListener('keyup', () => {
@@ -155,7 +152,8 @@ function initMap() {
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [{
+    styles: [
+      {
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"
@@ -488,7 +486,7 @@ function initMap() {
           `;
           infoWindow.setContent(infoWindowContent);
           // infoWindow.open(map);
-          map.setZoom(16);
+          map.setZoom(15);
           map.panTo(pos);
           const marker = new google.maps.Marker({
             position: pos,
@@ -510,14 +508,16 @@ function initMap() {
 
               //set my position as a origin place
               myPositionBtn.addEventListener('click', () => {
-                // const currentDestination = window.localStorage.getItem('currentDestination');
-                // const jsonDestinationCoords = JSON.parse(currentDestination);
-                // const travelMode = window.localStorage.getItem('currentTravelMode');
-                // window.localStorage.setItem('originPlace', pos);
-                // calcRoute(directionsService, directionsRenderer, pos, jsonDestinationCoords, travelMode);
-                infoWindow.close(map);
                 geocodeLatLng(pos);
-
+                const travelMode = window.localStorage.getItem('currentTravelMode');
+                infoWindow.close(map);
+                if(!window.localStorage.getItem('currentDestination'))
+                  alert('Wybierz miejsce docelowe z mapy...');
+                else{
+                  const currentDestination = window.localStorage.getItem('currentDestination');
+                  const jsonDestinationCoords = JSON.parse(currentDestination);
+                  calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, travelMode);
+                }
               })
             }
           });
@@ -547,7 +547,6 @@ function initMap() {
       walkModeBtn.classList.remove('drive-mode-active');
       window.localStorage.setItem('currentTravelMode', 'BICYCLING');
       const mode = 'BICYCLING';
-      // console.log(this);
       changeTravelMode(mode);
     }, 0);
   });
@@ -593,11 +592,6 @@ function initMap() {
         if (results[0]) {
           originInput.value = results[0].formatted_address;
           window.localStorage.setItem('originPlace', results[0].formatted_address);
-          const currentDestination = window.localStorage.getItem('currentDestination');
-          const jsonDestinationCoords = JSON.parse(currentDestination);
-          const travelMode = window.localStorage.getItem('currentTravelMode');
-          calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, travelMode);
-
         } else {
           window.alert('Nie znaleziono');
         }
@@ -613,14 +607,9 @@ function initMap() {
     if (!distanceField.innerHTML.includes("...")) {
       const currentDestination = window.localStorage.getItem('currentDestination');
       const jsonDestinationCoords = JSON.parse(currentDestination);
-
       const originPlace = window.localStorage.getItem('originPlace');
-      // console.log(originPlace);
-
       calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, mode);
-      // if(typeof originPlace === 'object'){
-      //   console.log("OBJECT!!");
-      // }
+
     }
   }
 
@@ -633,16 +622,13 @@ function initMap() {
     window.localStorage.setItem('originPlace', originPlace);
     calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
   }
-  // new MarkerClusterer(map, markers, {
-  //     imagePath:
-  //       "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-  //   });
 
-  var markerCluster = new MarkerClusterer(map, markers, {
+//group markers together if they are very close each other
+setTimeout(function(){
+  const markerCluster = new MarkerClusterer(map, markers, {
     imagePath: `../images/clusters/m`
   });
-  // console.log(markers);
-
+}, 2000);
 
   //end of initMap()
 }
@@ -652,7 +638,6 @@ function initMap() {
 document.addEventListener('click', (e) => {
 
   if (e.target.closest('.hamburger')) {
-    // console.log("work");
     document.querySelectorAll(".hamburger span")[0].classList.toggle("span-active-first");
     document.querySelectorAll(".hamburger span")[1].classList.toggle("span-active-second");
     document.querySelectorAll(".hamburger span")[2].classList.toggle("span-active-third");
