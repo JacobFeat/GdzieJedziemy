@@ -8,6 +8,11 @@ const krakow = {
   lng: 19.944544
 }
 
+const center = {
+  lat: 51.957540,
+  lng: 18.986491
+}
+
 
 const myPlaceArray = [{
     name: 'Kamieniołom Liban',
@@ -104,6 +109,7 @@ const myPlaceArray = [{
 ]
 
 const markers = [];
+let counter = 1;
 const originPlaceBtn = document.querySelector('.lookup-icon');
 const originInput = document.querySelector('.origin-input');
 const closeSearch = document.querySelector('.close-search');
@@ -112,12 +118,6 @@ const bikeModeBtn = document.querySelector('.bike-mode');
 const walkModeBtn = document.querySelector('.walk-mode');
 const distanceField = document.querySelector('.distance-display');
 
-const distanceBox = document.querySelector('.distance-box');
-const distanceBoxStyles = getComputedStyle(distanceBox);
-const travelModeBox = document.querySelector('.travel-mode-box');
-console.log(distanceBoxStyles.left);
-console.log(distanceBoxStyles.width);
-// travelModeBox.style.left = `${distanceBoxStyles.left}`;
 
 window.addEventListener('change', () => {
   // console.log(marginLeftDistanceBox);
@@ -149,8 +149,8 @@ closeSearch.addEventListener('click', () => {
 function initMap() {
   const optionsMap = {
     // mapId: "8e0a97af9386fef",
-    zoom: 14,
-    center: krakow,
+    zoom: 7,
+    center: center,
     fullscreenControl: false,
     mapTypeControl: false,
     // mapTypeId: "satellite",
@@ -359,37 +359,17 @@ function initMap() {
 
   //declare a object that we use to change coords to name of place
   const geocoder = new google.maps.Geocoder;
-  //function that change our coords to name of place
-  function geocodeLatLng(latlng) {
-    geocoder.geocode({
-      'location': latlng
-    }, function(results, status) {
-      if (status == 'OK') {
-        if (results[0]) {
-          originInput.value = results[0].formatted_address;
-          window.localStorage.setItem('originPlace', results[0].formatted_address);
-          const currentDestination = window.localStorage.getItem('currentDestination');
-          const jsonDestinationCoords = JSON.parse(currentDestination);
-          const travelMode = window.localStorage.getItem('currentTravelMode');
-          calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, travelMode);
 
-        } else {
-          window.alert('Nie znaleziono');
-        }
-      } else {
-        window.alert('Geocoder failed due to: ' + status);
-      }
-    });
-  };
 
   // const onChangeHandler = function() {
   //   calcRoute(directionsService, directionsRenderer, krakow, 'DRIVING');
   // };
 
   // document.querySelector('.route-btn').addEventListener('click', onChangeHandler);
-
+  //
   myPlaceArray.forEach(place => {
-    addMarker(place);
+    setTimeout(function(){addMarker(place);},counter*200);
+    counter++;
   });
 
   //make array where all infoWindows will be stored
@@ -404,11 +384,9 @@ function initMap() {
     });
 
     markers.push(marker);
-    // console.log(markers);
-    // clearMarkers();
-    setTimeout(function() {
-      marker.setAnimation(google.maps.Animation.DROP);
-    }, 50);
+
+    marker.setAnimation(google.maps.Animation.DROP);
+
     //add content to infoWindow
     const cityContent = `
     <img class="place-img" src="/images/${city.imgSource}" alt="image of place">
@@ -462,7 +440,7 @@ function initMap() {
     setMapOnAll(null);
   }
 
-  
+
   window.addEventListener('load', e => {
     //get origin place on load
     const originPlace = window.localStorage.getItem('originPlace');
@@ -509,13 +487,14 @@ function initMap() {
           const marker = new google.maps.Marker({
             position: pos,
             map: map,
+            // animation: google.maps.Animation.BOUNCE,
             icon: 'images/hereStrokeBlack.svg',
           });
+          // setTimeout(function(){marker.setAnimation(google.maps.Animation.DROP);}, 200);
           marker.addListener('click', (e) => {
             infoWindow.open(map);
             //style infoWindow
             setTimeout(styleInfoWindow, 0);
-
             function styleInfoWindow() {
               const closeBtn = document.querySelector('.my-position-box').parentElement.parentElement.parentElement.querySelector('.gm-ui-hover-effect');
               const myPositionBtn = document.querySelector('.my-position-btn');
@@ -587,6 +566,29 @@ function initMap() {
       providePlaces();
     };
   });
+
+  //function that change our coords to name of place
+  function geocodeLatLng(latlng) {
+    geocoder.geocode({
+      'location': latlng
+    }, function(results, status) {
+      if (status == 'OK') {
+        if (results[0]) {
+          originInput.value = results[0].formatted_address;
+          window.localStorage.setItem('originPlace', results[0].formatted_address);
+          const currentDestination = window.localStorage.getItem('currentDestination');
+          const jsonDestinationCoords = JSON.parse(currentDestination);
+          const travelMode = window.localStorage.getItem('currentTravelMode');
+          calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, travelMode);
+
+        } else {
+          window.alert('Nie znaleziono');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+    });
+  };
 
   //function which change travel mode
   function changeTravelMode(mode) {
