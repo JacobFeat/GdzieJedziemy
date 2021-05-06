@@ -384,7 +384,6 @@ function initMap() {
     });
 
     markers.push(marker);
-
     marker.setAnimation(google.maps.Animation.DROP);
 
     //add content to infoWindow
@@ -412,16 +411,23 @@ function initMap() {
           map.panTo(city.coords);
           var placeBtn = document.querySelector('.place-btn');
           placeBtn.addEventListener('click', () => {
+
             //take coords of choosen place
             const destinationCoords = `{"lat": ${city.coords.lat}, "lng": ${city.coords.lng}}`;
             //json parse them to the object
             const jsonDestinationCoords = JSON.parse(destinationCoords);
-            //get travel mode from localStorage and put to the calcRoute()
-            const travelMode = window.localStorage.getItem('currentTravelMode');
-            const originPlace = window.localStorage.getItem('originPlace');
+            if(window.localStorage.getItem('originPlace')){
+              //get travel mode from localStorage and put to the calcRoute
+              const travelMode = window.localStorage.getItem('currentTravelMode');
+              const originPlace = window.localStorage.getItem('originPlace');
 
-            calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
-            infoWindow.close();
+              calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
+              infoWindow.close();
+            }
+            else{
+              alert('Wybierz miejsce początkowe...')
+            }
+
             //save coords to localStorage
             window.localStorage.setItem('currentDestination', destinationCoords);
           });
@@ -556,8 +562,19 @@ function initMap() {
 
   //set input value as a origin place
   originPlaceBtn.addEventListener('click', () => {
-    // console.log(originInput.value);
-    providePlaces();
+    window.localStorage.setItem('originPlace', originInput.value);
+    if(!window.localStorage.getItem('originPlace') || originInput.value == "")
+      alert('Wybierz miejsce początkowe...');
+    else {
+      if(!window.localStorage.getItem('currentDestination'))
+        alert('Wybierz miejsce docelowe z mapy...');
+      else
+        providePlaces();
+        //close all infoWindows
+        infoWindows.forEach(infoWindow => {
+          infoWindow.close();
+        });
+    }
   });
 
   //start calcRoute() when you press Enter while typing city

@@ -248,8 +248,9 @@ document.addEventListener('click', (e) => {
 
   }
 
-  //if mapBtn is clicked, remove destination and show the plain map without any route 
+  //if mapBtn is clicked, remove destination and show the plain map without any route
   if(e.target.closest('.map-icon-link')){
+    window.localStorage.setItem('originPlace', searchInput.value);
     window.localStorage.removeItem('currentDestination');
   }
 

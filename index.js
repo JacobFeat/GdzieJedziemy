@@ -7,11 +7,10 @@ let suggestionsCity = suggestionsList.children;
 // const leftLight = document.querySelector(".left-light");
 // const rightLight = document.querySelector(".right-light");
 
-// window.addEventListener('load', () => {
-//   const params = (new URL(document.location)).searchParams;
-//   const cityDesir = params.get('desiredCity')
-//   console.log(cityDesir);
-// });
+window.addEventListener('load', () => {
+  window.localStorage.removeItem('currentDestination');
+  window.localStorage.removeItem('originPlace');
+});
 
 
 const myPlace = {

@@ -660,6 +660,11 @@ body {
   top: -1px !important;
 }
 
+.gm-iw{
+  padding: 20px;
+  font-weight: 700;
+}
+
 /* .gmnoprint{
   bottom: 175px !important;
 } */
@@ -702,6 +707,7 @@ body {
   max-width: 250px;
   margin-left: 20px;
 }
+
 
 .pac-matched {
   background: #e3e3e3;
