@@ -112,7 +112,17 @@ const bikeModeBtn = document.querySelector('.bike-mode');
 const walkModeBtn = document.querySelector('.walk-mode');
 const distanceField = document.querySelector('.distance-display');
 
+const distanceBox = document.querySelector('.distance-box');
+const distanceBoxStyles = getComputedStyle(distanceBox);
+const travelModeBox = document.querySelector('.travel-mode-box');
+console.log(distanceBoxStyles.left);
+console.log(distanceBoxStyles.width);
+// travelModeBox.style.left = `${distanceBoxStyles.left}`;
 
+window.addEventListener('change', () => {
+  // console.log(marginLeftDistanceBox);
+  console.log("work");
+});
 
 //add delete's input button when input is filling
 originInput.addEventListener('keyup', () => {
@@ -362,7 +372,7 @@ function initMap() {
           const jsonDestinationCoords = JSON.parse(currentDestination);
           const travelMode = window.localStorage.getItem('currentTravelMode');
           calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, travelMode);
-          
+
         } else {
           window.alert('Nie znaleziono');
         }
@@ -441,6 +451,17 @@ function initMap() {
       })
     }
   }
+
+  function setMapOnAll(map){
+    for(let i=0; i<markers.length; i++){
+      markers[i].setMap(map);
+    }
+  }
+
+  function clearMarkers(){
+    setMapOnAll(null);
+  }
+
 
   window.addEventListener('load', e => {
     //get origin place on load
@@ -650,9 +671,4 @@ function calcRoute(directionsService, directionsRenderer, originPlace, destinati
       // distanceField.classList.toggle('distance-display-active');
     }
   });
-}
-
-//clear all markers
-function cleanMarkers() {
-
 }
