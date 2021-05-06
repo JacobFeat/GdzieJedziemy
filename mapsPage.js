@@ -462,7 +462,7 @@ function initMap() {
     setMapOnAll(null);
   }
 
-
+  
   window.addEventListener('load', e => {
     //get origin place on load
     const originPlace = window.localStorage.getItem('originPlace');

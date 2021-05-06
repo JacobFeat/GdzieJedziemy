@@ -4,6 +4,7 @@ const searchInput = document.querySelector(".search");
 let suggestionsList = document.querySelector(".list-of-suggestions");
 const lookupIcon = document.querySelector(".lookup-icon");
 const lookupAndMap = document.querySelector(".lookup-and-map");
+const mapBtn = document.querySelector('.map-icon-link');
 const spotsList = document.querySelector(".list-of-spots");
 const spotsListLi = spotsList.querySelectorAll(".card-container");
 const frontCardAll = document.querySelectorAll(".front-card");
@@ -247,6 +248,10 @@ document.addEventListener('click', (e) => {
 
   }
 
+  //if mapBtn is clicked, remove destination and show the plain map without any route 
+  if(e.target.closest('.map-icon-link')){
+    window.localStorage.removeItem('currentDestination');
+  }
 
 }, false);
 

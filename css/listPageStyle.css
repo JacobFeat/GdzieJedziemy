@@ -191,26 +191,25 @@ body {
   left: -16px;
 }
 
-.map-icon {
-  font-size: 32px !important;
-  color: var(--main-color);
-  position: relative;
-  margin-right: 10px;
-  /* z-index: 32; */
-}
-
-.map-icon::after {
-  content: '';
+.map-icon-link{
+  background: #fff;
   width: 54px;
   height: 54px;
   background: #fff;
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  transform: translate(-11px, -11px);
   border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  text-decoration: none;
 }
+
+.map-icon-img {
+  font-size: 32px !important;
+  color: var(--main-color);
+  position: relative;
+  margin: 0 auto;
+}
+
 
 .list-of-spots {
   width: 67%;
