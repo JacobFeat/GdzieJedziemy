@@ -574,7 +574,12 @@ input::placeholder {
   }
 
   .content{
-    font-size: 32px;
+    font-size: 36px;
+    max-width: 290px;
+  }
+
+  .search-box {
+    margin-top: 120px;
   }
 
   .hamburger{
@@ -582,6 +587,8 @@ input::placeholder {
   }
 
   .bus-img{
-    margin-top: 350px;
+    margin-top: 200px;
+    transform: scale(1.2);
+    right: -2vw;
   }
 }

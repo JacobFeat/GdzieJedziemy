@@ -118,8 +118,26 @@ document.addEventListener('mouseover', (e) => {
 });
 
 window.addEventListener('load', e => {
-  searchInput.value = window.localStorage.getItem('mySentCity');
+  const mySentCity = window.localStorage.getItem('mySentCity');
+  searchInput.value = mySentCity;
   window.localStorage.setItem('originPlace', searchInput.value);
+  setTimeout(function(){
+    //display list of suggested cities
+    displayMatches();
+    //fill first suggested city by name of city from input value
+    document.querySelectorAll('.name')[0].innerText = searchInput.value;
+    //hide others suggested city and show just first one
+    for (let i = 0; i < 3; i++) {
+      if (suggestionsCity[i]) {
+        suggestionsCity[i].style.display = "none";
+        suggestionsCity[0].style.display = "inline-block";
+      }
+    }
+    //add active dot to first suggested city
+    let dotForLi = document.createElement('span');
+    dotForLi.setAttribute('class', 'dot-for-li');
+    document.querySelectorAll('.name')[0].appendChild(dotForLi);
+  }, 0);
   // sendCordi(myPlaceArray, cities);
   setTimeout(sendCordi.bind(null, myPlaceArray, cities), 150);
   // suggestionsCity[0].style.display = "inline-block";

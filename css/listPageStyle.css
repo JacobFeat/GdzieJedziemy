@@ -78,6 +78,7 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
   margin-top: 30px;
 }
@@ -103,7 +104,7 @@ body {
 
 .search{
   position: absolute;
-  top: -12px;
+  top: 0px;
   left: 0px;
   width: 54px;
   height: 54px;
@@ -136,7 +137,7 @@ body {
 .close-search{
   position: absolute;
   color: #B8B8B8;
-  top: 42%;
+  top: 50%;
   transform: translateY(-50%);
   left: 300px;
   font-size: 16px !important;
@@ -165,7 +166,7 @@ body {
 
 .list-of-suggestions{
   position: absolute;
-  top: 50px;
+  top: 60px;
   left: 20px;
   display: flex;
 }
