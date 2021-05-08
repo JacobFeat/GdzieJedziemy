@@ -277,10 +277,10 @@ function initMap() {
   //
   setTimeout(function(){
     myPlaceArray.forEach(place => {
-      setTimeout(function(){addMarker(place);},counter*200);
+      setTimeout(function(){addMarker(place);},counter*150);
       counter++;
     });
-  }, 100);
+  }, 300);
 
 
   //make array where all infoWindows will be stored
@@ -437,7 +437,10 @@ function initMap() {
                 else{
                   const currentDestination = window.localStorage.getItem('currentDestination');
                   const jsonDestinationCoords = JSON.parse(currentDestination);
-                  calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, travelMode);
+                  //add setTimeout because without it bugs might occur
+                  setTimeout(function(){
+                    calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, travelMode);
+                  },300);
                 }
               })
             }

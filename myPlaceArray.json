@@ -90,5 +90,32 @@
       "lng": 18.05
     },
     "imgSource": "img10.jpg"
+  },
+{
+    "name": "Sowia Góra",
+    "description": "Ultricies integer quis auctor elit sed vulputate mi sit amet. Ultrices in iaculis nunc sed augue. Ut porttitor leo a diam sollicitudin tempor id. Id velit ut tortor pretium viverra suspendisse potenti.",
+    "coords": {
+      "lat": 52.70,
+      "lng": 15.84
+    },
+    "imgSource": "img11.jpg"
+  }, 
+{
+    "name": "Kępeczki",
+    "description": "Ultricies integer quis auctor elit sed vulputate mi sit amet. Ultrices in iaculis nunc sed augue. Ut porttitor leo a diam sollicitudin tempor id. Id velit ut tortor pretium viverra suspendisse potenti.",
+    "coords": {
+      "lat": 51.582778,
+      "lng": 21.646389
+    },
+    "imgSource": "img12.jpg"
+  }, 
+{
+    "name": "Bazylika w Licheniu Starym",
+    "description": "Ultricies integer quis auctor elit sed vulputate mi sit amet. Ultrices in iaculis nunc sed augue. Ut porttitor leo a diam sollicitudin tempor id. Id velit ut tortor pretium viverra suspendisse potenti.",
+    "coords": {
+      "lat": 52.323633,
+      "lng": 18.358347
+    },
+    "imgSource": "img13.jpg"
   }
 ]

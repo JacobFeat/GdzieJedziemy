@@ -489,6 +489,7 @@ body {
 .place-img {
   width: 300px;
   height: 300px;
+  object-fit: cover;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
