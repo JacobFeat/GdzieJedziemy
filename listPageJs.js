@@ -13,100 +13,11 @@ const closeBackCard = document.querySelector(".close-back-card");
 const frontCardDot = document.querySelectorAll(".front-card-dot");
 let suggestionsCity = suggestionsList.children;
 
-const myPlaceArray = [
-  {
-    name: 'Kamieniołom Liban',
-    description: "Maecenas accumsan lacus vel facilisis. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Bibendum arcu vitae elementum curabitur vitae nunc sed. Sit amet massa vitae tortor condimentum lacinia quis vel. Sagittis eu volutpat odio facilisis mauris sit amet. Ultrices neque ornare aenean euismod elementum nisi quis. Diam volutpat commodo sed egestas. ",
-    coords: {
-      lat: 50.04,
-      lng: 19.96,
-    },
-    imgSource: "img1.jpg"
-  },
-  {
-    name: 'Pustynia Błędowska',
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id consectetur purus ut faucibus pulvinar elementum integer enim neque. Blandit turpis cursus in hac habitasse platea.",
-    coords: {
-      lat: 50.36,
-      lng: 19.52
-    },
-    imgSource: "img2.jpg"
-  },
-  {
-    name: 'Zakrzówek',
-    description: "Lacus laoreet non curabitur gravida arcu ac. Tincidunt arcu non sodales neque sodales ut. Commodo odio aenean sed adipiscing diam donec adipiscing tristique risus. Facilisis gravida neque convallis a cras semper.",
-    coords: {
-      lat: 50.04,
-      lng: 19.91
-    },
-    imgSource: "img3.jpg"
-  },
-  {
-    name: 'Kopiec Krakusa',
-    description: "Proin fermentum leo vel orci porta. Tincidunt eget nullam non nisi est sit amet facilisis. Lobortis elementum nibh tellus molestie nunc. Bibendum enim facilisis gravida neque convallis.",
-    coords: {
-      lat: 50.03,
-      lng: 19.96
-    },
-    imgSource: "img4.jpg"
-  },
-  {
-    name: 'Kopiec Kościuszki',
-    description: "Vitae justo eget magna fermentum iaculis eu. Id donec ultrices tincidunt arcu non sodales neque. Sem et tortor consequat id porta nibh venenatis.",
-    coords: {
-      lat: 50.05,
-      lng: 19.89
-    },
-    imgSource: "img5.jpg"
+let myPlaceArray = [];
 
-  },
-  {
-    name: 'Zamek Tenczyn',
-    description: "Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. Velit sed ullamcorper morbi tincidunt. Nunc id cursus metus aliquam. Mi ipsum faucibus vitae aliquet nec ullamcorper sit. Accumsan tortor posuere ac ut consequat semper.",
-    coords: {
-      lat: 50.10,
-      lng: 19.58
-    },
-    imgSource: "img6.jpg"
-
-  },
-  {
-    name: 'Góra Żar',
-    description: "Sed augue lacus viverra vitae congue eu. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et. Amet dictum sit amet justo donec.",
-    coords: {
-      lat: 49.79,
-      lng: 19.22
-    },
-    imgSource: "img7.jpg"
-  },
-  {
-    name: 'Góra Świętego Marcina',
-    description: "Nisl purus in mollis nunc sed. Tortor aliquam nulla facilisi cras fermentum. Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque sit.",
-    coords: {
-      lat: 49.99,
-      lng: 21.01
-    },
-    imgSource: "img8.jpg"
-  },
-  {
-    name: 'Wieża widokowa w Siekowie',
-    description: "Leo integer malesuada nunc vel risus commodo viverra maecenas accumsan. A iaculis at erat pellentesque adipiscing commodo elit at. Pretium viverra suspendisse potenti nullam ac tortor vitae.",
-    coords: {
-      lat: 52.06,
-      lng: 16.37
-    },
-    imgSource: "img9.jpg"
-  },
-  {
-    name: 'Kaszubskie Oko',
-    description: "Ultricies integer quis auctor elit sed vulputate mi sit amet. Ultrices in iaculis nunc sed augue. Ut porttitor leo a diam sollicitudin tempor id. Id velit ut tortor pretium viverra suspendisse potenti.",
-    coords: {
-      lat: 54.72,
-      lng: 18.05
-    },
-    imgSource: "img10.jpg"
-  }
-]
+fetch('myPlaceArray.json')
+  .then(blob => blob.json())
+  .then(data => myPlaceArray.push(...data));
 
 let mySortedArray = [];
 const atLeastOneExpanded = (element) => {
@@ -137,7 +48,7 @@ window.addEventListener('load', e => {
     let dotForLi = document.createElement('span');
     dotForLi.setAttribute('class', 'dot-for-li');
     document.querySelectorAll('.name')[0].appendChild(dotForLi);
-  }, 0);
+  }, 100);
   // sendCordi(myPlaceArray, cities);
   setTimeout(sendCordi.bind(null, myPlaceArray, cities), 150);
   // suggestionsCity[0].style.display = "inline-block";
@@ -384,7 +295,6 @@ function calculateCordi(latValue, lngValue, object) {
     `;
   }).join("");
   spotsList.innerHTML = html;
-
   //calculate lat and lng to km
   for (let i = 0; i < object.length; i++) {
     const latAsNumber = parseFloat(latValue);
@@ -409,7 +319,7 @@ function calculateCordi(latValue, lngValue, object) {
       roundDistance = Math.round(distance * 100) / 100;
     }
     //send distance to proper cards/cities
-    spotsList.querySelectorAll('.front-card')[i].querySelector('.place-distance').innerHTML = roundDistance + " km";
+    spotsList.querySelectorAll('.front-card')[i].querySelector('.place-distance').innerHTML = `${roundDistance}  km`;
   }
 
 }
