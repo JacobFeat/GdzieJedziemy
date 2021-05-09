@@ -322,6 +322,7 @@ body {
   font-size: 18px;
   color: var(--dark-main-color);
   width: 22%;
+  min-width: 150px;
   text-align: left;
 }
 
@@ -344,6 +345,7 @@ body {
   font-weight: 500;
   color: var(--dark-main-color);
   width: 12%;
+  min-width: 100px;
   padding-left: 20px;
 }
 
@@ -513,6 +515,8 @@ body {
   z-index: 0;
 }
 
+/*-------- MEDIA QUERIES --------- */
+
 @media screen and (max-width: 1300px) {
 .lookup-and-map{
   width: 90%;
@@ -521,4 +525,74 @@ body {
 .list-of-spots{
   width: 90%;
 }
+}
+
+
+@media screen and (max-width: 1000px) {
+  .right-circle{
+    transform: translate(45%, -50%) scale(0.8);
+  }
+
+  .path-img{
+    display: none;
+  }
+}
+@media screen and (max-width: 680px) {
+  .right-circle{
+    transform: translate(60%, -40%) scale(0.8);
+  }
+
+  .place{
+    margin-left: 20px;
+    width: 60%;
+  }
+
+  .place-description{
+    display: none;
+  }
+
+  .place-distance{
+    width: 20%;
+  }
+
+  .close-back-card{
+    top: 15px;
+    right: 15px;
+  }
+
+  .place-back{
+    font-size: 17px;
+    text-align: center;
+  }
+
+  .place-description-back{
+    font-size: 13px;
+    margin: 20px 20px 0;
+  }
+
+  .content-end{
+    margin-bottom: 30px;
+  }
+
+}
+
+@media screen and (max-width: 550px) {
+  .right-circle{
+    transform: translate(65%, -5%) scale(0.8);
+  }
+
+  .search-active{
+    width: 270px;
+  }
+
+  .close-search{
+    left: 210px;
+  }
+
+  .lookup-icon-active{
+    left: 220px;
+  }
+  .front-card-dot{
+    display: none !important;
+  }
 }

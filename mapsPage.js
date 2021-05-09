@@ -29,7 +29,9 @@ const bikeModeBtn = document.querySelector('.bike-mode');
 const walkModeBtn = document.querySelector('.walk-mode');
 const distanceField = document.querySelector('.distance-display');
 
-
+window.addEventListener('resize', ()=> {
+  console.log(window.innerHeight);
+})
 
 //add delete's input button when input is filling
 originInput.addEventListener('keyup', () => {

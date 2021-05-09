@@ -13,6 +13,19 @@ const closeBackCard = document.querySelector(".close-back-card");
 const frontCardDot = document.querySelectorAll(".front-card-dot");
 let suggestionsCity = suggestionsList.children;
 
+const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+
+
+window.addEventListener('resize', ()=>{
+  // handleResChange(mediaQuery);
+  console.log(window.innerWidth);
+  if(window.innerWidth<500){
+  }
+})
+
+
+
 let myPlaceArray = [];
 
 fetch('myPlaceArray.json')
@@ -29,6 +42,8 @@ document.addEventListener('mouseover', (e) => {
 });
 
 window.addEventListener('load', e => {
+  handleResChange(mediaQuery);
+
   const mySentCity = window.localStorage.getItem('mySentCity');
   searchInput.value = mySentCity;
   window.localStorage.setItem('originPlace', searchInput.value);
@@ -260,6 +275,18 @@ function sendCordi(object, arrayOfCities) {
   }
   sortList(spotsList);
 
+}
+
+//short place description on resize
+function handleResChange(e){
+  if(e.matches){
+    // console.log("Res changed");
+    // console.log(window.innerWidth);
+    const placeDescriptionAll = document.querySelectorAll('.place-description');
+    placeDescriptionAll.forEach(place => {
+      place.innerText = place.innerText.slice(0, 30) + "...";
+    })
+  }
 }
 
 //changing string result to number result
