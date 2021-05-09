@@ -1,9 +1,0 @@
-<svg width="40" height="51" viewBox="0 0 40 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="14" height="24" transform="matrix(-1 0 0 1 26 13)" fill="#08BDAA"/>
-<path d="M13.1765 14L2.12921 25.3057" stroke="#08BDAA" stroke-width="3"/>
-<path d="M34.8555 4C34.9871 14.2663 25.6445 14.5 25.6445 14.5" stroke="#08BDAA" stroke-width="3"/>
-<line y1="-1.5" x2="16.0933" y2="-1.5" transform="matrix(0 -1 -1 0 23 50.0933)" stroke="#08BDAA" stroke-width="3"/>
-<line y1="-1.5" x2="16.0933" y2="-1.5" transform="matrix(0 -1 -1 0 12 50.0933)" stroke="#08BDAA" stroke-width="3"/>
-<rect x="12" y="12" width="14" height="1" fill="white"/>
-<circle r="6.09622" transform="matrix(-1 0 0 1 19.0962 6.09622)" fill="#08BDAA"/>
-</svg>

@@ -29,9 +29,6 @@ const bikeModeBtn = document.querySelector('.bike-mode');
 const walkModeBtn = document.querySelector('.walk-mode');
 const distanceField = document.querySelector('.distance-display');
 
-window.addEventListener('resize', ()=> {
-  console.log(window.innerHeight);
-})
 
 //add delete's input button when input is filling
 originInput.addEventListener('keyup', () => {
@@ -41,13 +38,6 @@ originInput.addEventListener('keyup', () => {
     closeSearch.classList.remove('close-search-active');
   }
 });
-//
-// originInput.addEventListener('focusin', () => {
-//     closeSearch.classList.add('close-search-active');
-// });
-// originInput.addEventListener('focusout', () => {
-//     closeSearch.classList.remove('close-search-active');
-// });
 
 closeSearch.addEventListener('click', () => {
   originInput.value = "";
@@ -270,13 +260,6 @@ function initMap() {
   //declare a object that we use to change coords to name of place
   const geocoder = new google.maps.Geocoder;
 
-
-  // const onChangeHandler = function() {
-  //   calcRoute(directionsService, directionsRenderer, krakow, 'DRIVING');
-  // };
-
-  // document.querySelector('.route-btn').addEventListener('click', onChangeHandler);
-  //
   setTimeout(function(){
     myPlaceArray.forEach(place => {
       setTimeout(function(){addMarker(place);},counter*150);
@@ -364,10 +347,6 @@ function initMap() {
     //get origin place on load
     const originPlace = window.localStorage.getItem('originPlace');
     originInput.value = originPlace;
-    //if coordinates are in input value, don't show them
-    // if(originInput.value.includes("object")){
-    //   originInput.value = "Moja lokalizacja";
-    // }
     closeSearch.classList.add('close-search-active');
 
     //when page is loading and place's route button was clicked, show route
@@ -375,10 +354,6 @@ function initMap() {
       const currentDestination = window.localStorage.getItem('currentDestination');
       const jsonDestinationCoords = JSON.parse(currentDestination);
       calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, 'DRIVING');
-      // localStorage.removeItem('buttonCurrentDestination');
-
-      // setTimeout(calcRoute.bind(null, directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, 'DRIVING'), 150);
-      // setTimeout(function(){localStorage.removeItem('button, CurrentDestination');}, 300);
     }
 
   });
@@ -400,20 +375,15 @@ function initMap() {
           </div>
           `;
           infoWindow.setContent(infoWindowContent);
-          // infoWindow.open(map);
           map.setZoom(15);
           map.panTo(pos);
-          // if(typeof marker !== 'undefined') {
-          //   marker.setMap(null)
-          // };
 
           const marker = new google.maps.Marker({
             position: pos,
             map: map,
-            // animation: google.maps.Animation.BOUNCE,
             icon: 'images/hereStrokeBlack.svg',
           });
-          // setTimeout(function(){marker.setAnimation(google.maps.Animation.DROP);}, 200);
+
           marker.addListener('click', (e) => {
             infoWindow.open(map);
             //style infoWindow

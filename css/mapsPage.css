@@ -419,16 +419,6 @@ body {
   align-items: center;
   cursor: default;
   background: var(--dark-main-color);
-  /* background: linear-gradient(to right, var(--main-color) 50%, var(--dark-main-color) 50%); */
-  /* background-size: 200% 100%; */
-  /* background-position: right; */
-  /* transition: all .3s ease-out; */
-  /* animation: slideBg 1s forwards; */
-}
-
-.distance-display-active {
-  /* background-position: left; */
-  /* animation: slideBg 1s forwards; */
 }
 
 .time-display {
@@ -453,8 +443,6 @@ body {
   padding: 0;
   margin-left: 2px;
   display: flex;
-  /* order: 3; */
-  /* margin-right: auto; */
 }
 
 .drive-mode {
@@ -525,16 +513,6 @@ body {
   background-position: left;
 }
 
-/* .place-close{
-  position: absolute;
-  top: 0;
-  left:0;
-  width: 30px;
-  height: 30px;
-  background: white;
-  border: none;
-  cursor: pointer;
-} */
 .my-position-btn {
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
@@ -629,7 +607,6 @@ body {
 }
 
 .gm-control-active::before {
-  /* background: #fff !important; */
   content: '';
   position: absolute;
   top: 50%;
@@ -641,7 +618,6 @@ body {
 }
 
 .gm-control-active::after {
-  /* background: var(--dark-main-color) !important; */
   content: '';
   position: absolute;
   top: 50%;
@@ -670,10 +646,6 @@ body {
   text-align: center;
 }
 
-/* .gmnoprint{
-  bottom: 175px !important;
-} */
-/* Loading route classes*/
 .cycle-loading {
   position: fixed;
   top: 0;
@@ -687,96 +659,7 @@ body {
   background-size: 10%;
   z-index: 1;
   opacity: 1;
-  /* animation: loadingCycleRoute 0.7s; ease-in-out forwards; */
   animation: bouncing .2s infinite alternate, loadingCycleRoute 2s forwards;
-}
-
-.road {
-  height: 3px;
-  width: 180px;
-  background: #fff;
-  position: absolute;
-  top: 60%;
-  left: 100%;
-  animation: road_speed_first 1s 2;
-}
-
-.road-second {
-  top: 62%;
-  left: 130%;
-  animation: road_speed_second 1s 2;
-}
-
-.road-third {
-  top: 64%;
-  left: 150%;
-  animation: road_speed_third 1s 2;
-}
-
-.road-fourth {
-  top: 60%;
-  left: 100%;
-  animation: road_speed_first 1s 2;
-  animation-delay: 0.5s;
-}
-
-.road-fifth {
-  top: 62%;
-  left: 130%;
-  animation: road_speed_second 1s 2;
-  animation-delay: 0.5s;
-}
-
-.road-sixth {
-  top: 64%;
-  left: 150%;
-  animation: road_speed_third 1s 2;
-  animation-delay: 0.5s;
-}
-
-@keyframes road_speed_first {
-  100% {
-    left: -60%;
-  }
-}
-
-@keyframes road_speed_second {
-  100% {
-    left: -30%;
-  }
-}
-
-@keyframes road_speed_third {
-  100% {
-    left: -10%;
-  }
-}
-
-@keyframes bouncing {
-  0% {
-    background-position: 50% 50%;
-  }
-
-  100% {
-    background-position: 50% 49%;
-  }
-}
-
-@keyframes loadingCycleRoute {
-  0% {
-    /* opacity: 0; */
-    left: -100vh;
-  }
-
-  15%, 70% {
-    /* opacity: 1; */
-    left: 0;
-  }
-
-  100% {
-    /* opacity: 0; */
-    left: 300vh;
-  }
 }
 
 .pac-container {
