@@ -1,7 +1,10 @@
+
+
 const searchInput = document.querySelector(".search");
 let suggestionsList = document.querySelector(".list-of-suggestions");
 const lookupIcon = document.querySelector(".lookup-icon");
 const lookupAndMap = document.querySelector(".lookup-and-map");
+const mapBtn = document.querySelector('.map-icon-link');
 const spotsList = document.querySelector(".list-of-spots");
 const spotsListLi = spotsList.querySelectorAll(".card-container");
 const frontCardAll = document.querySelectorAll(".front-card");
@@ -10,80 +13,24 @@ const closeBackCard = document.querySelector(".close-back-card");
 const frontCardDot = document.querySelectorAll(".front-card-dot");
 let suggestionsCity = suggestionsList.children;
 
-const myPlaceArray = [
-  {
-    name: 'Kamieniołom Liban',
-    description: "Maecenas accumsan lacus vel facilisis. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Bibendum arcu vitae elementum curabitur vitae nunc sed. Sit amet massa vitae tortor condimentum lacinia quis vel. Sagittis eu volutpat odio facilisis mauris sit amet. Ultrices neque ornare aenean euismod elementum nisi quis. Diam volutpat commodo sed egestas. ",
-    lat: 50.04,
-    lng: 19.96,
-    imgSource: "img1.jpg"
-  },
-  {
-    name: 'Pustynia Błędowska',
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id consectetur purus ut faucibus pulvinar elementum integer enim neque. Blandit turpis cursus in hac habitasse platea.",
-    lat: 50.36,
-    lng: 19.52,
-    imgSource: "img2.jpg"
-  },
-  {
-    name: 'Zakrzówek',
-    description: "Lacus laoreet non curabitur gravida arcu ac. Tincidunt arcu non sodales neque sodales ut. Commodo odio aenean sed adipiscing diam donec adipiscing tristique risus. Facilisis gravida neque convallis a cras semper.",
-    lat: 50.04,
-    lng: 19.91,
-    imgSource: "img3.jpg"
-  },
-  {
-    name: 'Kopiec Krakusa',
-    description: "Proin fermentum leo vel orci porta. Tincidunt eget nullam non nisi est sit amet facilisis. Lobortis elementum nibh tellus molestie nunc. Bibendum enim facilisis gravida neque convallis.",
-    lat: 50.03,
-    lng: 19.96,
-    imgSource: "img4.jpg"
-  },
-  {
-    name: 'Kopiec Kościuszki',
-    description: "Vitae justo eget magna fermentum iaculis eu. Id donec ultrices tincidunt arcu non sodales neque. Sem et tortor consequat id porta nibh venenatis.",
-    lat: 50.05,
-    lng: 19.89,
-    imgSource: "img5.jpg"
+const mediaQuery = window.matchMedia('(max-width: 768px)');
 
-  },
-  {
-    name: 'Zamek Tenczyn',
-    description: "Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. Velit sed ullamcorper morbi tincidunt. Nunc id cursus metus aliquam. Mi ipsum faucibus vitae aliquet nec ullamcorper sit. Accumsan tortor posuere ac ut consequat semper.",
-    lat: 50.10,
-    lng: 19.58,
-    imgSource: "img6.jpg"
 
-  },
-  {
-    name: 'Góra Żar',
-    description: "Sed augue lacus viverra vitae congue eu. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et. Amet dictum sit amet justo donec.",
-    lat: 49.79,
-    lng: 19.22,
-    imgSource: "img7.jpg"
-  },
-  {
-    name: 'Góra Świętego Marcina',
-    description: "Nisl purus in mollis nunc sed. Tortor aliquam nulla facilisi cras fermentum. Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque sit.",
-    lat: 49.99,
-    lng: 21.01,
-    imgSource: "img8.jpg"
-  },
-  {
-    name: 'Wieża widokowa w Siekowie',
-    description: "Leo integer malesuada nunc vel risus commodo viverra maecenas accumsan. A iaculis at erat pellentesque adipiscing commodo elit at. Pretium viverra suspendisse potenti nullam ac tortor vitae.",
-    lat: 52.06,
-    lng: 16.37,
-    imgSource: "img9.jpg"
-  },
-  {
-    name: 'Kaszubskie Oko',
-    description: "Ultricies integer quis auctor elit sed vulputate mi sit amet. Ultrices in iaculis nunc sed augue. Ut porttitor leo a diam sollicitudin tempor id. Id velit ut tortor pretium viverra suspendisse potenti.",
-    lat: 54.72,
-    lng: 18.05,
-    imgSource: "img10.jpg"
+
+window.addEventListener('resize', ()=>{
+  // handleResChange(mediaQuery);
+  console.log(window.innerWidth);
+  if(window.innerWidth<500){
   }
-]
+})
+
+
+
+let myPlaceArray = [];
+
+fetch('myPlaceArray.json')
+  .then(blob => blob.json())
+  .then(data => myPlaceArray.push(...data));
 
 let mySortedArray = [];
 const atLeastOneExpanded = (element) => {
@@ -95,8 +42,31 @@ document.addEventListener('mouseover', (e) => {
 });
 
 window.addEventListener('load', e => {
-  searchInput.value = window.localStorage.getItem('mySentCity');
-  sendCordi(myPlaceArray, cities);
+  handleResChange(mediaQuery);
+
+  const mySentCity = window.localStorage.getItem('mySentCity');
+  searchInput.value = mySentCity;
+  window.localStorage.setItem('originPlace', searchInput.value);
+  setTimeout(function(){
+    //display list of suggested cities
+    displayMatches();
+    //fill first suggested city by name of city from input value
+    document.querySelectorAll('.name')[0].innerText = searchInput.value;
+    //hide others suggested city and show just first one
+    for (let i = 0; i < 3; i++) {
+      if (suggestionsCity[i]) {
+        suggestionsCity[i].style.display = "none";
+        suggestionsCity[0].style.display = "inline-block";
+      }
+    }
+    //add active dot to first suggested city
+    let dotForLi = document.createElement('span');
+    dotForLi.setAttribute('class', 'dot-for-li');
+    document.querySelectorAll('.name')[0].appendChild(dotForLi);
+  }, 100);
+  // sendCordi(myPlaceArray, cities);
+  setTimeout(sendCordi.bind(null, myPlaceArray, cities), 150);
+  // suggestionsCity[0].style.display = "inline-block";
   // suggestionsCity[0].innerHTML = "<span class='name'>" + searchInput.value + "<span class='dot-for-li'></span></span>";
 });
 
@@ -117,7 +87,6 @@ document.addEventListener('click', (e) => {
     myCardArray.push(document.querySelectorAll('.card-container')[i]);
   }
   const currentIndex = myCardArray.indexOf(e.target.closest('.card-container'));
-  console.log(currentIndex);
 
   //expand and collapse search input, display and hide close-search button
   if (e.target.classList.contains('search') || e.target.classList.contains('close-search')) {
@@ -137,6 +106,8 @@ document.addEventListener('click', (e) => {
     suggestionsList.style.display="none";
     document.querySelector('.close-search').classList.remove('close-search-active');
   }
+
+
 
   //expand card and add margin bottom to expanded card
   if (e.target.closest('.front-card')) {
@@ -171,6 +142,16 @@ document.addEventListener('click', (e) => {
     e.target.parentElement.parentElement.parentElement.querySelector('.front-card-dot').style.display = "inline-block"; //display green dot
   }
 
+  if(e.target.classList.contains('how-to-reach-button')){
+    const placeName = e.target.parentElement.parentElement.parentElement.querySelector('.place-back').textContent;
+    const searchPlace = myPlaceArray.filter(place => place.name == placeName)
+                                    .map(keys => `{"lat": ${keys.coords.lat}, "lng": ${keys.coords.lng}}`)
+
+    window.localStorage.setItem('currentDestination', searchPlace[0]);
+    console.log(  window.localStorage.getItem('currentDestination'));
+
+  }
+
   if (e.target.classList.contains('name')) {
     // add main-color bullet to clicked suggested name
     let dotForLi = document.createElement('span');
@@ -193,16 +174,26 @@ document.addEventListener('click', (e) => {
           return place.innerText;
         });
       const myCurrentCityIndex = showMyCity.indexOf(currentName);
+      //display just active city, others -> hidden
       for (let i = 0; i < 3; i++) {
         if (suggestionsCity[i]) {
           suggestionsCity[i].style.display = "none";
           suggestionsCity[myCurrentCityIndex].style.display = "inline-block";
         }
       }
+      //Set current city as a local storage's origin place when you click suggestion city
+      window.localStorage.setItem('originPlace',suggestionsCity[myCurrentCityIndex].innerText);
     }
     sendCordi(myPlaceArray, cities);
 
   }
+
+  //if mapBtn is clicked, remove destination and show the plain map without any route
+  if(e.target.closest('.map-icon-link')){
+    window.localStorage.setItem('originPlace', searchInput.value);
+    window.localStorage.removeItem('currentDestination');
+  }
+
 }, false);
 
 //search city function
@@ -265,15 +256,14 @@ function sendCordi(object, arrayOfCities) {
       suggestionsCity[i].addEventListener('click', () => {
         const foundCity = arrayOfCities.filter(findCity)
           .map(mapCity);
-        // const [lat, lng] = foundCity[0].split(", ");
-        // const changed = changeCordi(lat, lng, object);
-
       })
     }
   }
-  const [lat, lng] = foundCity[0].split(", ");
 
-  const calculated = calculateCordi(lat, lng, object);
+  if(foundCity[0]){
+    const [lat, lng] = foundCity[0].split(", ");
+    const calculated = calculateCordi(lat, lng, object);
+  }
 
   // sort li by distance
   function sortList(ul) {
@@ -285,12 +275,18 @@ function sendCordi(object, arrayOfCities) {
   }
   sortList(spotsList);
 
-  // display just 5 elements of spotsList
-  //UPDATE: I made this in css file
-  // const listOfSpotsList = Array.from(spotsList.querySelectorAll(".card-container"));
-  // for (let i = 5; i < listOfSpotsList.length; i++) {
-  //   listOfSpotsList[i].style.display = "none";
-  // }
+}
+
+//short place description on resize
+function handleResChange(e){
+  if(e.matches){
+    // console.log("Res changed");
+    // console.log(window.innerWidth);
+    const placeDescriptionAll = document.querySelectorAll('.place-description');
+    placeDescriptionAll.forEach(place => {
+      place.innerText = place.innerText.slice(0, 30) + "...";
+    })
+  }
 }
 
 //changing string result to number result
@@ -318,7 +314,7 @@ function calculateCordi(latValue, lngValue, object) {
         </span>
         <span class="content-end">
         <p class="how-to-reach">Jak dojechać?</p>
-        <button type="button" class="how-to-reach-button">Sprawdź</button>
+        <a class="how-to-reach-link" href="/mapsPage.html"><button type="button" class="how-to-reach-button">Sprawdź</button></a>
         </span>
       </div>
       </span>
@@ -326,15 +322,16 @@ function calculateCordi(latValue, lngValue, object) {
     `;
   }).join("");
   spotsList.innerHTML = html;
+  //calculate lat and lng to km
   for (let i = 0; i < object.length; i++) {
     const latAsNumber = parseFloat(latValue);
     const lngAsNumber = parseFloat(lngValue);
     const latToKm = latAsNumber * 110.574;
     const earthRadius = 6371e3; // metres
     const latitude1 = latAsNumber * Math.PI / 180;
-    const latitude2 = object[i].lat * Math.PI / 180;
-    const deltaLatitude = (object[i].lat - latAsNumber) * Math.PI / 180;
-    const deltaLongitude = (object[i].lng - lngAsNumber) * Math.PI / 180;
+    const latitude2 = object[i].coords.lat * Math.PI / 180;
+    const deltaLatitude = (object[i].coords.lat - latAsNumber) * Math.PI / 180;
+    const deltaLongitude = (object[i].coords.lng - lngAsNumber) * Math.PI / 180;
 
     const a = Math.sin(deltaLatitude / 2) * Math.sin(deltaLatitude / 2) +
       Math.cos(latitude1) * Math.cos(latitude2) *
@@ -348,7 +345,8 @@ function calculateCordi(latValue, lngValue, object) {
     } else {
       roundDistance = Math.round(distance * 100) / 100;
     }
-    spotsList.querySelectorAll('.front-card')[i].querySelector('.place-distance').innerHTML = roundDistance + " km";
+    //send distance to proper cards/cities
+    spotsList.querySelectorAll('.front-card')[i].querySelector('.place-distance').innerHTML = `${roundDistance}  km`;
   }
 
 }

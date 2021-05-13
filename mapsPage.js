@@ -8,119 +8,54 @@ const krakow = {
   lng: 19.944544
 }
 
+const center = {
+  lat: 51.957540,
+  lng: 18.986491
+}
 
-const myPlaceArray = [{
-    name: 'Kamieniołom Liban',
-    description: "Maecenas accumsan lacus vel facilisis. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Bibendum arcu vitae elementum curabitur vitae nunc sed. Sit amet massa vitae tortor condimentum lacinia quis vel. Sagittis eu volutpat odio facilisis mauris sit amet. Ultrices neque ornare aenean euismod elementum nisi quis. Diam volutpat commodo sed egestas. ",
-    coords: {
-      lat: 50.04,
-      lng: 19.96,
-    },
-    imgSource: "img1.jpg"
-  },
-  {
-    name: 'Pustynia Błędowska',
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id consectetur purus ut faucibus pulvinar elementum integer enim neque. Blandit turpis cursus in hac habitasse platea.",
-    coords: {
-      lat: 50.36,
-      lng: 19.52
-    },
-    imgSource: "img2.jpg"
-  },
-  {
-    name: 'Zakrzówek',
-    description: "Lacus laoreet non curabitur gravida arcu ac. Tincidunt arcu non sodales neque sodales ut. Commodo odio aenean sed adipiscing diam donec adipiscing tristique risus. Facilisis gravida neque convallis a cras semper.",
-    coords: {
-      lat: 50.04,
-      lng: 19.91
-    },
-    imgSource: "img3.jpg"
-  },
-  {
-    name: 'Kopiec Krakusa',
-    description: "Proin fermentum leo vel orci porta. Tincidunt eget nullam non nisi est sit amet facilisis. Lobortis elementum nibh tellus molestie nunc. Bibendum enim facilisis gravida neque convallis.",
-    coords: {
-      lat: 50.03,
-      lng: 19.96
-    },
-    imgSource: "img4.jpg"
-  },
-  {
-    name: 'Kopiec Kościuszki',
-    description: "Vitae justo eget magna fermentum iaculis eu. Id donec ultrices tincidunt arcu non sodales neque. Sem et tortor consequat id porta nibh venenatis.",
-    coords: {
-      lat: 50.05,
-      lng: 19.89
-    },
-    imgSource: "img5.jpg"
+let myPlaceArray = [];
 
-  },
-  {
-    name: 'Zamek Tenczyn',
-    description: "Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. Velit sed ullamcorper morbi tincidunt. Nunc id cursus metus aliquam. Mi ipsum faucibus vitae aliquet nec ullamcorper sit. Accumsan tortor posuere ac ut consequat semper.",
-    coords: {
-      lat: 50.10,
-      lng: 19.58
-    },
-    imgSource: "img6.jpg"
-
-  },
-  {
-    name: 'Góra Żar',
-    description: "Sed augue lacus viverra vitae congue eu. Commodo quis imperdiet massa tincidunt nunc pulvinar sapien et. Amet dictum sit amet justo donec.",
-    coords: {
-      lat: 49.79,
-      lng: 19.22
-    },
-    imgSource: "img7.jpg"
-  },
-  {
-    name: 'Góra Świętego Marcina',
-    description: "Nisl purus in mollis nunc sed. Tortor aliquam nulla facilisi cras fermentum. Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque sit.",
-    coords: {
-      lat: 49.99,
-      lng: 21.01
-    },
-    imgSource: "img8.jpg"
-  },
-  {
-    name: 'Wieża widokowa w Siekowie',
-    description: "Leo integer malesuada nunc vel risus commodo viverra maecenas accumsan. A iaculis at erat pellentesque adipiscing commodo elit at. Pretium viverra suspendisse potenti nullam ac tortor vitae.",
-    coords: {
-      lat: 52.06,
-      lng: 16.37
-    },
-    imgSource: "img9.jpg"
-  },
-  {
-    name: 'Kaszubskie Oko',
-    description: "Ultricies integer quis auctor elit sed vulputate mi sit amet. Ultrices in iaculis nunc sed augue. Ut porttitor leo a diam sollicitudin tempor id. Id velit ut tortor pretium viverra suspendisse potenti.",
-    coords: {
-      lat: 54.72,
-      lng: 18.05
-    },
-    imgSource: "img10.jpg"
-  }
-]
+fetch('myPlaceArray.json')
+  .then(blob => blob.json())
+  .then(data => myPlaceArray.push(...data));
 
 const markers = [];
+let counter = 1;
 const originPlaceBtn = document.querySelector('.lookup-icon');
 const originInput = document.querySelector('.origin-input');
+const closeSearch = document.querySelector('.close-search');
 const carModeBtn = document.querySelector('.car-mode');
 const bikeModeBtn = document.querySelector('.bike-mode');
 const walkModeBtn = document.querySelector('.walk-mode');
 const distanceField = document.querySelector('.distance-display');
 
+
+//add delete's input button when input is filling
+originInput.addEventListener('keyup', () => {
+  if (originInput.value != "") {
+    closeSearch.classList.add('close-search-active');
+  } else {
+    closeSearch.classList.remove('close-search-active');
+  }
+});
+
+closeSearch.addEventListener('click', () => {
+  originInput.value = "";
+  closeSearch.classList.remove('close-search-active');
+  originInput.focus();
+});
+
 function initMap() {
   const optionsMap = {
     // mapId: "8e0a97af9386fef",
-    zoom: 14,
-    center: krakow,
+    zoom: 7,
+    center: center,
     fullscreenControl: false,
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [{
+    styles: [
+      {
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"
@@ -322,15 +257,16 @@ function initMap() {
 
   directionsRenderer.setMap(map);
 
-  // const onChangeHandler = function() {
-  //   calcRoute(directionsService, directionsRenderer, krakow, 'DRIVING');
-  // };
+  //declare a object that we use to change coords to name of place
+  const geocoder = new google.maps.Geocoder;
 
-  // document.querySelector('.route-btn').addEventListener('click', onChangeHandler);
+  setTimeout(function(){
+    myPlaceArray.forEach(place => {
+      setTimeout(function(){addMarker(place);},counter*150);
+      counter++;
+    });
+  }, 300);
 
-  myPlaceArray.forEach(place => {
-    addMarker(place);
-  });
 
   //make array where all infoWindows will be stored
   const infoWindows = [];
@@ -344,10 +280,8 @@ function initMap() {
     });
 
     markers.push(marker);
-    // clearMarkers();
-    setTimeout(function() {
-      marker.setAnimation(google.maps.Animation.DROP);
-    }, 50);
+    marker.setAnimation(google.maps.Animation.DROP);
+
     //add content to infoWindow
     const cityContent = `
     <img class="place-img" src="/images/${city.imgSource}" alt="image of place">
@@ -373,16 +307,23 @@ function initMap() {
           map.panTo(city.coords);
           var placeBtn = document.querySelector('.place-btn');
           placeBtn.addEventListener('click', () => {
+
             //take coords of choosen place
             const destinationCoords = `{"lat": ${city.coords.lat}, "lng": ${city.coords.lng}}`;
             //json parse them to the object
             const jsonDestinationCoords = JSON.parse(destinationCoords);
-            //get travel mode from localStorage and put to the calcRoute()
-            const travelMode = window.localStorage.getItem('currentTravelMode');
-            const originPlace = window.localStorage.getItem('originPlace');
+            if(window.localStorage.getItem('originPlace')){
+              //get travel mode from localStorage and put to the calcRoute
+              const travelMode = window.localStorage.getItem('currentTravelMode');
+              const originPlace = window.localStorage.getItem('originPlace');
 
-            calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
-            infoWindow.close();
+              calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
+              infoWindow.close();
+            }
+            else{
+              alert('Wybierz miejsce początkowe...')
+            }
+
             //save coords to localStorage
             window.localStorage.setItem('currentDestination', destinationCoords);
           });
@@ -390,6 +331,33 @@ function initMap() {
       })
     }
   }
+
+  function setMapOnAll(map){
+    for(let i=0; i<markers.length; i++){
+      markers[i].setMap(map);
+    }
+  }
+
+  function clearMarkers(){
+    setMapOnAll(null);
+  }
+
+
+  window.addEventListener('load', e => {
+    //get origin place on load
+    const originPlace = window.localStorage.getItem('originPlace');
+    originInput.value = originPlace;
+    closeSearch.classList.add('close-search-active');
+
+    //when page is loading and place's route button was clicked, show route
+    if (window.localStorage.getItem('currentDestination')) {
+      const currentDestination = window.localStorage.getItem('currentDestination');
+      const jsonDestinationCoords = JSON.parse(currentDestination);
+      calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, 'DRIVING');
+    }
+
+  });
+
   //find my location
   locationButton.addEventListener('click', () => {
     if (navigator.geolocation) {
@@ -399,14 +367,55 @@ function initMap() {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          // infoWindow.setPosition(pos);
-          // infoWindow.setContent(`${pos.lat}`);
-          // infoWindow.open(map);
+          infoWindow.setPosition(pos);
+          const infoWindowContent = `
+          <div class="my-position-box">
+
+          <button type="button" class="my-position-btn">Stąd ruszam</button>
+          </div>
+          `;
+          infoWindow.setContent(infoWindowContent);
+          map.setZoom(15);
           map.panTo(pos);
+
           const marker = new google.maps.Marker({
             position: pos,
             map: map,
             icon: 'images/hereStrokeBlack.svg',
+          });
+
+          marker.addListener('click', (e) => {
+            infoWindow.open(map);
+            //style infoWindow
+            setTimeout(styleInfoWindow, 0);
+            function styleInfoWindow() {
+              const closeBtn = document.querySelector('.my-position-box').parentElement.parentElement.parentElement.querySelector('.gm-ui-hover-effect');
+              const myPositionBtn = document.querySelector('.my-position-btn');
+              closeBtn.style.transform = "scale(0.7)";
+              closeBtn.style.transition = "0.2s";
+              document.querySelector('.my-position-box').parentElement.parentElement.parentElement.parentElement.style.top = "-70px";
+
+              //set my position as a origin place
+              myPositionBtn.addEventListener('click', () => {
+                geocodeLatLng(pos);
+                const travelMode = window.localStorage.getItem('currentTravelMode');
+                infoWindow.close(map);
+                //if destination is not chosen, first choose
+                if(!window.localStorage.getItem('currentDestination')){
+                  alert('Wybierz miejsce docelowe z mapy...');
+                  map.setZoom(9);
+                }
+                //if destination is chosen, show route from your current position
+                else{
+                  const currentDestination = window.localStorage.getItem('currentDestination');
+                  const jsonDestinationCoords = JSON.parse(currentDestination);
+                  //add setTimeout because without it bugs might occur
+                  setTimeout(function(){
+                    calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, travelMode);
+                  },300);
+                }
+              })
+            }
           });
         },
         () => {
@@ -434,7 +443,6 @@ function initMap() {
       walkModeBtn.classList.remove('drive-mode-active');
       window.localStorage.setItem('currentTravelMode', 'BICYCLING');
       const mode = 'BICYCLING';
-      console.log(this);
       changeTravelMode(mode);
     }, 0);
   });
@@ -447,12 +455,21 @@ function initMap() {
     changeTravelMode(mode);
   });
 
-
-
   //set input value as a origin place
   originPlaceBtn.addEventListener('click', () => {
-    // console.log(originInput.value);
-    providePlaces();
+    window.localStorage.setItem('originPlace', originInput.value);
+    if(!window.localStorage.getItem('originPlace') || originInput.value == "")
+      alert('Wybierz miejsce początkowe...');
+    else {
+      if(!window.localStorage.getItem('currentDestination'))
+        alert('Wybierz miejsce docelowe z mapy...');
+      else
+        providePlaces();
+        //close all infoWindows
+        infoWindows.forEach(infoWindow => {
+          infoWindow.close();
+        });
+    }
   });
 
   //start calcRoute() when you press Enter while typing city
@@ -462,6 +479,24 @@ function initMap() {
     };
   });
 
+  //function that change our coords to name of place
+  function geocodeLatLng(latlng) {
+    geocoder.geocode({
+      'location': latlng
+    }, function(results, status) {
+      if (status == 'OK') {
+        if (results[0]) {
+          originInput.value = results[0].formatted_address;
+          window.localStorage.setItem('originPlace', results[0].formatted_address);
+        } else {
+          window.alert('Nie znaleziono');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+    });
+  };
+
   //function which change travel mode
   function changeTravelMode(mode) {
     window.localStorage.setItem('currentTravelMode', mode);
@@ -470,6 +505,7 @@ function initMap() {
       const jsonDestinationCoords = JSON.parse(currentDestination);
       const originPlace = window.localStorage.getItem('originPlace');
       calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, mode);
+
     }
   }
 
@@ -483,6 +519,13 @@ function initMap() {
     calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
   }
 
+//group markers together if they are very close each other
+setTimeout(function(){
+  const markerCluster = new MarkerClusterer(map, markers, {
+    imagePath: `../images/clusters/m`
+  });
+}, 2000);
+
   //end of initMap()
 }
 
@@ -491,7 +534,6 @@ function initMap() {
 document.addEventListener('click', (e) => {
 
   if (e.target.closest('.hamburger')) {
-    // console.log("work");
     document.querySelectorAll(".hamburger span")[0].classList.toggle("span-active-first");
     document.querySelectorAll(".hamburger span")[1].classList.toggle("span-active-second");
     document.querySelectorAll(".hamburger span")[2].classList.toggle("span-active-third");
@@ -529,9 +571,4 @@ function calcRoute(directionsService, directionsRenderer, originPlace, destinati
       // distanceField.classList.toggle('distance-display-active');
     }
   });
-}
-
-//clear all markers
-function cleanMarkers() {
-
 }

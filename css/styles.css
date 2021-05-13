@@ -11,6 +11,7 @@ body {
 
 :root {
   --main-color: #08BDAA;
+  --dark-main-color: #686868;
 }
 
 * {
@@ -22,10 +23,10 @@ body {
   /* max-width: 2000px; */
   height: 100vh;
   display: flex;
-  background-image: url('../images/bg-dt.svg');
-  background-position: 104% 0;
-  /* background-size: 50%; */
-  /* background: contain; */
+  background-image: url('../images/bg-center.svg');
+  background-position: center;
+  background-size: 160vh;
+  background: contain;
   background-repeat: no-repeat;
   position: relative;
 }
@@ -51,11 +52,6 @@ body {
   }
 }
 
-@media (min-width: 1800px) {
-  .main-container {
-    background-size: 50%;
-  }
-}
 
 .bg-box {
   position: absolute;
@@ -79,23 +75,17 @@ body {
 
 @keyframes left-in {
   from {
-    /* left: -50vw; */
     top: -80vh;
     opacity: 0;
   }
 
   to {
-    /* left: 0; */
     top: 0;
     opacity: 1;
   }
 }
 
-@media (min-width: 1800px) {
-  .left-container {
-    padding-left: 200px;
-  }
-}
+
 
 .logo {
   color: var(--main-color);
@@ -108,7 +98,7 @@ body {
 
 .logo-circle {
   min-width: 40px;
-  height: 40px;
+  min-height: 40px;
   border: 6px solid var(--main-color);
   border-radius: 100%;
   display: block;
@@ -119,11 +109,9 @@ body {
 .content {
   font-family: 'Poppins', sans-serif;
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   width: 540px;
   padding-top: 130px;
-  /* position: absolute; */
-  /* top: 30%; */
 }
 
 .content span {
@@ -233,8 +221,6 @@ input::placeholder {
 }
 
 .right-container {
-  /* z-index: -1; */
-  /* overflow: hidden; */
   width: 50%;
   height: 100%;
   position: relative;
@@ -262,7 +248,7 @@ input::placeholder {
 .icons a:hover {
   color: var(--main-color);
   font-size: 30px;
-  margin: 7px 17px;
+  margin: 6px 17px;
 }
 
 .lights {
@@ -270,11 +256,9 @@ input::placeholder {
 }
 
 .bus-img {
-  /* filter: drop-shadow(10px 10px 20px #3b3b3b); */
   max-width: 100%;
   vertical-align: middle;
   transform: scale(0.9);
-  /* margin-left: 60px; */
   position: relative;
 }
 
@@ -292,37 +276,19 @@ input::placeholder {
   }
 }
 
-/* TODO: Make pseudo elements for img */
-/* .left-light{
-  width: 40px;
-  height: 57px;
-  background-color: yellow;
-  opacity: 0.5;
-  border-radius: 100%;
-  position: absolute;
-  top: 290px;
-  left: 104px;
+.non-hamburger {
+  align-self: flex-start;
+  margin: 0;
+  z-index: 2;
 }
-
-.right-light{
-  width: 64px;
-  height: 60px;
-  background-color: yellow;
-  opacity: 0.5;
-  border-radius: 100%;
-  position: absolute;
-  top: 292px;
-  left: 355px;
-} */
-.non-hamburger {}
 
 .non-hamburger ul {
   margin-bottom: 40px;
   list-style-type: none;
   display: flex;
   position: relative;
-  left: -20%;
-  /* border: 1px solid white; */
+  left: -163px;
+
 }
 
 .non-hamburger li {
@@ -336,23 +302,39 @@ input::placeholder {
   font-weight: 600;
 }
 
+.non-hamburger a:hover {
+  color: var(--dark-main-color);
+}
+
 .non-hamburger a:hover {}
 
 .hamburger-bg * {
   display: none;
 }
 
+.hamburger{
+  display: none;
+}
+
+@media (min-width: 1800px) {
+  .left-container {
+    padding-left: 200px;
+  }
+
+  .icons{
+    margin: 40px 70px 0 0;
+  }
+}
+
+
 @media (max-width: 1100px) {
   .main-container {
     background-image: url('../images/bg-medium-fixed.svg');
     background-size: cover;
-    /* background-position: center; */
-    /* background: cover; */
     background-repeat: no-repeat;
   }
 
   .bus-img {
-    /* transform: scale(0.8); */
     right: -10vw;
     margin-top: 90px;
   }
@@ -363,10 +345,9 @@ input::placeholder {
 
   .icons {
     align-self: flex-start;
-    /* margin: 40px 30px 60px 0;  */
     position: relative;
     left: -120px;
-    margin: 40px 30px 0 30px;
+    margin: 40px 0px 0px 30px;
     z-index: 2;
   }
 
@@ -392,7 +373,6 @@ input::placeholder {
     position: relative;
     width: 40px;
     height: 30px;
-    /* border: 3px solid var(--main-color); */
     margin: 58px 100px 0 0;
     box-sizing: content-box;
     padding: 0 10px;
@@ -404,14 +384,11 @@ input::placeholder {
     z-index: 4;
   }
 
-  @keyframes roundOver {}
-
   .hamburger span {
     width: 100%;
     height: 12%;
     background: var(--main-color);
     cursor: pointer;
-    /* transform: rotate(0deg) translate(0, 0px); */
     transition: transform 0.5s, opacity 0.5s, background 0.5s;
     transform-origin: 0 100% !important;
     z-index: 5;
@@ -421,7 +398,6 @@ input::placeholder {
     background: #fff !important;
     transform: rotate(45deg) translate(-2px, -8px);
     transition: transform 0.5s;
-    /* transform-origin: 0% 100%; */
     transform-origin: left;
   }
 
@@ -434,7 +410,6 @@ input::placeholder {
     background: #fff !important;
     transform: rotate(-45deg) translate(2px, 8px);
     transition: transform 0.5s;
-    /* transform-origin: 0% 100%; */
     transform-origin: left;
   }
 
@@ -546,7 +521,7 @@ input::placeholder {
 
 @media screen and (max-width: 950px) {
   .main-container{
-    /* background-position: -80%; */
+    background-position: 40% 50%;
   }
 
   .content {
@@ -555,12 +530,31 @@ input::placeholder {
   }
 }
 
-@media (max-width: 530px) {
+@media screen and (max-width: 750px) {
+  .main-cointainer{
+    background-image: url('../images/bg-small-3.svg');
+    background-position: 200% !important;
+  }
+
+  .left-container{
+    padding-left: 40px;
+  }
+
+  .hamburger{
+    margin-right: 40px;
+  }
+
+  .bus-img{
+    margin-top: 0px;
+  }
+  .list-of-suggestions li{
+    margin: 0 auto 2px;
+  }
+}
+
+@media screen and (max-width: 530px) {
   .main-container {
-    background-image: url('../images/bg-small.svg');
     background-size: cover;
-    /* background-position: center; */
-    /* background: cover; */
     background-repeat: no-repeat;
   }
 
@@ -569,10 +563,111 @@ input::placeholder {
   }
 
   .content{
-    font-size: 32px;
+    font-size: 36px;
+    max-width: 290px;
+    padding-top: 90px;
+  }
+
+  .search-box {
+    margin-top: 200px;
   }
 
   .hamburger{
     margin-right: 10px;
+  }
+
+  .bus-img{
+    margin-top: 80px;
+    transform: scale(1.2);
+    right: -2vw;
+  }
+
+  .search-box label{
+    font-size: 20px;
+  }
+
+  .search{
+    width: 250px;
+    font-size: 15px;
+  }
+
+  .submit-button{
+    left: 220px;
+  }
+
+  .submit-button-arrow{
+    left: 230px;
+  }
+
+  .list-of-suggestions{
+    width: 250px;
+  }
+  .list-of-suggestions li{
+    font-size: 15px;
+    height: 34px;s
+  }
+
+  .hamburger-bg .logo {
+    color: white;
+    z-index: 6;
+    margin: 95px 0 0 20px;
+  }
+
+  .logo-link {
+    left: 30px;
+    font-size: 20px;
+    transform: translateX(0);
+    margin: 14px 0 0;
+    justify-content: flex-start;
+  }
+
+  .logo-circle {
+    width: 34px;
+    height: 34px;
+  }
+
+  .first-li::before {
+    left: -80px;
+  }
+  .first-li::after {
+    right: -80px;
+  }
+}
+
+@media screen and (max-width: 530px) and (max-height: 890px){
+  .content{
+    padding-top: 50px;
+  }
+
+  .bus-img{
+    margin-top: 20px;
+  }
+  .search-box{
+    margin-top: 90px;
+  }
+}
+@media screen and  (max-width: 530px) and (max-height: 850px){
+  .bus-img{
+    margin-top: 100px;
+  }
+}
+
+@media screen and (max-width: 530px) and (max-height: 750px){
+  .content{
+    padding-top: 30px;
+    font-size: 30px;
+  }
+
+  .bus-img{
+    margin-top: 0px;
+  }
+  .search-box{
+    margin-top: 10vh;
+  }
+}
+
+@media (max-width: 530px) and (max-height: 660px){
+  .bus-img{
+    margin-top: 80px;
   }
 }
