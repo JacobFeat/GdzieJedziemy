@@ -350,3 +350,7 @@ function calculateCordi(latValue, lngValue, object) {
   }
 
 }
+
+function gitNew(){
+
+};
