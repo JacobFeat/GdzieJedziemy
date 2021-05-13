@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Gdzie Jedziesz? </title>
+  <link rel="stylesheet" type="text/css" href="css/mapsPage.css" />
+
+  <!-- FAVICON -->
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/e8f186aa77.js" crossorigin="anonymous"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+
+  <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
+</head>
+
+<body>
+
+
+  <header class="top-header">
+    <div class="origin-input-container">
+
+      <input class="origin-input" type="text" name="" value="" placeholder="Skąd jedziesz...">
+      <button class="material-icons lookup-icon">&#xe8b6;
+      </button>
+      <span class="material-icons-outlined close-search">
+        close
+      </span>
+    </div>
+
+    <a class="logo-link" href="/">Gdzie <span class="logo-circle"></span> Jedziemy</a>
+    <nav class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </nav>
+    </div>
+    <div class="hamburger-bg">
+      <p class="logo">
+        Gdzie <span class="logo-circle"></span> Jedziemy
+      </p>
+      <ul>
+        <li class="hamburger-menu-li"><a class="first-li" href="/">Strona Główna</a></li>
+        <li class="hamburger-menu-li"><a href="/mapsPage">Mapa</a></li>
+        <li class="hamburger-menu-li"><a href="/faq">FAQ</a></li>
+        <li class="hamburger-menu-li"><a href="https://www.facebook.com/JK.KitaK/">Kontakt</a></li>
+      </ul>
+
+      <a class="my-face" href="https://www.facebook.com/JK.KitaK/"><i class="far fa-grin-beam"></i></a>
+    </div>
+  </header>
+
+  <div id="map"></div>
+
+
+  <button type="button" class="my-location-btn">
+    <span class="my-location-text">Sprawdź lokalizację</span><span class="material-icons-outlined my-location-icon">
+      my_location
+    </span></button>
+  <div class="distance-box">
+    <p class="distance-display">Odległość: ...</p>
+    <p class="time-display">Czas: ...</p>
+    <div class="travel-mode-box">
+      <span class="material-icons-outlined drive-mode car-mode">
+        directions_car
+      </span>
+      <span class="material-icons-outlined drive-mode bike-mode">
+        directions_bike
+      </span>
+      <span class="material-icons-outlined drive-mode walk-mode">
+        directions_walk
+      </span>
+    </div>
+  </div>
+
+  <script src="./mapsPage.js"></script>
+
+  <script async src="https://maps.googleapis.com/maps/api/js?key=MYKEY&libraries=places&callback=initMap">
+  </script>
+</body>
+
+</html>
