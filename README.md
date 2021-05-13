@@ -6,7 +6,7 @@ Maps page mainly uses Google Maps API. There are implemented such APIs as Route,
 
 The website is adjusted to various desktop resolutions (Desktop, Tablet, Phone).
 
-Desktop view: 
+Desktop view:
 
 <img src="https://github.com/JacobFeat/GdzieJedziemy/blob/master/Screenshots/GdzieJedziemy%20-%20Desktop.png" height="273" width="400"> <img src="https://github.com/JacobFeat/GdzieJedziemy/blob/master/Screenshots/GdzieJedziemy2%20-%20Desktop.png" height="273" width="400">
 <img src="https://github.com/JacobFeat/GdzieJedziemy/blob/master/Screenshots/GdzieJedziemy3%20-%20Desktop.png" height="273" width="400">
@@ -15,3 +15,6 @@ Phone view:
 
 <img src="https://github.com/JacobFeat/GdzieJedziemy/blob/master/Screenshots/GdzieJedziemy%20-%20Phone.png" height="400" width="178"> <img src="https://github.com/JacobFeat/GdzieJedziemy/blob/master/Screenshots/GdzieJedziemy2%20-%20Phone.png" height="400" width="178">
 <img src="https://github.com/JacobFeat/GdzieJedziemy/blob/master/Screenshots/GdzieJedziemy3%20-%20Phone.png" height="400" width="178">
+
+Video presentation:
+https://www.youtube.com/watch?v=Ml1x7oavUwc
