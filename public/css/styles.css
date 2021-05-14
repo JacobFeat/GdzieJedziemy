@@ -1,3 +1,10 @@
+html{
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -19,7 +26,7 @@ body {
 }
 
 .main-container {
-  width: 100vw;
+  width: 100%;
   /* max-width: 2000px; */
   height: 100vh;
   display: flex;
@@ -334,6 +341,10 @@ input::placeholder {
     background-repeat: no-repeat;
   }
 
+  .content{
+
+  }
+
   .bus-img {
     right: -10vw;
     margin-top: 90px;
@@ -634,7 +645,19 @@ input::placeholder {
   }
 }
 
-@media screen and (max-width: 530px) and (max-height: 890px){
+@media (max-width:1110px) and (orientation:portrait){
+
+  .logo{
+    font-size: 70px;
+  }
+
+  .content{
+    font-size: 90px;
+    width: 660px;
+  }
+}
+
+/* @media screen and (max-width: 530px) and (max-height: 890px){
   .content{
     padding-top: 50px;
   }
@@ -670,4 +693,4 @@ input::placeholder {
   .bus-img{
     margin-top: 80px;
   }
-}
+} */

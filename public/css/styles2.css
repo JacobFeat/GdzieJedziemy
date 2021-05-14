@@ -1,0 +1,251 @@
+html{
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+body{
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-image: url('../images/bg-listPage-6p.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  font-family: 'Lora', serif;
+
+}
+
+:root {
+  --main-color: #08BDAA;
+  --dark-main-color: #686868;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.main-container{
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 50px;
+  background-image: url('../images/bg-small-new2.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-position: 200% !important; */
+}
+
+nav{
+  font-size: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px 60px 0 60px;
+}
+
+.logo{
+  color: var(--main-color);
+  font-size: 1em;
+  font-weight: 800;
+  margin: 0;
+  /* padding: 060px 0 0 40px; */
+  display: flex;
+  align-items: center;
+}
+
+.logo-circle {
+  min-width: 1.4em;
+  min-height: 1.4em;
+  border: 0.18em solid var(--main-color);
+  border-radius: 100%;
+  display: block;
+  box-sizing: content-box;
+  margin: 0 0.28em;
+}
+
+.hamburger {
+  /* border: 1px solid black; */
+  width: 90px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.hamburger span {
+  width: 100%;
+  height: 10%;
+  background: var(--main-color);
+  cursor: pointer;
+  transition: transform 0.5s, opacity 0.5s, background 0.5s;
+  transform-origin: 0 100% !important;
+  z-index: 5;
+}
+
+.span-active-first {
+  background: #fff !important;
+  transform: rotate(45deg) translate(-2px, -8px);
+  transition: transform 0.5s;
+  transform-origin: left;
+}
+
+.span-active-second {
+  opacity: 0;
+  transition: 0.1s;
+}
+
+.span-active-third {
+  background: #fff !important;
+  transform: rotate(-45deg) translate(2px, 8px);
+  transition: transform 0.5s;
+  transform-origin: left;
+}
+
+.content-container{
+  font-size: 90px;
+  font-family: 'Poppins', sans-serif;
+  color: var(--dark-main-color);
+  padding-left: 60px;
+  width: 100%;
+  position: relative;
+  padding: 10vh 0 0 60px;
+}
+
+.content{
+  font-size: 1em;
+  font-weight: 800;
+  max-width: 780px;
+  /* padding: 120px 0 0 0; */
+}
+
+.content span{
+  color: var(--main-color);
+}
+
+.search-box {
+  margin-top: 200px;
+  font-size: 0.6em;
+  font-weight: 600;
+  position: relative;
+  z-index: 2;
+}
+
+.search {
+  box-sizing: content-box;
+  display: flex;
+  width: 600px;
+  height: 80px;
+  border: 3px solid var(--main-color);
+  background: #F3F3F3;
+  border-radius: 100px;
+  padding: 5px 25px;
+  margin-top: 10px;
+  outline: none;
+  position: relative;
+  left: -15px;
+  font-family: 'Lora', serif;
+  font-weight: 800;
+  color: #636363;
+  font-size: 0.7em;
+}
+
+.submit-button {
+  position: absolute;
+  top: 104px;
+  left: 550px;
+  border-radius: 100%;
+  width: 70px;
+  height: 70px;
+  border: none;
+  background: white;
+  outline: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.submit-button-arrow {
+  width: 2px;
+  border: solid var(--main-color);
+  border-width: 0 4px 4px 0;
+  padding: 9px;
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 128px;
+  left: 570px;
+  z-index: 1;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.submit-button-active {
+  background: var(--main-color);
+  transition: 0.5s;
+}
+
+.submit-button-arrow-active {
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transition: 0.5s;
+}
+
+input::placeholder {
+  font-family: 'Lora', serif;
+  font-weight: 800;
+  color: #adadad;
+}
+
+.list-of-suggestions {
+  box-sizing: content-box;
+  list-style: none;
+  width: 400px;
+  padding: 0;
+  margin: 0;
+}
+
+.list-of-suggestions li {
+  background: #F3F3F3;
+  width: 90%;
+  height: 40px;
+  border: 1px solid var(--main-color);
+  margin: 0 auto 5px;
+  padding: 10px;
+  display: none;
+  cursor: pointer;
+  align-items: center;
+  font-size: 18px;
+}
+
+.list-of-suggestions li:nth-child(-n+3) {
+  display: flex;
+}
+
+.change-city-color {
+  background: var(--main-color);
+  color: white;
+}
+
+.bus-img{
+  position: absolute;
+  bottom: 0;
+  right: -200px;
+  transform: scale(0.9);
+}
+
+.icons{
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  font-size: 1em;
+}
+
+.icons a{
+  color: #fff;
+  margin: 0 0.4em;
+}

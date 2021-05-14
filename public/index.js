@@ -12,6 +12,10 @@ window.addEventListener('load', () => {
   window.localStorage.removeItem('originPlace');
 });
 
+window.addEventListener('resize', () =>{
+  console.log("Height: " + window.innerHeight);
+  console.log("Width: " + window.innerWidth);
+});
 
 const myPlace = {
   lat: 49.092

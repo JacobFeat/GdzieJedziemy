@@ -23,9 +23,12 @@ app.get("/mapsPage", function(req, res){
 app.get("/faq", function(req, res){
   res.sendFile(__dirname + "/faq.html");
 });
+app.get("/index2", function(req, res){
+  res.sendFile(__dirname + "/index2.html");
+});
 
 
 
-app.listen(process.env.PORT, function(){
+app.listen(process.env.PORT || 3000, function(){
   console.log(`Server started on port `);
 });
