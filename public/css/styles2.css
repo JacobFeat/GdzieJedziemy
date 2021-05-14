@@ -309,7 +309,7 @@ input::placeholder {
 .list-of-suggestions {
   box-sizing: content-box;
   list-style: none;
-  width: 400px;
+  width: 600px;
   padding: 0;
   margin: 0;
 }
@@ -320,11 +320,11 @@ input::placeholder {
   height: 40px;
   border: 1px solid var(--main-color);
   margin: 0 auto 5px;
-  padding: 10px;
+  padding: 40px 20px;
   display: none;
   cursor: pointer;
   align-items: center;
-  font-size: 18px;
+  font-size: 0.7em;
 }
 
 .list-of-suggestions li:nth-child(-n+3) {
@@ -338,7 +338,7 @@ input::placeholder {
 
 .bus-img{
   position: absolute;
-  bottom: 0;
+  top: 500px;
   right: -200px;
   transform: scale(0.9);
 }
