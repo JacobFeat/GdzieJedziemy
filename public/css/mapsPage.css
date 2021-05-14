@@ -720,6 +720,7 @@ body {
     top: 87px;
     left: unset;
     right: 30px;
+    max-width: 44px;
     z-index: 0;
     background: var(--main-color);
     background: linear-gradient(to right, var(--main-color) 50%, #fff 50%);
