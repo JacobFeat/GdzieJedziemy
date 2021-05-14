@@ -1,16 +1,16 @@
 html{
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 body{
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
   background-image: url('../images/bg-listPage-6p.svg');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   font-family: 'Lora', serif;
 
 }
@@ -37,7 +37,6 @@ body{
   background-image: url('../images/bg-small-new2.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  /* background-position: 200% !important; */
 }
 
 nav{
@@ -89,10 +88,112 @@ nav{
   transform-origin: 0 100% !important;
   z-index: 5;
 }
+.hamburger-bg {
+  background: linear-gradient(197.88deg, #08BDAA 20.42%, #16D9C4 99.54%);
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  position: fixed;
+  transition: 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  clip-path: circle(0px at 89% 9%);
+  z-index: 3;
+  font-size: 64px
+}
 
+.hamburger-bg-active {
+  clip-path: circle(150vh at 89% 9%);
+  transition: 0.8s ease;
+}
+
+.hamburger-bg .logo {
+  color: white;
+  z-index: 6;
+  margin: 210px 0 0 80px;
+  display: flex;
+}
+
+.hamburger-bg .logo-circle {
+  border: 0.18em solid #fff;
+}
+
+.hamburger-bg ul {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  text-align: center;
+  display: block;
+}
+
+.hamburger-bg li {
+  padding-bottom: 30px;
+  display: block;
+}
+
+.hamburger-menu-li a {
+  text-decoration: none;
+  color: white;
+  font-size: 0.8em;
+  font-family: 'Poppins', sans-serif;
+  display: block;
+  position: relative;
+}
+
+.hamburger-menu-li {
+  position: relative;
+}
+
+.hamburger-menu-li::before {
+  content: '';
+  display: inline-block;
+  width: 0px;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  bottom: 25px;
+  left: -5px;
+  transition: 0.3s ease-out;
+}
+
+.hamburger-menu-li:hover::before {
+  width: 157px;
+  transition: 0.3s ease-out;
+}
+
+.first-li::before {
+  content: '';
+  display: inline-block;
+  width: 50px;
+  height: 6px;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: -120px;
+}
+
+.first-li::after {
+  content: '';
+  display: inline-block;
+  width: 50px;
+  height: 6px;
+  background: white;
+  position: absolute;
+  top: 50%;
+  right: -120px;
+}
+
+  .my-face {
+  font-size: 0.8em;
+  color: #fff;
+  margin: 210px 0 44px;
+  display: inline-block;
+}
 .span-active-first {
   background: #fff !important;
-  transform: rotate(45deg) translate(-2px, -8px);
+  transform: rotate(45deg) translate(-2px, -17px);
   transition: transform 0.5s;
   transform-origin: left;
 }
@@ -104,7 +205,7 @@ nav{
 
 .span-active-third {
   background: #fff !important;
-  transform: rotate(-45deg) translate(2px, 8px);
+  transform: rotate(-45deg) translate(2px, 17px);
   transition: transform 0.5s;
   transform-origin: left;
 }
