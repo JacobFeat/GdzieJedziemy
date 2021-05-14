@@ -130,7 +130,7 @@ body {
   background: linear-gradient(to right, var(--main-color), var(--main-color) 50%, var(--dark-main-color) 50%);
   background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-text-fill-color: transparent; */
   background-size: 200% 100%;
   background-position: 100%;
   transition: background-position 275ms ease;
@@ -773,8 +773,8 @@ body {
   }
 
   .logo-circle {
-    width: 34px;
-    height: 34px;
+    max-width: 34px;
+    max-height: 34px;
     border: 4px solid var(--dark-main-color);
   }
 

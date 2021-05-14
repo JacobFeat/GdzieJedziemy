@@ -114,6 +114,7 @@ document.addEventListener('click', (e) => {
 
     //scroll to picked card
     function scrollToCertainPoint(index) {
+      console.log(index);
       scrollTo(0, (114 + index * 114));
     }
     setTimeout(scrollToCertainPoint.bind(null, currentIndex), 150);
