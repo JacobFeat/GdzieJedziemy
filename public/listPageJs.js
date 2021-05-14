@@ -114,10 +114,10 @@ document.addEventListener('click', (e) => {
 
     //scroll to picked card
     function scrollToCertainPoint(index) {
-      console.log(index);
-      scrollTo(0, (114 + index * 114));
+      scrollTo(0, (124 + index * 114));
     }
     setTimeout(scrollToCertainPoint.bind(null, currentIndex), 150);
+    console.log(currentIndex);
     e.target.closest('.front-card').style.marginBottom = "364px";
     e.target.closest('.card-container').classList.add('li-active');
 
