@@ -11,9 +11,7 @@ app.use(express.static("public"));//display css and js
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/", function(req, res){
-  // console.log(req);
   res.sendFile(__dirname + "/index.html");
-  // res.sendFile(__dirname + "/listPage.html")
 });
 
 app.get("/listPage", function(req, res){
@@ -28,6 +26,6 @@ app.get("/faq", function(req, res){
 
 
 
-app.listen(process.env.PORT || 3000, function(){
-  console.log(`Server started on port ${port}`);
+app.listen(process.env.PORT, function(){
+  console.log(`Server started on port `);
 });
