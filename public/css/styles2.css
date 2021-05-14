@@ -26,6 +26,7 @@ body{
 }
 
 .main-container{
+
   width: 100%;
   min-height: 100vh;
 min-height: -webkit-fill-available;
@@ -47,6 +48,8 @@ nav{
   justify-content: space-between;
   align-items: center;
   padding: 0px 60px 0 60px;
+  z-index: 2;
+
 }
 
 .logo{
@@ -92,6 +95,7 @@ nav{
 .hamburger-bg {
   overflow: hidden;
   background: linear-gradient(197.88deg, #08BDAA 20.42%, #16D9C4 99.54%);
+
   width: 100%;
   height: 100vh;
   margin: 0;
@@ -102,13 +106,17 @@ nav{
   justify-content: space-between;
   align-items: center;
   clip-path: circle(0px at 89% 9%);
-  z-index: 3;
-  font-size: 64px
+  -webkit-clip-path: circle(0px at 89% 9%);
+  font-size: 64px;
+  z-index: 1;
 }
 
 .hamburger-bg-active {
   clip-path: circle(150vh at 89% 9%);
+  -webkit-clip-path: circle(150vh at 89% 9%);
   transition: 0.8s ease;
+  z-index: 3;
+
 }
 
 .hamburger-bg .logo {
@@ -221,6 +229,8 @@ nav{
   position: relative;
   padding: 4vh 0 0 60px;
   overflow: hidden;
+  z-index: 2;
+
 }
 
 .content{
@@ -346,9 +356,11 @@ input::placeholder {
 .icons{
   position: absolute;
   left: 50%;
-  bottom: 50px;
+  bottom: 80px;
   transform: translateX(-50%);
   font-size: 1em;
+  z-index: 2;
+
 }
 
 .icons a{
