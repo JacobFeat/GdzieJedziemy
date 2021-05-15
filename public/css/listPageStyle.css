@@ -493,6 +493,8 @@ body {
 
 /*-------- MEDIA QUERIES --------- */
 
+
+
 @media (orientation: portrait) {
   .container{
     min-height: 100vh;
@@ -570,12 +572,20 @@ body {
     transform: translate(65%, -5%) scale(0.8);
   }
 
+  .search{
+    border: none;
+    box-shadow: 0 0 0 1px #fff;
+  }
+
   .search-active{
     width: 270px;
+    border: none;
+    box-shadow: 0 0 0 1px #B8B8B8;
   }
 
   .close-search{
-    left: 200px;
+    padding: 16px;
+    left: 186px;
   }
 
   .lookup-icon-active{
@@ -587,4 +597,18 @@ body {
 }
 
 
+}
+
+@media (min-resolution: 2dppx) {
+  .search{
+    border-top: 0.5px solid #fff;
+  }
+
+  .search-hover{
+    border-top: 0.5px solid #B8B8B8;
+  }
+
+  .search-active{
+    border-top: 0.5px solid #B8B8B8;
+  }
 }

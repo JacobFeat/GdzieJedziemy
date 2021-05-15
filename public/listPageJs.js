@@ -113,14 +113,13 @@ document.addEventListener('click', (e) => {
   //expand card and add margin bottom to expanded card
   if (e.target.closest('.front-card')) {
     //scroll to picked card
+
     // function scrollToCertainPoint(index) {
     //   scrollTo(0, (124 + index * 114), );
     // }
     // setTimeout(scrollToCertainPoint.bind(null, currentIndex), 150);
 
-
-
-SmoothVerticalScrolling(e.target, 200, "top");
+    SmoothVerticalScrolling(e.target, 200, "top");
 
 
     console.log(currentIndex);
@@ -147,7 +146,6 @@ SmoothVerticalScrolling(e.target, 200, "top");
     document.querySelectorAll('.card-container').forEach(li => li.classList.remove('li-active'));
     document.querySelectorAll('.front-card').forEach(li => li.style.marginBottom = "20px");
     e.target.parentElement.parentElement.parentElement.querySelector('.front-card-dot').style.display = "inline-block"; //display green dot
-    // scrollTo(0, 0);
   }
 
   if(e.target.classList.contains('how-to-reach-button')){
