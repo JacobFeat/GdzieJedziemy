@@ -64,9 +64,9 @@ window.addEventListener('load', e => {
     let dotForLi = document.createElement('span');
     dotForLi.setAttribute('class', 'dot-for-li');
     document.querySelectorAll('.name')[0].appendChild(dotForLi);
-  }, 100);
-  // sendCordi(myPlaceArray, cities);
-  setTimeout(sendCordi.bind(null, myPlaceArray, cities), 150);
+  }, 300);
+
+  setTimeout(sendCordi.bind(null, myPlaceArray, cities), 300);
   // suggestionsCity[0].style.display = "inline-block";
   // suggestionsCity[0].innerHTML = "<span class='name'>" + searchInput.value + "<span class='dot-for-li'></span></span>";
 });
