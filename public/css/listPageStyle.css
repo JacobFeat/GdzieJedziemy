@@ -17,8 +17,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
+  /* scroll-behavior: smooth; */
+  /* -webkit-overflow-scrolling: touch; */
 }
 
 body {
@@ -44,11 +44,11 @@ body {
   z-index: 0;
   background-image: url('../images/bg-listPage-6p.svg');
   background-repeat: no-repeat;
-  height: 100$;
+  height: 100vh;
   width: 100vw;
   padding: 0;
   margin: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   position: absolute;
 }
 
@@ -135,7 +135,7 @@ body {
   border: 1px solid #B8B8B8;
   transition: 0.3s ease-in-out;
   cursor: auto;
-  padding: 5px 50px 5px 15px;
+  padding: 5px 80px 5px 15px;
 }
 
 .close-search{
@@ -144,7 +144,7 @@ body {
   top: 50%;
   transform: translateY(-50%);
   left: 300px;
-  font-size: 16px !important;
+  font-size: 20px !important;
   z-index: 3;
   opacity: 0.0;
   cursor: pointer;
@@ -338,6 +338,7 @@ body {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   display: flex;
+  z-index: 2;
 }
 
 .card-img{
@@ -357,8 +358,6 @@ body {
   color: var(--dark-main-color);
   position: relative;
   background: linear-gradient(90deg, rgba(246, 246, 246, 1) 0%, rgba(255, 255, 255, 0.8) 100%);
-
-  /* text-align: center; */
 }
 
 .content-start{
@@ -476,11 +475,11 @@ body {
   top: 0;
   right: 0;
   transform: translate(25%, -50%);
-  z-index: 0;
+  z-index: -1;
 }
 
 .left-circle {
-  position: fixed;
+  position: absolute;
   width: 500px;
   height: 500px;
   background: rgb(8, 189, 170);
@@ -493,6 +492,13 @@ body {
 }
 
 /*-------- MEDIA QUERIES --------- */
+
+@media (orientation: portrait) {
+  .container{
+    min-height: 100vh;
+    height: auto;
+  }
+}
 
 @media screen and (max-width: 1300px) {
 .lookup-and-map{
@@ -569,7 +575,7 @@ body {
   }
 
   .close-search{
-    left: 210px;
+    left: 200px;
   }
 
   .lookup-icon-active{
@@ -578,4 +584,7 @@ body {
   .front-card-dot{
     display: none !important;
   }
+}
+
+
 }
