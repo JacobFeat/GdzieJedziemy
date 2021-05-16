@@ -277,9 +277,14 @@ nav{
   -webkit-appearance: none;
 }
 
+.search-container{
+  position: relative;
+}
+
 .submit-button {
   position: absolute;
-  top: 38px;
+  top: 50%;
+  transform: translateY(-50%);
   left: 245px;
   border-radius: 100%;
   width: 34px;
@@ -296,10 +301,10 @@ nav{
   border: solid var(--main-color);
   border-width: 0 2px 2px 0;
   padding: 6px;
-  transform: rotate(-45deg);
   position: absolute;
-  top: 48px;
-  left: 252px;
+  top: 30%;
+  left: 50%;
+  transform: rotate(-45deg) translate(-50%, -50%);
   z-index: 1;
   cursor: pointer;
   pointer-events: none;
