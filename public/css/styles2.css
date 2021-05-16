@@ -274,6 +274,7 @@ nav{
   font-weight: 800;
   color: #636363;
   font-size: 0.8em;
+  -webkit-appearance: none;
 }
 
 .submit-button {

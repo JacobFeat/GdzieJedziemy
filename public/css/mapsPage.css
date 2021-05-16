@@ -44,7 +44,8 @@ body {
 .origin-input {
   position: absolute;
   left: 14px;
-  top: 5px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 75%;
   border: none;
   padding-bottom: 5px;
@@ -801,7 +802,7 @@ body {
   }
 }
 
-@media screen and (max-height: 750px) {
+@media screen and (max-width: 750px) {
   .origin-input-container{
     width: 270px;
   }
@@ -811,7 +812,8 @@ body {
   }
 
   .lookup-icon{
-    left: 230px;
+    left: unset;
+    right: 0;
   }
 
   .gm-style-iw-d{
