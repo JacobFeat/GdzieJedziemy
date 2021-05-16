@@ -66,7 +66,7 @@ window.addEventListener('load', e => {
     document.querySelectorAll('.name')[0].appendChild(dotForLi);
   }, 300);
 
-  setTimeout(sendCordi.bind(null, myPlaceArray, cities), 300);
+  setTimeout(sendCordi, 300, myPlaceArray, cities);
   // suggestionsCity[0].style.display = "inline-block";
   // suggestionsCity[0].innerHTML = "<span class='name'>" + searchInput.value + "<span class='dot-for-li'></span></span>";
 });
