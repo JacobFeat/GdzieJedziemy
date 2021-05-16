@@ -68,8 +68,9 @@ body {
 .close-search {
   position: absolute;
   color: #B8B8B8;
-  top: 55%;
-  left: 245px;
+  top: 50%;
+  left: 235px;
+  padding: 5px;
   transform: translateY(-50%);
   font-size: 16px !important;
   z-index: 3;
@@ -102,9 +103,10 @@ body {
 
 .lookup-icon {
   position: absolute;
-  top: 55%;
+  top: 50%;
   transform: translateY(-50%);
-  left: 260px;
+  left: 265px;
+  padding: 10px 10px 10px 0;
   color: var(--dark-main-color);
   cursor: pointer;
   background: none;
@@ -887,7 +889,8 @@ body {
   }
 
   .close-search{
-    left: 205px;
+    left: 180px;
+    padding: 15px;
   }
 
   .lookup-icon{
