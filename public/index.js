@@ -4,8 +4,9 @@ const subBtn = document.querySelector(".submit-button");
 const subBtnArrow = document.querySelector(".submit-button-arrow");
 const logo = document.querySelector(".logo");
 let suggestionsCity = suggestionsList.children;
-// const leftLight = document.querySelector(".left-light");
-// const rightLight = document.querySelector(".right-light");
+const alertBox = document.querySelector('.alert-box');
+const alertBoxClose = document.querySelector('.alert-box-close');
+const layout = document.querySelector('.layout');
 
 window.addEventListener('load', () => {
   window.localStorage.removeItem('currentDestination');
@@ -92,6 +93,18 @@ document.addEventListener('click', (e)=>{
       // window.localStorage.setItem('originPlace', name);
     }
     sendCityName(searchInput.value);
+    const ifYourCityIsAvailable = cities.filter(place => place.city.toUpperCase() == searchInput.value.toUpperCase());
+    console.log(ifYourCityIsAvailable.length);
+    if(ifYourCityIsAvailable.length == 0){
+      e.preventDefault();
+      alertBox.classList.add('alert-box-active');
+      layout.classList.add('layout-active');
+    }
+  }
+
+  if(e.target.classList.contains('alert-box-close')){
+    alertBox.classList.remove('alert-box-active');
+    layout.classList.remove('layout-active');
   }
 
   if(e.target.closest('.hamburger')){

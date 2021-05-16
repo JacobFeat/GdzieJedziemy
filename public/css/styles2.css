@@ -1,11 +1,11 @@
-html{
+html {
   padding: 0;
   margin: 0;
-    height: -webkit-fill-available;
+  height: -webkit-fill-available;
   /* overflow: hidden; */
 }
 
-body{
+body {
   padding: 0;
   margin: 0;
   /* overflow: hidden; */
@@ -13,7 +13,6 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Lora', serif;
-
 }
 
 :root {
@@ -25,11 +24,10 @@ body{
   box-sizing: border-box;
 }
 
-.main-container{
-
+.main-container {
   width: 100%;
   min-height: 100vh;
-min-height: -webkit-fill-available;
+  min-height: -webkit-fill-available;
   position: absolute;
   left: 0;
   right: 0;
@@ -41,7 +39,7 @@ min-height: -webkit-fill-available;
   background-size: cover;
 }
 
-nav{
+nav {
   font-size: 20px;
   /* height: 260px; */
   display: flex;
@@ -49,10 +47,9 @@ nav{
   align-items: center;
   padding: 40px 30px 0;
   z-index: 2;
-
 }
 
-.logo{
+.logo {
   color: var(--main-color);
   font-size: 1.2em;
   font-weight: 800;
@@ -133,7 +130,7 @@ nav{
 .hamburger-bg ul {
   list-style: none;
   text-decoration: none;
-  padding: 70px 0 ;
+  padding: 70px 0;
   text-align: center;
   display: block;
 }
@@ -195,7 +192,7 @@ nav{
   right: -80px;
 }
 
-  .my-face {
+.my-face {
   font-size: 1em;
   color: #fff;
   margin: 0 0 44px;
@@ -221,7 +218,7 @@ nav{
   transform-origin: left;
 }
 
-.content-container{
+.content-container {
   font-size: 35px;
   font-family: 'Poppins', sans-serif;
   color: var(--dark-main-color);
@@ -230,17 +227,16 @@ nav{
   padding: 30px 0 0 30px;
   overflow: hidden;
   z-index: 2;
-
 }
 
-.content{
+.content {
   font-size: 1em;
   font-weight: 800;
   max-width: 300px;
   /* padding: 120px 0 0 0; */
 }
 
-.content span{
+.content span {
   color: var(--main-color);
 }
 
@@ -253,7 +249,7 @@ nav{
   z-index: 2;
 }
 
-.search-box label{
+.search-box label {
   /* padding-left: 15px; */
 }
 
@@ -277,7 +273,7 @@ nav{
   -webkit-appearance: none;
 }
 
-.search-container{
+.search-container {
   position: relative;
 }
 
@@ -357,14 +353,14 @@ input::placeholder {
   color: white;
 }
 
-.bus-img{
+.bus-img {
   position: absolute;
   top: 180px;
   right: -100px;
   transform: scale(0.6);
 }
 
-.icons{
+.icons {
   position: absolute;
   left: 50%;
   bottom: 20px;
@@ -373,58 +369,57 @@ input::placeholder {
   z-index: 2;
 }
 
-.icons a{
+.icons a {
   color: #fff;
   margin: 0 0.4em;
 }
 
 @media (min-width:600px) {
-
-  .main-container{
+  .main-container {
     background-image: url('../images/bg-medium-fixed.svg');
     font-size: 20px;
   }
 
-  nav{
+  nav {
     font-size: 30px;
     padding: 60px 60px 0;
     height: auto;
   }
 
-  .hamburger{
+  .hamburger {
     width: 40px;
     height: 30px;
   }
 
-  .content-container{
+  .content-container {
     font-size: 50px;
     padding: 100px 0 0 60px;
     /* overflow:  visible; */
   }
 
-  .content{
+  .content {
     max-width: 650px;
   }
 
-  .search-box{
+  .search-box {
     font-size: 0.35em;
     font-weight: 600;
     margin-top: 20px;
     margin-left: 15px;
   }
 
-  .search{
+  .search {
     margin-top: 6px;
     width: 400px;
     height: 36px;
     font-size: 1em;
   }
 
-  .submit-button{
+  .submit-button {
     width: 38px;
     height: 38px;
     top: 34px;
-    left: 392px ;
+    left: 392px;
   }
 
   .submit-button-arrow {
@@ -444,26 +439,25 @@ input::placeholder {
     transition: 0.5s;
   }
 
-  .list-of-suggestions{
+  .list-of-suggestions {
     width: 400px;
   }
 
-  .list-of-suggestions li{
+  .list-of-suggestions li {
     padding: 5px 20px;
     font-size: 1em;
   }
 
-  .bus-img{
+  .bus-img {
     top: 140px;
     right: -50px;
     max-width: 450px;
     overflow: hidden;
   }
 
-  .icons{
+  .icons {
     bottom: 40px;
   }
-
 
   .span-active-first {
     transform: rotate(45deg) translate(-2px, -8px);
@@ -482,7 +476,6 @@ input::placeholder {
   .hamburger-bg-active {
     clip-path: circle(1500px at 92% 9%);
     -webkit-clip-path: circle(1500px at 92% 9%);
-
   }
 
   .hamburger-bg .logo {
@@ -492,7 +485,6 @@ input::placeholder {
   .hamburger-bg .logo-circle {
     border: 5px solid #fff;
   }
-
 
   .hamburger-menu-li a {
     font-size: 0.66em;
@@ -517,15 +509,15 @@ input::placeholder {
   .first-li::after {
     width: 50px;
     height: 2px;
-}
+  }
 
-    .my-face {
+  .my-face {
     font-size: 1em;
     color: #fff;
     margin: 50px 0 44px;
   }
 
-  .icons{
+  .icons {
     font-size: 24px;
   }
 
@@ -535,32 +527,110 @@ input::placeholder {
   }
 }
 
-@media (orientation: portrait) and (min-height: 730px){
-  .content-container{
+.alert-box {
+  width: 280px;
+  height: 120px;
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 99;
+  padding: 0 30px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--dark-main-color);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+.alert-box-active{
+  transform: translate(-50%, -50%) scale(1);
+  transition: 0.3s;
+  pointer-events: all;
+}
+
+.alert-box-important {
+  color: var(--main-color);
+  display: contents;
+}
+
+.alert-box-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.alert-box-close span{
+  display: inline-block;
+  width: 60%;
+  height: 2px;
+  background: var(--dark-main-color);
+  transform: translate(-50%, -50%) rotate(45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.alert-box-close span:last-child{
+  transform: translate(-50%, -50%) rotate(-45deg);
+
+}
+
+.layout {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(104, 104, 104, 0.7);
+  z-index: 98;
+  pointer-events: none;
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.layout-active{
+  opacity: 1;
+  transition: 0.3s;
+  pointer-events: all;
+}
+
+@media (orientation: portrait) and (min-height: 730px) {
+  .content-container {
     padding-top: 50px;
   }
+
   .list-of-suggestions li:nth-child(-n+3) {
     display: flex;
   }
 }
 
-
 @media (orientation: portrait) and (min-height: 830px) {
-  .main-container{
+  .main-container {
     background-image: url('../images/bg-small-3.svg');
-
   }
-  .content-container{
+
+  .content-container {
     padding-top: 70px;
   }
-  .content{
+
+  .content {
     /* font-size: 1.0em; */
   }
-  .search-box{
+
+  .search-box {
     margin-top: 150px;
   }
 
-  .bus-img{
+  .bus-img {
     top: 250px;
   }
 }
