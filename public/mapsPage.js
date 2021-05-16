@@ -28,7 +28,10 @@ const carModeBtn = document.querySelector('.car-mode');
 const bikeModeBtn = document.querySelector('.bike-mode');
 const walkModeBtn = document.querySelector('.walk-mode');
 const distanceField = document.querySelector('.distance-display');
-
+const alertBox = document.querySelector('.alert-box');
+const alertBoxText = document.querySelector('.alert-box p');
+const alertBoxClose = document.querySelector('.alert-box-close');
+const layout = document.querySelector('.layout');
 
 //add delete's input button when input is filling
 originInput.addEventListener('keyup', () => {
@@ -54,8 +57,7 @@ function initMap() {
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [
-      {
+    styles: [{
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"
@@ -260,9 +262,11 @@ function initMap() {
   //declare a object that we use to change coords to name of place
   const geocoder = new google.maps.Geocoder;
 
-  setTimeout(function(){
+  setTimeout(function() {
     myPlaceArray.forEach(place => {
-      setTimeout(function(){addMarker(place);},counter*150);
+      setTimeout(function() {
+        addMarker(place);
+      }, counter * 150);
       counter++;
     });
   }, 300);
@@ -312,16 +316,17 @@ function initMap() {
             const destinationCoords = `{"lat": ${city.coords.lat}, "lng": ${city.coords.lng}}`;
             //json parse them to the object
             const jsonDestinationCoords = JSON.parse(destinationCoords);
-            if(window.localStorage.getItem('originPlace')){
+            if (window.localStorage.getItem('originPlace')) {
               //get travel mode from localStorage and put to the calcRoute
               const travelMode = window.localStorage.getItem('currentTravelMode');
               const originPlace = window.localStorage.getItem('originPlace');
 
               calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
               infoWindow.close();
-            }
-            else{
-              alert('Wybierz miejsce początkowe...')
+            } else {
+              alertBox.classList.add('alert-box-active');
+              layout.classList.add('layout-active');
+              alertBoxText.innerHTML = 'Wybierz miejsce <span class="alert-box-important">początkowe</span';
             }
 
             //save coords to localStorage
@@ -332,13 +337,13 @@ function initMap() {
     }
   }
 
-  function setMapOnAll(map){
-    for(let i=0; i<markers.length; i++){
+  function setMapOnAll(map) {
+    for (let i = 0; i < markers.length; i++) {
       markers[i].setMap(map);
     }
   }
 
-  function clearMarkers(){
+  function clearMarkers() {
     setMapOnAll(null);
   }
 
@@ -388,6 +393,7 @@ function initMap() {
             infoWindow.open(map);
             //style infoWindow
             setTimeout(styleInfoWindow, 0);
+
             function styleInfoWindow() {
               const closeBtn = document.querySelector('.my-position-box').parentElement.parentElement.parentElement.querySelector('.gm-ui-hover-effect');
               const myPositionBtn = document.querySelector('.my-position-btn');
@@ -401,18 +407,20 @@ function initMap() {
                 const travelMode = window.localStorage.getItem('currentTravelMode');
                 infoWindow.close(map);
                 //if destination is not chosen, first choose
-                if(!window.localStorage.getItem('currentDestination')){
-                  alert('Wybierz miejsce docelowe z mapy...');
+                if (!window.localStorage.getItem('currentDestination')) {
+                  alertBox.classList.add('alert-box-active');
+                  layout.classList.add('layout-active');
+                  alertBoxText.innerHTML = 'Wybierz miejsce <span class="alert-box-important">docelowe</span> z mapy...';
                   map.setZoom(9);
                 }
                 //if destination is chosen, show route from your current position
-                else{
+                else {
                   const currentDestination = window.localStorage.getItem('currentDestination');
                   const jsonDestinationCoords = JSON.parse(currentDestination);
                   //add setTimeout because without it bugs might occur
-                  setTimeout(function(){
+                  setTimeout(function() {
                     calcRoute(directionsService, directionsRenderer, originInput.value, jsonDestinationCoords, travelMode);
-                  },300);
+                  }, 300);
                 }
               })
             }
@@ -458,17 +466,21 @@ function initMap() {
   //set input value as a origin place
   originPlaceBtn.addEventListener('click', () => {
     window.localStorage.setItem('originPlace', originInput.value);
-    if(!window.localStorage.getItem('originPlace') || originInput.value == "")
-      alert('Wybierz miejsce początkowe...');
-    else {
-      if(!window.localStorage.getItem('currentDestination'))
-        alert('Wybierz miejsce docelowe z mapy...');
-      else
+    if (!window.localStorage.getItem('originPlace') || originInput.value == "") {
+      alertBox.classList.add('alert-box-active');
+      layout.classList.add('layout-active');
+      alertBoxText.innerHTML = 'Wybierz miejsce <span class="alert-box-important">początkowe</span';
+    } else {
+      if (!window.localStorage.getItem('currentDestination')) {
+        alertBox.classList.add('alert-box-active');
+        layout.classList.add('layout-active');
+        alertBoxText.innerHTML = 'Wybierz miejsce <span class="alert-box-important">docelowe</span> z mapy...';
+      } else
         providePlaces();
-        //close all infoWindows
-        infoWindows.forEach(infoWindow => {
-          infoWindow.close();
-        });
+      //close all infoWindows
+      infoWindows.forEach(infoWindow => {
+        infoWindow.close();
+      });
     }
   });
 
@@ -519,12 +531,12 @@ function initMap() {
     calcRoute(directionsService, directionsRenderer, originPlace, jsonDestinationCoords, travelMode);
   }
 
-//group markers together if they are very close each other
-setTimeout(function(){
-  const markerCluster = new MarkerClusterer(map, markers, {
-    imagePath: `../images/clusters/m`
-  });
-}, 2000);
+  //group markers together if they are very close each other
+  setTimeout(function() {
+    const markerCluster = new MarkerClusterer(map, markers, {
+      imagePath: `../images/clusters/m`
+    });
+  }, 2000);
 
   //end of initMap()
 }
@@ -541,7 +553,11 @@ document.addEventListener('click', (e) => {
   };
 });
 
-
+//close alert
+alertBoxClose.addEventListener('click', () => {
+  alertBox.classList.remove('alert-box-active');
+  layout.classList.remove('layout-active');
+});
 
 //error if your browser fail with geolocation
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {

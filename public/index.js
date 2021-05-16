@@ -94,7 +94,6 @@ document.addEventListener('click', (e)=>{
     }
     sendCityName(searchInput.value);
     const ifYourCityIsAvailable = cities.filter(place => place.city.toUpperCase() == searchInput.value.toUpperCase());
-    console.log(ifYourCityIsAvailable.length);
     if(ifYourCityIsAvailable.length == 0){
       e.preventDefault();
       alertBox.classList.add('alert-box-active');

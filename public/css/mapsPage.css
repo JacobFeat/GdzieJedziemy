@@ -673,6 +673,85 @@ body {
   /* color: white; */
 }
 
+.alert-box {
+  width: 280px;
+  height: 120px;
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 99;
+  padding: 0 30px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--dark-main-color);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+.alert-box-active{
+  transform: translate(-50%, -50%) scale(1);
+  transition: 0.3s;
+  pointer-events: all;
+}
+
+.alert-box-important {
+  color: var(--main-color);
+  display: contents;
+}
+
+.alert-box-close {
+  box-sizing: border-box;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.alert-box-close span{
+  display: inline-block;
+  width: 60%;
+  height: 2px;
+  background: var(--dark-main-color);
+  transform: translate(-50%, -50%) rotate(45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.alert-box-close span:last-child{
+  transform: translate(-50%, -50%) rotate(-45deg);
+
+}
+
+.layout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(104, 104, 104, 0.7);
+  z-index: 98;
+  pointer-events: none;
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.layout-active{
+  opacity: 1;
+  transition: 0.3s;
+  pointer-events: all;
+}
+
 @media (max-width: 1100px) {
   .my-location-text {
     display: none;
@@ -804,11 +883,11 @@ body {
 
 @media screen and (max-width: 750px) {
   .origin-input-container{
-    width: 270px;
+    width: 260px;
   }
 
   .close-search{
-    left: 215px;
+    left: 205px;
   }
 
   .lookup-icon{
