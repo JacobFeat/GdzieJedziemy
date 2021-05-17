@@ -570,7 +570,7 @@ body {
 
 @media screen and (max-width: 550px) {
   .right-circle{
-    transform: translate(65%, -5%) scale(0.8);
+    transform: translate(60%, -26%) scale(0.4);
   }
 
 .lookup-icon {
