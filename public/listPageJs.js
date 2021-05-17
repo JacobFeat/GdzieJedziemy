@@ -122,7 +122,7 @@ document.addEventListener('click', (e) => {
     SmoothVerticalScrolling(e.target, 500, "top");
 
 
-    console.log(currentIndex);
+    console.log(e.target.parentElement);
     e.target.closest('.front-card').style.marginBottom = "364px";
     e.target.closest('.card-container').classList.add('li-active');
 
