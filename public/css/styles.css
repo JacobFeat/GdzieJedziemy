@@ -165,8 +165,6 @@ nav {
   transition: 0.3s ease-out;
 }
 
-
-
 .first-li::before {
   content: '';
   display: inline-block;
@@ -707,8 +705,8 @@ input::placeholder {
   }
 
   .hamburger-bg-active {
-    clip-path: circle(120vw at 92% 9%);
-    -webkit-clip-path: circle(120vw at 92% 9%);
+    clip-path: circle(150vw at 92% 9%);
+    -webkit-clip-path: circle(150vw at 92% 9%);
   }
 }
 

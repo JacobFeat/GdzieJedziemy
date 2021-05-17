@@ -282,23 +282,23 @@ body {
 .first-li::before {
   content: '';
   display: inline-block;
-  width: 80px;
+  width: 50px;
   height: 2px;
   background: white;
   position: absolute;
   top: 50%;
-  left: -120px;
+  left: -80px;
 }
 
 .first-li::after {
   content: '';
   display: inline-block;
-  width: 80px;
+  width: 50px;
   height: 2px;
   background: white;
   position: absolute;
   top: 50%;
-  right: -120px;
+  right: -80px;
 }
 
 .my-face {
@@ -847,16 +847,6 @@ body {
 
   .hamburger{
     top: 20px;
-  }
-
-  .first-li::before {
-    width: 50px;
-    left: -80px;
-  }
-
-  .first-li::after {
-    width: 50px;
-    right: -80px;
   }
 
 }

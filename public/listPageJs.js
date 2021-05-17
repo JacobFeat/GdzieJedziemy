@@ -119,7 +119,7 @@ document.addEventListener('click', (e) => {
     // }
     // setTimeout(scrollToCertainPoint.bind(null, currentIndex), 150);
 
-    SmoothVerticalScrolling(e.target, 200, "top");
+    SmoothVerticalScrolling(e.target, 500, "top");
 
 
     console.log(currentIndex);
