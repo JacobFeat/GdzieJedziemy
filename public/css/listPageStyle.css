@@ -25,7 +25,7 @@ body {
   margin: 0;
   padding: 0;
   /* height: 100%; */
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -44,11 +44,12 @@ body {
   z-index: 0;
   background-image: url('../images/bg-listPage-6p.svg');
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 100vh;
+    height: auto;
   width: 100vw;
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden !important;
   position: absolute;
 }
 
@@ -340,7 +341,7 @@ body {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   display: flex;
-  z-index: 2;
+  z-index: 5;
 }
 
 .card-img{
@@ -498,10 +499,7 @@ body {
 
 
 @media (orientation: portrait) {
-  .container{
-    min-height: 100vh;
-    height: auto;
-  }
+
 }
 
 @media screen and (max-width: 1300px) {
@@ -512,6 +510,7 @@ body {
 .list-of-spots{
   width: 90%;
 }
+
 }
 
 
@@ -603,6 +602,10 @@ body {
   }
   .front-card-dot{
     display: none !important;
+  }
+  .how-to-reach-button:hover{
+    /* color: var(--main-color); */
+    background-position: right;
   }
 }
 

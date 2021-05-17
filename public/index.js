@@ -7,16 +7,30 @@ let suggestionsCity = suggestionsList.children;
 const alertBox = document.querySelector('.alert-box');
 const alertBoxClose = document.querySelector('.alert-box-close');
 const layout = document.querySelector('.layout');
+busImg = document.querySelector('.bus-img');
 
 window.addEventListener('load', () => {
   window.localStorage.removeItem('currentDestination');
   window.localStorage.removeItem('originPlace');
+  if(window.innerWidth>850)
+  {
+    busImg.setAttribute('src', '../images/bus2.png')
+  }
 });
 
 window.addEventListener('resize', () =>{
-  console.log("Height: " + window.innerHeight);
+  // console.log("Height: " + window.innerHeight);
   console.log("Width: " + window.innerWidth);
+  if(window.innerWidth>850)
+  {
+    busImg.setAttribute('src', '../images/bus2.png')
+  }
+  if(window.innerWidth<650)
+  {
+    busImg.setAttribute('src', '../images/bus2-small.png')
+  }
 });
+
 
 const myPlace = {
   lat: 49.092

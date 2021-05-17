@@ -7,6 +7,8 @@ body {
   padding: 0;
   margin: 0;
   overflow: hidden;
+  font-family: 'Lora', serif;
+
 }
 
 #map {
@@ -113,13 +115,13 @@ body {
   border: none;
 }
 
+
 .logo-link {
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--dark-main-color);
-  /* background: #F5F5F5; */
   font-family: 'Lora', serif;
   font-size: 24px;
   font-weight: 800;
@@ -130,34 +132,20 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-  background: linear-gradient(to right, var(--main-color), var(--main-color) 50%, var(--dark-main-color) 50%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  /* -webkit-text-fill-color: transparent; */
-  background-size: 200% 100%;
-  background-position: 100%;
-  transition: background-position 275ms ease;
-}
-
-.logo-link:hover {
-  background-position: 0 100%;
+  transition: 0.3s ease;
 }
 
 .logo-circle {
   width: 40px;
   height: 40px;
-  border: 6px solid var(--dark-main-color);
+  border: 5px solid var(--dark-main-color);
   border-radius: 100%;
   display: block;
   box-sizing: content-box;
   margin: 0 10px;
   z-index: 2;
-  transition: border 275ms ease;
-}
+  transition: 0.3s ease;
 
-.logo-link:hover .logo-circle {
-  border: 6px solid var(--main-color);
-  transition: border 275ms ease;
 }
 
 .hamburger {
@@ -191,11 +179,6 @@ body {
   z-index: 8;
 }
 
-.hamburger:hover span {
-  background: var(--main-color);
-  /* background-position: left; */
-}
-
 .span-active-first {
   background: #fff !important;
   transform: rotate(45deg) translate(-2px, -10px);
@@ -206,6 +189,7 @@ body {
 
 .span-active-second {
   opacity: 0;
+  background: var(--main-color);
   transition: 0.1s;
 }
 
@@ -218,48 +202,49 @@ body {
 }
 
 .hamburger-bg {
+  overflow: hidden;
   background: linear-gradient(197.88deg, #08BDAA 20.42%, #16D9C4 99.54%);
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   margin: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
   transition: 0.5s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  clip-path: circle(0px at 98% 5%);
-  z-index: 5;
+  clip-path: circle(0px at 96% 2%);
+  -webkit-clip-path: circle(0px at 96% 2%);
+  font-size: 24px;
+  z-index: 1;
 }
 
 .hamburger-bg-active {
-  clip-path: circle(130vw at 89% 9%);
+  clip-path: circle(150vw at 96% 2%);
+  -webkit-clip-path: circle(150vw at 96% 2%);
   transition: 0.8s ease;
+  z-index: 3;
 }
 
 .hamburger-bg .logo {
   color: white;
   z-index: 6;
-  margin: 45px 0 0 30px;
+  margin: 50px 0 0 30px;
   display: flex;
   align-items: center;
-  font-family: 'Lora', serif;
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 29px;
+  font-weight: 600;
 }
 
 .hamburger-bg .logo-circle {
-  border: 5px solid #fff;
-  z-index: 6;
-  display: flex;
+  border: 0.18em solid #fff;
 }
 
 .hamburger-bg ul {
   list-style: none;
   text-decoration: none;
-  padding: 0;
+  padding: 70px 0;
   text-align: center;
   display: block;
 }
@@ -272,7 +257,7 @@ body {
 .hamburger-menu-li a {
   text-decoration: none;
   color: white;
-  font-size: 20px;
+  font-size: 0.8em;
   font-family: 'Poppins', sans-serif;
   display: block;
   position: relative;
@@ -294,15 +279,10 @@ body {
   transition: 0.3s ease-out;
 }
 
-.hamburger-menu-li:hover::before {
-  width: 157px;
-  transition: 0.3s ease-out;
-}
-
 .first-li::before {
   content: '';
   display: inline-block;
-  width: 50px;
+  width: 80px;
   height: 2px;
   background: white;
   position: absolute;
@@ -313,7 +293,7 @@ body {
 .first-li::after {
   content: '';
   display: inline-block;
-  width: 50px;
+  width: 80px;
   height: 2px;
   background: white;
   position: absolute;
@@ -322,11 +302,12 @@ body {
 }
 
 .my-face {
-  font-size: 30px;
+  font-size: 1em;
   color: #fff;
-  margin-bottom: 44px;
+  margin: 0 0 44px;
   display: inline-block;
 }
+
 }
 
 .return-arrow {
@@ -365,9 +346,6 @@ body {
   transition: all .3s ease-out;
 }
 
-.my-location-btn:hover {
-  background-position: left;
-}
 
 .my-location-icon {
   margin-left: 10px;
@@ -393,9 +371,6 @@ body {
   transition: all .3s ease-out;
 }
 
-.route-btn:hover {
-  background-position: left;
-}
 
 .distance-box {
   position: absolute;
@@ -463,14 +438,6 @@ body {
   margin-left: 0px;
 }
 
-.drive-mode:hover {
-  background: #0d7a6f !important;
-  transition: background .4s;
-}
-
-.drive-mode-active, .drive-mode-active:hover {
-  background: var(--main-color) !important;
-}
 
 .map-box * {
   padding: 0;
@@ -512,9 +479,6 @@ body {
   transition: all .3s ease-out;
 }
 
-.place-btn:hover {
-  background-position: left;
-}
 
 .my-position-btn {
   font-family: 'Poppins', sans-serif;
@@ -531,10 +495,7 @@ body {
   transition: 0.3s ease;
 }
 
-.my-position-btn:hover {
-  background-position: left;
-  transition: 0.3s ease;
-}
+
 
 .my-position-close-hover {
   background-color: #0097EC !important;
@@ -551,10 +512,7 @@ body {
   transition: background .4s;
 }
 
-.gm-ui-hover-effect:hover {
-  background: var(--main-color) !important;
-  transition: background .4s;
-}
+
 
 .gm-ui-hover-effect::before {
   content: '';
@@ -604,10 +562,6 @@ body {
   transition: .4s;
 }
 
-.gm-control-active:hover {
-  background: var(--main-color) !important;
-  transition: .4s;
-}
 
 .gm-control-active::before {
   content: '';
@@ -813,11 +767,6 @@ body {
     color: var(--dark-main-color);
   }
 
-  .my-location-btn:hover {
-    background-position: left;
-    color: #fff;
-  }
-
   .distance-box{
     flex-wrap: wrap-reverse;
   }
@@ -836,53 +785,6 @@ body {
     margin: 5px auto 10px;
   }
 }
-
-@media (max-width:560px) {
-  .hamburger-bg .logo {
-    color: white;
-    z-index: 6;
-    margin: 95px 0 0 0px;
-  }
-
-}
-
-@media (max-width: 420px) {
-  .logo-link {
-    left: 30px;
-    font-size: 20px;
-    transform: translateX(0);
-    margin: 14px 0 0;
-    justify-content: flex-start;
-  }
-
-  .logo-circle {
-    max-width: 34px;
-    max-height: 34px;
-    border: 4px solid var(--dark-main-color);
-  }
-
-  .logo-link:hover .logo-circle {
-    border: 4px solid var(--main-color);
-  }
-
-  .my-location-btn{
-    left: 30px;
-    top: 140px;
-  }
-
-  .hamburger{
-    top: 20px;
-  }
-
-
-  .first-li::before {
-    left: -80px;
-  }
-  .first-li::after {
-    right: -80px;
-  }
-}
-
 @media screen and (max-width: 750px) {
   .origin-input-container{
     width: 260px;
@@ -911,5 +813,115 @@ body {
   .place-btn{
     margin: 5px auto 10px;
     font-size: 12px !important;
+  }
+}
+
+@media (max-width:560px) {
+  .hamburger-bg .logo {
+    color: white;
+    z-index: 6;
+    margin: 120px 0 0 30px;
+  }
+
+}
+
+@media (max-width: 420px) {
+  .logo-link {
+    left: 30px;
+    font-size: 20px;
+    transform: translateX(0);
+    margin: 14px 0 0;
+    justify-content: flex-start;
+  }
+
+  .logo-circle {
+    max-width: 34px;
+    max-height: 34px;
+    border: 4px solid var(--dark-main-color);
+  }
+
+  .my-location-btn{
+    left: 30px;
+    top: 140px;
+  }
+
+  .hamburger{
+    top: 20px;
+  }
+
+  .first-li::before {
+    width: 50px;
+    left: -80px;
+  }
+
+  .first-li::after {
+    width: 50px;
+    right: -80px;
+  }
+
+}
+
+
+@media screen and (orientation: portrait) {
+  .hamburger-bg {
+    clip-path: circle(0px at 96% 2%);
+    -webkit-clip-path: circle(0px at 96% 2%);
+  }
+
+  .hamburger-bg-active {
+    clip-path: circle(150vh at 96% 2%);
+    -webkit-clip-path: circle(150vh at 96% 2%);
+  }
+}
+
+@media  (hover: hover) and (pointer: fine) {
+  .logo-link:hover {
+    color: var(--main-color);
+    transition: 0.3s ease;
+  }
+  .logo-link:hover .logo-circle {
+    border: 5px solid var(--main-color);
+    transition: 0.3s ease;
+  }
+  .hamburger:hover span {
+    background: var(--main-color);
+  }
+  .hamburger-menu-li:hover::before {
+    width: 157px;
+    transition: 0.3s ease-out;
+  }
+
+  .my-location-btn:hover {
+    background-position: left;
+  }
+  .route-btn:hover {
+    background-position: left;
+  }
+  .drive-mode:hover {
+    background: #0d7a6f !important;
+    transition: background .4s;
+  }
+
+  .drive-mode-active, .drive-mode-active:hover {
+    background: var(--main-color) !important;
+  }
+  .place-btn:hover {
+    background-position: left;
+  }
+  .my-position-btn:hover {
+    background-position: left;
+    transition: 0.3s ease;
+  }
+  .gm-ui-hover-effect:hover {
+    background: var(--main-color) !important;
+    transition: background .4s;
+  }
+  .gm-control-active:hover {
+    background: var(--main-color) !important;
+    transition: .4s;
+  }
+  .my-location-btn:hover {
+    background-position: left;
+    color: #fff;
   }
 }
