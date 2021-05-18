@@ -606,7 +606,55 @@ body {
   font-weight: 700;
   text-align: center;
 }
+.logo-link:hover {
+  color: var(--main-color);
+  transition: 0.3s ease;
+}
+.logo-link:hover .logo-circle {
+  border: 5px solid var(--main-color);
+  transition: 0.3s ease;
+}
+.hamburger:hover span {
+  background: var(--main-color);
+}
+.hamburger-menu-li:hover::before {
+  width: 157px;
+  transition: 0.3s ease-out;
+}
 
+.my-location-btn:hover {
+  background-position: left;
+}
+.route-btn:hover {
+  background-position: left;
+}
+.drive-mode:hover {
+  background: #0d7a6f !important;
+  transition: background .4s;
+}
+
+.drive-mode-active, .drive-mode-active:hover {
+  background: var(--main-color) !important;
+}
+.place-btn:hover {
+  background-position: left;
+}
+.my-position-btn:hover {
+  background-position: left;
+  transition: 0.3s ease;
+}
+.gm-ui-hover-effect:hover {
+  background: var(--main-color) !important;
+  transition: background .4s;
+}
+.gm-control-active:hover {
+  background: var(--main-color) !important;
+  transition: .4s;
+}
+.my-location-btn:hover {
+  background-position: left;
+  color: #fff;
+}
 .cycle-loading {
   position: fixed;
   top: 0;
@@ -747,7 +795,7 @@ body {
   .distance-box {
     left: 30px;
     transform: translateX(0);
-    max-width: 300px;
+    max-width: 210px;
     justify-content: flex-start;
   }
 
@@ -827,6 +875,11 @@ body {
     margin: 120px 0 0 30px;
   }
 
+  .place-img{
+    height: 250px;
+    width: 250px;
+  }
+
 }
 
 @media (max-width: 420px) {
@@ -869,53 +922,23 @@ body {
 }
 
 @media  (hover: hover) and (pointer: fine) {
-  .logo-link:hover {
-    color: var(--main-color);
-    transition: 0.3s ease;
-  }
-  .logo-link:hover .logo-circle {
-    border: 5px solid var(--main-color);
-    transition: 0.3s ease;
-  }
-  .hamburger:hover span {
-    background: var(--main-color);
-  }
-  .hamburger-menu-li:hover::before {
-    width: 157px;
-    transition: 0.3s ease-out;
+
+}
+
+@media screen and (max-height: 700px) {
+  .place-img {
+    display: none;
   }
 
-  .my-location-btn:hover {
-    background-position: left;
-  }
-  .route-btn:hover {
-    background-position: left;
-  }
-  .drive-mode:hover {
-    background: #0d7a6f !important;
-    transition: background .4s;
+  .place {
+    /* margin: 20px 20px 10px; */
+    width: 250px;
+    text-align: center;
   }
 
-  .drive-mode-active, .drive-mode-active:hover {
-    background: var(--main-color) !important;
-  }
-  .place-btn:hover {
-    background-position: left;
-  }
-  .my-position-btn:hover {
-    background-position: left;
-    transition: 0.3s ease;
-  }
-  .gm-ui-hover-effect:hover {
-    background: var(--main-color) !important;
-    transition: background .4s;
-  }
-  .gm-control-active:hover {
-    background: var(--main-color) !important;
-    transition: .4s;
-  }
-  .my-location-btn:hover {
-    background-position: left;
-    color: #fff;
+  .place-btn {
+    margin: 10 20px 20px;
+    padding: 8px;
+
   }
 }
