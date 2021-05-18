@@ -609,6 +609,11 @@ body {
   font-weight: 700;
   text-align: center;
 }
+
+div.gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom{
+  bottom: 175px !important;
+}
+
 .logo-link:hover {
   color: var(--main-color);
   transition: 0.3s ease;

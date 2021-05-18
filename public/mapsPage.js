@@ -57,8 +57,7 @@ function initMap() {
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [
-      {
+    styles: [{
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"
@@ -384,11 +383,26 @@ function initMap() {
           map.setZoom(15);
           map.panTo(pos);
 
+
+          // if(typeof marker !== "undefined")
+            // marker.setMap(null);
+
           const marker = new google.maps.Marker({
             position: pos,
             map: map,
             icon: 'images/hereStrokeBlack.svg',
           });
+
+          // google.maps.event.addListener(map, 'zoom_changed', function() {
+          //   const zoom = map.getZoom();
+          //   if (zoom < 8) {
+          //     console.log(zoom);
+          //     marker.icon = "images/"
+          //     console.log(marker.icon);
+          //   }
+          // });
+
+
 
           marker.addListener('click', (e) => {
             infoWindow.open(map);
@@ -435,6 +449,7 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
+
 
   //click listener for each travel mode button
   carModeBtn.addEventListener('click', () => {
