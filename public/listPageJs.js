@@ -43,7 +43,7 @@ document.addEventListener('mouseover', (e) => {
 });
 
 window.addEventListener('load', e => {
-  handleResChange(mediaQuery);
+  // handleResChange(1000);
 
   const mySentCity = window.localStorage.getItem('mySentCity');
   searchInput.value = mySentCity;

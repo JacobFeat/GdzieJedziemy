@@ -57,7 +57,8 @@ function initMap() {
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [{
+    styles: [
+      {
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"

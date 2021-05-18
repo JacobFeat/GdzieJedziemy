@@ -218,6 +218,8 @@ body {
   -webkit-clip-path: circle(0px at 96% 2%);
   font-size: 24px;
   z-index: 1;
+  pointer-events: none;
+
 }
 
 .hamburger-bg-active {
@@ -225,6 +227,8 @@ body {
   -webkit-clip-path: circle(150vw at 96% 2%);
   transition: 0.8s ease;
   z-index: 3;
+  pointer-events: all;
+
 }
 
 .hamburger-bg .logo {
