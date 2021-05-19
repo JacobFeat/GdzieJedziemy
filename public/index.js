@@ -8,6 +8,8 @@ const alertBox = document.querySelector('.alert-box');
 const alertBoxClose = document.querySelector('.alert-box-close');
 const layout = document.querySelector('.layout');
 busImg = document.querySelector('.bus-img');
+const alertBoxText = document.querySelector('.alert-box p');
+
 
 window.addEventListener('load', () => {
   window.localStorage.removeItem('currentDestination');
@@ -19,8 +21,6 @@ window.addEventListener('load', () => {
 });
 
 window.addEventListener('resize', () =>{
-  // console.log("Height: " + window.innerHeight);
-  console.log("Width: " + window.innerWidth);
   if(window.innerWidth>850)
   {
     busImg.setAttribute('src', '../images/bus2.png')
@@ -69,9 +69,17 @@ function displayMatches() {
     if (suggestionsCity[i]) {
       suggestionsCity[i].addEventListener('click', () => {
         const foundSuggestion = suggestionsCity[i].innerText;
-        // console.log(foundSuggestion);
-        searchInput.value = foundSuggestion;
+
+        if(foundSuggestion.includes(" ")){
+          const [firstPartCity, secondPartCity] = foundSuggestion.split(" ");
+          searchInput.value = firstPartCity.charAt(0).toUpperCase()+firstPartCity.slice(1).toLowerCase()+" "+secondPartCity.charAt(0).toUpperCase()+secondPartCity.slice(1).toLowerCase();
+        }
+        else{
+          searchInput.value = foundSuggestion.charAt(0).toUpperCase()+foundSuggestion.slice(1).toLowerCase();
+        }
+
         suggestionsList.style.display = "none";
+
       })
     }
   }
@@ -103,25 +111,41 @@ document.addEventListener('click', (e)=>{
   if(e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')){
     // e.preventDefault();
     function sendCityName(name){
-      window.localStorage.setItem('mySentCity', name);
-      // window.localStorage.setItem('originPlace', name);
+      // window.localStorage.setItem('mySentCity', name.charAt(0).toUpperCase()+name.slice(1).toLowerCase());
+      if(name.includes(" ")){
+        const [firstPartCity, secondPartCity] = name.split(" ");
+        name = firstPartCity.charAt(0).toUpperCase()+firstPartCity.slice(1).toLowerCase()+" "+secondPartCity.charAt(0).toUpperCase()+secondPartCity.slice(1).toLowerCase();
+        window.localStorage.setItem('mySentCity', name);
+      }
+      else{
+        window.localStorage.setItem('mySentCity', name.charAt(0).toUpperCase()+name.slice(1).toLowerCase());
+      }
     }
     sendCityName(searchInput.value);
     const ifYourCityIsAvailable = cities.filter(place => place.city.toUpperCase() == searchInput.value.toUpperCase());
-    if(ifYourCityIsAvailable.length == 0){
+    const hasNumber = /\d/;
+    if(ifYourCityIsAvailable.length == 0 && !hasNumber.test(searchInput.value)){
       e.preventDefault();
+      alertBoxText.innerHTML='Twojego miasta nie ma <span class="alert-box-important">jeszcze</span> w naszej bazie';
       alertBox.classList.add('alert-box-active');
       layout.classList.add('layout-active');
     }
+    if(hasNumber.test(searchInput.value)){
+      e.preventDefault();
+      alertBoxText.innerHTML="Miasto <span class='alert-box-error'>nie może</span> zawierać cyfry!";
+      alertBox.classList.add('alert-box-active');
+      layout.classList.add('layout-active');
+    }
+
   }
 
-  if(e.target.classList.contains('alert-box-close')){
+  if(e.target.closest('.alert-box-close')){
     alertBox.classList.remove('alert-box-active');
     layout.classList.remove('layout-active');
   }
 
   if(e.target.closest('.hamburger')){
-    // console.log("work");
+
     document.querySelectorAll(".hamburger span")[0].classList.toggle("span-active-first");
     document.querySelectorAll(".hamburger span")[1].classList.toggle("span-active-second");
     document.querySelectorAll(".hamburger span")[2].classList.toggle("span-active-third");
@@ -129,6 +153,10 @@ document.addEventListener('click', (e)=>{
 
   };
 });
+
+//close alert on Escape key
+document.addEventListener('keydown', closeAlert);
+
 
 // searchInput.addEventListener('change', displayMatches);
 searchInput.addEventListener('keyup', displayMatches);
@@ -187,4 +215,11 @@ function sendCordi() {
 function changeCordi(value) {
   const valueOfFound = value;
   const valueAsNumber = parseFloat(valueOfFound);
+}
+
+function closeAlert(e){
+  if(e.key == "Escape"){
+    alertBox.classList.remove('alert-box-active');
+    layout.classList.remove('layout-active');
+  }
 }

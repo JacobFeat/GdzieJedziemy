@@ -571,6 +571,9 @@ function initMap() {
   //end of initMap()
 }
 
+//close alerts
+window.addEventListener('keydown', closeAlert);
+
 
 //active hamburger
 document.addEventListener('click', (e) => {
@@ -617,4 +620,11 @@ function calcRoute(directionsService, directionsRenderer, originPlace, destinati
       // distanceField.classList.toggle('distance-display-active');
     }
   });
+}
+
+function closeAlert(e){
+  if(e.key == "Escape"){
+    alertBox.classList.remove('alert-box-active');
+    layout.classList.remove('layout-active');
+  }
 }

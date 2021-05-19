@@ -37,6 +37,7 @@ body {
   background-image: url('../images/bg-smallest.svg');
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
 }
 
 nav {
@@ -375,6 +376,7 @@ input::placeholder {
 .icons a {
   color: #fff;
   padding: 10px;
+
 }
 
 
@@ -408,6 +410,10 @@ input::placeholder {
 
 .alert-box-important {
   color: var(--main-color);
+  display: contents;
+}
+.alert-box-error {
+  color: #FC3468;
   display: contents;
 }
 
@@ -670,28 +676,31 @@ input::placeholder {
   }
   .main-container{
     background-image: url('../images/bg-big.svg');
+    overflow: hidden;
     /* background-position: 200%; */
   }
 
   .content-container{
     padding-left: 100px;
-    font-size: 45px;
+    font-size: 48px;
+    overflow: visible;
   }
 
   .content{
-    max-width: 500px;
+    max-width: 540px;
   }
 
   .search-box{
     font-size: 0.4em;
-    margin-top: 70px;
-    overflow:visible;
+    margin-top: 80px;
+
   }
 
   .bus-img{
-    right: -30px;
-    top: 120px;
+    right: 50px;
+    top: 160px;
     transform: scale(1.1);
+    /* overflow: visible; */
   }
 
 }
@@ -708,6 +717,11 @@ input::placeholder {
 
   .content-container{
     padding-left: 200px;
+    font-size: 52px;
+  }
+
+  .content{
+    max-width: 590px;
   }
 
   .bus-img{

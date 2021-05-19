@@ -498,7 +498,8 @@ body {
 .my-position-btn {
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
-  width: 100%;
+  width: 120px;
+  height: 55px;
   border: none;
   color: #fff;
   padding: 15px 10px;
@@ -909,6 +910,7 @@ div.gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom{
     max-height: 34px;
     border: 4px solid var(--dark-main-color);
   }
+
 
   .my-location-btn{
     left: 30px;
