@@ -66,6 +66,7 @@ body {
 @media screen and (max-width: 500px) {
   .bg-img {
     clip-path: url(#bgmask);
+    -webkit-clip-path: url(#bgmask);
     width: 250px;
     aspect-ratio: 1/1;
     /* height: 30vw; */

@@ -57,6 +57,7 @@ nav {
   /* padding: 060px 0 0 40px; */
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .logo-circle {
@@ -209,7 +210,7 @@ nav {
 
 .span-active-second {
   opacity: 0;
-  transition: 0.1s;
+  transition: 0.1s !important;
 }
 
 .span-active-third {
