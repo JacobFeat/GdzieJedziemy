@@ -33,6 +33,8 @@ const alertBoxText = document.querySelector('.alert-box p');
 const alertBoxClose = document.querySelector('.alert-box-close');
 const layout = document.querySelector('.layout');
 
+const mediaQueryList = window.matchMedia("(max-width:650px)");
+
 //add delete's input button when input is filling
 originInput.addEventListener('keyup', () => {
   if (originInput.value != "") {
@@ -231,9 +233,21 @@ function initMap() {
           "color": "#9e9e9e"
         }]
       }
-    ]
+    ],
+    zoomControl: true,
+    zoomControlOptions: {
+      position: google.maps.ControlPosition.RIGHT_BOTTOM,
+    },
+    streetViewControl: true,
   };
 
+//hide maps' options if media query matches
+  if(mediaQueryList.matches){
+    optionsMap.zoomControl = false;
+    optionsMap.streetViewControl = false;
+  }
+
+  // console.log(optionsMap.zoomControl);
   const map = new google.maps.Map(document.getElementById("map"), optionsMap);
   const locationButton = document.querySelector('.my-location-btn');
 
@@ -385,7 +399,7 @@ function initMap() {
 
 
           // if(typeof marker !== "undefined")
-            // marker.setMap(null);
+          // marker.setMap(null);
 
           const marker = new google.maps.Marker({
             position: pos,

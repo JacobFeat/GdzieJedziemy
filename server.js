@@ -6,7 +6,6 @@ var http = require('http');
 
 const app = express();
 
-
 app.use(express.static("public"));//display css and js
 app.use(bodyParser.urlencoded({extended: true}));
 
