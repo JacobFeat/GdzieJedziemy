@@ -1,3 +1,4 @@
+const content = document.querySelector('.content');
 const searchInput = document.querySelector(".search");
 const suggestionsList = document.querySelector(".list-of-suggestions");
 const subBtn = document.querySelector(".submit-button");
@@ -18,6 +19,10 @@ window.addEventListener('load', () => {
   {
     busImg.setAttribute('src', '../images/bus2.png')
   }
+  searchInput.classList.add('search-animation');
+  subBtn.classList.add('submit-button-animation');
+  content.classList.add('content-animation');
+  busImg.classList.add('bus-img-animation');
 });
 
 window.addEventListener('resize', () =>{

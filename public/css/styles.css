@@ -236,7 +236,31 @@ nav {
   font-size: 1em;
   font-weight: 800;
   max-width: 300px;
+  position: relative;
   /* padding: 120px 0 0 0; */
+  animation: slide-in 0.7s forwards ease, skew-in 0.9s forwards ease;
+}
+
+.content-animation{
+}
+
+@keyframes slide-in {
+  0%{
+    left: -100vw;
+  }
+  100%{
+    left: 0;
+  }
+}
+
+@keyframes skew-in {
+  0%{
+    transform: skewX(50deg);
+
+  }
+  100%{
+    transform: skewX(0deg);
+  }
 }
 
 .content span {
@@ -259,7 +283,7 @@ nav {
 .search {
   box-sizing: content-box;
   display: flex;
-  width: 280px;
+  width: 20px;
   height: 30px;
   border: 3px solid var(--main-color);
   background: #F3F3F3;
@@ -274,6 +298,14 @@ nav {
   color: #636363;
   font-size: 0.8em;
   -webkit-appearance: none;
+  transition: 0.5s ease;
+}
+
+.search-animation{
+  width: 280px;
+  transition: 0.8s ease;
+  transition-delay: 0.7s;
+  transition-property: width;
 }
 
 .search-container {
@@ -284,7 +316,7 @@ nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 245px;
+  left: -9px;
   border-radius: 100%;
   width: 34px;
   height: 34px;
@@ -292,7 +324,14 @@ nav {
   background: white;
   outline: none;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.5s ease;
+}
+
+.submit-button-animation{
+  left: 245px;
+  transition: 0.8s ease;
+  transition-delay: 0.7s;
+  transition-property: left;
 }
 
 .submit-button-arrow {
@@ -359,8 +398,15 @@ input::placeholder {
 .bus-img {
   position: absolute;
   top: 180px;
-  right: -100px;
+  right: -100vw;
   transform: scale(0.6);
+}
+
+.bus-img-animation{
+
+  right: -100px;
+  transition: 0.6s ease;
+  transition-delay: 0.6s;
 }
 
 .icons {
@@ -547,15 +593,33 @@ input::placeholder {
 
   .search {
     margin-top: 6px;
-    width: 400px;
+    /* width: 400px; */
+    width: 25px;
     height: 36px;
     font-size: 1em;
+  }
+
+  .search-animation{
+    width: 400px;
+    transition: 0.8s ease;
+    transition-delay: 0.3s;
+    transition-property: width;
+
   }
 
   .submit-button {
     position: absolute;
     top: 50%;
+    /* left: 365px; */
+    left: -6px;
+  }
+
+  .submit-button-animation{
     left: 365px;
+    transition: 0.8s ease;
+    transition-delay: 0.3s;
+    transition-property: left;
+
   }
 
   .submit-button-arrow {
