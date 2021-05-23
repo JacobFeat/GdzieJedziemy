@@ -22,6 +22,7 @@ window.addEventListener('load', () => {
   searchInput.classList.add('search-animation');
   subBtn.classList.add('submit-button-animation');
   content.classList.add('content-animation');
+  busImg.classList.add('bus-img-animation');
 });
 
 window.addEventListener('resize', () =>{

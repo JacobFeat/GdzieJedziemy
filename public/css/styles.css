@@ -241,8 +241,6 @@ nav {
   animation: slide-in 0.7s forwards ease, skew-in 0.9s forwards ease;
 }
 
-.content-animation{
-}
 
 @keyframes slide-in {
   0%{
@@ -261,14 +259,6 @@ nav {
   100%{
     transform: skewX(0deg);
   }
-}
-
-.content-animation{
-
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  transition: 0.4s ease;
-  transition-delay: 0.3s;
-  transition-property: clip-path;
 }
 
 .content span {
@@ -312,11 +302,7 @@ nav {
 .search-animation{
   width: 280px;
   transition: 0.8s ease;
-<<<<<<< HEAD
-  transition-delay: 0.3s;
-=======
   transition-delay: 0.7s;
->>>>>>> animations
   transition-property: width;
 }
 
@@ -342,11 +328,7 @@ nav {
 .submit-button-animation{
   left: 245px;
   transition: 0.8s ease;
-<<<<<<< HEAD
-  transition-delay: 0.3s;
-=======
   transition-delay: 0.7s;
->>>>>>> animations
   transition-property: left;
 }
 
@@ -414,8 +396,15 @@ input::placeholder {
 .bus-img {
   position: absolute;
   top: 180px;
-  right: -100px;
+  right: -100vw;
   transform: scale(0.6);
+}
+
+.bus-img-animation{
+
+  right: -100px;
+  transition: 0.6s ease;
+  transition-delay: 0.6s;
 }
 
 .icons {
