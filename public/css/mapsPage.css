@@ -786,6 +786,7 @@ div.gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom{
   display: flex;
   justify-content: center;
   align-items: center;
+  height: -webkit-fill-available;
 }
 
 .fade-map-icon{
@@ -799,6 +800,7 @@ div.gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom{
   pointer-events: none;
   transition: 0.4s ease;
   transition-delay: 0.4s;
+  height: -webkit-fill-available;
 }
 
 @media (max-width: 1100px) {
