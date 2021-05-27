@@ -10,6 +10,7 @@ const alertBoxClose = document.querySelector('.alert-box-close');
 const layout = document.querySelector('.layout');
 busImg = document.querySelector('.bus-img');
 const alertBoxText = document.querySelector('.alert-box p');
+const fadeIn = document.querySelector('.fade-in');
 
 
 window.addEventListener('load', () => {
@@ -36,11 +37,6 @@ window.addEventListener('resize', () =>{
   }
 });
 
-
-const myPlace = {
-  lat: 49.092
-}
-
 let cities = [];
 
 fetch('pl.json')
@@ -59,8 +55,6 @@ function displayMatches() {
   const html = matchCities.map(place => {
     const regex = new RegExp(this.value, 'gi');
     const cityName = place.city.replace(regex, `<span class="change-city-color">${this.value}</span>`);
-    // <span class="change-city-color">
-    // console.log(cityName);
     return `
         <li>
           <span class = "name">${cityName}</span>
@@ -114,7 +108,13 @@ document.addEventListener('mouseout', (e)=>{
 
 document.addEventListener('click', (e)=>{
   if(e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')){
-    // e.preventDefault();
+    e.preventDefault();
+    fadeIn.classList.add("fade-in-active");
+    setTimeout(function(){
+
+  window.location.href = "listPage";
+
+}, 500);
     function sendCityName(name){
       // window.localStorage.setItem('mySentCity', name.charAt(0).toUpperCase()+name.slice(1).toLowerCase());
       if(name.includes(" ")){
@@ -160,7 +160,7 @@ document.addEventListener('click', (e)=>{
 });
 
 //close alert on Escape key
-document.addEventListener('keydown', closeAlert);
+document.addEventListener('keydown', closeAlertAndHamburger);
 
 
 // searchInput.addEventListener('change', displayMatches);
@@ -169,21 +169,13 @@ searchInput.addEventListener('focusin', () => {
   suggestionsList.style.display = "inline-block";
 });
 
-searchInput.addEventListener('keyup', sendCordi);
-searchInput.addEventListener('change', sendCordi);
-logo.addEventListener('click', sendCordi);
-// searchInput.addEventListener('focusout', (e) => {
-//   // if(e.target.className)
-//   console.log(e.target);
-//   suggestionsList.style.display = "none";
-// });
-// //
-// suggestionsList.addEventListener("click", (e) => {
-//   console.log("test");
-// });
+searchInput.addEventListener('keyup', showSuggestedCities);
+searchInput.addEventListener('change', showSuggestedCities);
+logo.addEventListener('click', showSuggestedCities);
+
 
 // sending name of city and values of position
-function sendCordi() {
+function showSuggestedCities() {
   function findCity(place) {
     const regex = new RegExp(searchInput.value, 'gi');
     return place.city.match(regex);
@@ -196,22 +188,16 @@ function sendCordi() {
   const foundCity = cities.filter(findCity)
                           .map(mapCity);
 
-  const displayFound = function() {
-  }
-
   for (let i = 0; i < 3; i++) {
     if (suggestionsCity[i]) {
       suggestionsCity[i].addEventListener('click', () => {
         const foundCity = cities.filter(findCity)
           .map(mapCity);
-        const displayFound = function() {
-        }
-        displayFound();
+
         const changed = changeCordi(foundCity[0]);
       })
     }
   }
-  displayFound();
   const changed = changeCordi(foundCity[0]);
 
 }
@@ -222,9 +208,13 @@ function changeCordi(value) {
   const valueAsNumber = parseFloat(valueOfFound);
 }
 
-function closeAlert(e){
+function closeAlertAndHamburger(e){
   if(e.key == "Escape"){
     alertBox.classList.remove('alert-box-active');
     layout.classList.remove('layout-active');
+    document.querySelectorAll(".hamburger span")[0].classList.remove("span-active-first");
+    document.querySelectorAll(".hamburger span")[1].classList.remove("span-active-second");
+    document.querySelectorAll(".hamburger span")[2].classList.remove("span-active-third");
+    document.querySelector(".hamburger-bg").classList.remove("hamburger-bg-active");
   }
 }

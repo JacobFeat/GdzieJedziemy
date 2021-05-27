@@ -32,6 +32,7 @@ body {
 
 .bg-img {
   clip-path: url(#bgmask);
+  -webkit-clip-path: url(#bgmask);
   width: 400px;
   aspect-ratio: 1/1;
   animation: roller 1s infinite alternate;

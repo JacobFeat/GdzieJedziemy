@@ -246,8 +246,6 @@ function initMap() {
     optionsMap.zoomControl = false;
     optionsMap.streetViewControl = false;
   }
-
-  // console.log(optionsMap.zoomControl);
   const map = new google.maps.Map(document.getElementById("map"), optionsMap);
   const locationButton = document.querySelector('.my-location-btn');
 
@@ -407,16 +405,6 @@ function initMap() {
             icon: 'images/hereStrokeBlack.svg',
           });
 
-          // google.maps.event.addListener(map, 'zoom_changed', function() {
-          //   const zoom = map.getZoom();
-          //   if (zoom < 8) {
-          //     console.log(zoom);
-          //     marker.icon = "images/"
-          //     console.log(marker.icon);
-          //   }
-          // });
-
-
 
           marker.addListener('click', (e) => {
             infoWindow.open(map);
@@ -463,6 +451,17 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
+
+  google.maps.event.addListener(map, 'zoom_changed', function() {
+    const zoom = map.getZoom();
+    if (zoom < 8) {
+      console.log(zoom);
+      // marker.icon = "images/"
+      // console.log(marker.icon);
+    }
+    // console.log(zoom);
+  });
+
 
 
   //click listener for each travel mode button

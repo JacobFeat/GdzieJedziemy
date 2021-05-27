@@ -11,19 +11,11 @@ const frontCardAll = document.querySelectorAll(".front-card");
 const placeDistanceAll = document.querySelectorAll(".place-distance");
 const closeBackCard = document.querySelector(".close-back-card");
 const frontCardDot = document.querySelectorAll(".front-card-dot");
+const fadeOut = document.querySelector('.fade-out');
 let suggestionsCity = suggestionsList.children;
 
+
 const mediaQuery = window.matchMedia('(max-width: 768px)');
-
-console.log(document.querySelector('.logo-link').getBoundingClientRect().top);
-
-
-window.addEventListener('resize', ()=>{
-  // handleResChange(mediaQuery);
-  console.log(window.innerWidth);
-  if(window.innerWidth<500){
-  }
-})
 
 
 
@@ -44,7 +36,7 @@ document.addEventListener('mouseover', (e) => {
 
 window.addEventListener('load', e => {
   // handleResChange(1000);
-
+  fadeOut.classList.add("fade-out-active");
   const mySentCity = window.localStorage.getItem('mySentCity');
   searchInput.value = mySentCity;
   window.localStorage.setItem('originPlace', searchInput.value);
@@ -66,7 +58,7 @@ window.addEventListener('load', e => {
     document.querySelectorAll('.name')[0].appendChild(dotForLi);
   }, 300);
 
-  setTimeout(sendCordi, 300, myPlaceArray, cities);
+  setTimeout(showSuggestedCities, 300, myPlaceArray, cities);
   // suggestionsCity[0].style.display = "inline-block";
   // suggestionsCity[0].innerHTML = "<span class='name'>" + searchInput.value + "<span class='dot-for-li'></span></span>";
 });
@@ -121,8 +113,6 @@ document.addEventListener('click', (e) => {
 
     SmoothVerticalScrolling(e.target, 500, "top");
 
-
-    console.log(e.target.parentElement);
     e.target.closest('.front-card').style.marginBottom = "364px";
     e.target.closest('.card-container').classList.add('li-active');
 
@@ -154,8 +144,6 @@ document.addEventListener('click', (e) => {
                                     .map(keys => `{"lat": ${keys.coords.lat}, "lng": ${keys.coords.lng}}`)
 
     window.localStorage.setItem('currentDestination', searchPlace[0]);
-    console.log(  window.localStorage.getItem('currentDestination'));
-
   }
 
   if (e.target.classList.contains('name')) {
@@ -190,7 +178,7 @@ document.addEventListener('click', (e) => {
       //Set current city as a local storage's origin place when you click suggestion city
       window.localStorage.setItem('originPlace',suggestionsCity[myCurrentCityIndex].innerText);
     }
-    sendCordi(myPlaceArray, cities);
+    showSuggestedCities(myPlaceArray, cities);
 
   }
 
@@ -260,7 +248,7 @@ searchInput.addEventListener('keyup', displayMatches);
 
 
 // sending name of city and values of position
-function sendCordi(object, arrayOfCities) {
+function showSuggestedCities(object, arrayOfCities) {
   function findCity(place) {
     const regex = new RegExp(searchInput.value, 'gi');
     return place.city.match(regex);
@@ -303,8 +291,6 @@ function sendCordi(object, arrayOfCities) {
 //short place description on resize
 function handleResChange(e){
   if(e.matches){
-    // console.log("Res changed");
-    // console.log(window.innerWidth);
     const placeDescriptionAll = document.querySelectorAll('.place-description');
     placeDescriptionAll.forEach(place => {
       place.innerText = place.innerText.slice(0, 30) + "...";

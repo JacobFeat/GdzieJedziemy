@@ -506,6 +506,28 @@ input::placeholder {
   pointer-events: all;
 }
 
+.fade-in{
+  position: fixed;
+  top: 0;
+  left: -100vw;
+  height: 100vh;
+  width: 100vw;
+  background: var(--main-color);
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fade-in img{
+  width: 150px;
+}
+
+.fade-in-active{
+  left: 0;
+  transition: 0.4s ease;
+}
+
 @media (orientation: portrait) and (max-height:670px) {
   .main-container{
     min-height: 670px;
@@ -600,7 +622,7 @@ input::placeholder {
   .search-animation{
     width: 400px;
     transition: 0.8s ease;
-    transition-delay: 0.3s;
+    transition-delay: 0.7s;
     transition-property: width;
 
   }
@@ -615,7 +637,7 @@ input::placeholder {
   .submit-button-animation{
     left: 365px;
     transition: 0.8s ease;
-    transition-delay: 0.3s;
+    transition-delay: 0.7s;
     transition-property: left;
 
   }
