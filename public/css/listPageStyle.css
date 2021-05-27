@@ -508,11 +508,35 @@ body {
 }
 
 .fade-out img{
-  width: 150px;
+  width: 100px;
 }
 
 .fade-out-active{
   left: 100vw;
+  transition: 0.4s ease;
+  transition-delay: 0.3s;
+}
+
+.fade-in-map{
+  position: fixed;
+  top: -100vh;
+  left: 0vw;
+  height: 100vh;
+  width: 100vw;
+  background: var(--main-color);
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fade-map-icon{
+  color: #fff;
+  font-size: 60px !important;
+}
+
+.fade-in-map-active{
+  top: 0;
   transition: 0.4s ease;
 }
 

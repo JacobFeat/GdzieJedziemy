@@ -16,8 +16,7 @@ const fadeIn = document.querySelector('.fade-in');
 window.addEventListener('load', () => {
   window.localStorage.removeItem('currentDestination');
   window.localStorage.removeItem('originPlace');
-  if(window.innerWidth>850)
-  {
+  if (window.innerWidth > 850) {
     busImg.setAttribute('src', '../images/bus2.png')
   }
   searchInput.classList.add('search-animation');
@@ -26,13 +25,11 @@ window.addEventListener('load', () => {
   busImg.classList.add('bus-img-animation');
 });
 
-window.addEventListener('resize', () =>{
-  if(window.innerWidth>850)
-  {
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 850) {
     busImg.setAttribute('src', '../images/bus2.png')
   }
-  if(window.innerWidth<650)
-  {
+  if (window.innerWidth < 650) {
     busImg.setAttribute('src', '../images/bus2-small.png')
   }
 });
@@ -69,12 +66,11 @@ function displayMatches() {
       suggestionsCity[i].addEventListener('click', () => {
         const foundSuggestion = suggestionsCity[i].innerText;
 
-        if(foundSuggestion.includes(" ")){
+        if (foundSuggestion.includes(" ")) {
           const [firstPartCity, secondPartCity] = foundSuggestion.split(" ");
-          searchInput.value = firstPartCity.charAt(0).toUpperCase()+firstPartCity.slice(1).toLowerCase()+" "+secondPartCity.charAt(0).toUpperCase()+secondPartCity.slice(1).toLowerCase();
-        }
-        else{
-          searchInput.value = foundSuggestion.charAt(0).toUpperCase()+foundSuggestion.slice(1).toLowerCase();
+          searchInput.value = firstPartCity.charAt(0).toUpperCase() + firstPartCity.slice(1).toLowerCase() + " " + secondPartCity.charAt(0).toUpperCase() + secondPartCity.slice(1).toLowerCase();
+        } else {
+          searchInput.value = foundSuggestion.charAt(0).toUpperCase() + foundSuggestion.slice(1).toLowerCase();
         }
 
         suggestionsList.style.display = "none";
@@ -93,63 +89,61 @@ function displayMatches() {
 }
 
 //hover event for submit button
-document.addEventListener('mouseover', (e)=>{
-  if(e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')){
+document.addEventListener('mouseover', (e) => {
+  if (e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')) {
     subBtn.classList.add('submit-button-active');
     subBtnArrow.classList.add('submit-button-arrow-active');
   }
 });
-document.addEventListener('mouseout', (e)=>{
-  if(e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')){
+document.addEventListener('mouseout', (e) => {
+  if (e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')) {
     subBtn.classList.remove('submit-button-active');
     subBtnArrow.classList.remove('submit-button-arrow-active');
   }
 });
 
-document.addEventListener('click', (e)=>{
-  if(e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')){
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')) {
     e.preventDefault();
     fadeIn.classList.add("fade-in-active");
-    setTimeout(function(){
+    setTimeout(function() {
+      window.location.href = "listPage";
+    }, 500);
 
-  window.location.href = "listPage";
-
-}, 500);
-    function sendCityName(name){
+    function sendCityName(name) {
       // window.localStorage.setItem('mySentCity', name.charAt(0).toUpperCase()+name.slice(1).toLowerCase());
-      if(name.includes(" ")){
+      if (name.includes(" ")) {
         const [firstPartCity, secondPartCity] = name.split(" ");
-        name = firstPartCity.charAt(0).toUpperCase()+firstPartCity.slice(1).toLowerCase()+" "+secondPartCity.charAt(0).toUpperCase()+secondPartCity.slice(1).toLowerCase();
+        name = firstPartCity.charAt(0).toUpperCase() + firstPartCity.slice(1).toLowerCase() + " " + secondPartCity.charAt(0).toUpperCase() + secondPartCity.slice(1).toLowerCase();
         window.localStorage.setItem('mySentCity', name);
-      }
-      else{
-        window.localStorage.setItem('mySentCity', name.charAt(0).toUpperCase()+name.slice(1).toLowerCase());
+      } else {
+        window.localStorage.setItem('mySentCity', name.charAt(0).toUpperCase() + name.slice(1).toLowerCase());
       }
     }
     sendCityName(searchInput.value);
     const ifYourCityIsAvailable = cities.filter(place => place.city.toUpperCase() == searchInput.value.toUpperCase());
     const hasNumber = /\d/;
-    if(ifYourCityIsAvailable.length == 0 && !hasNumber.test(searchInput.value)){
+    if (ifYourCityIsAvailable.length == 0 && !hasNumber.test(searchInput.value)) {
       e.preventDefault();
-      alertBoxText.innerHTML='Twojego miasta nie ma <span class="alert-box-important">jeszcze</span> w naszej bazie';
+      alertBoxText.innerHTML = 'Twojego miasta nie ma <span class="alert-box-important">jeszcze</span> w naszej bazie';
       alertBox.classList.add('alert-box-active');
       layout.classList.add('layout-active');
     }
-    if(hasNumber.test(searchInput.value)){
+    if (hasNumber.test(searchInput.value)) {
       e.preventDefault();
-      alertBoxText.innerHTML="Miasto <span class='alert-box-error'>nie może</span> zawierać cyfry!";
+      alertBoxText.innerHTML = "Miasto <span class='alert-box-error'>nie może</span> zawierać cyfry!";
       alertBox.classList.add('alert-box-active');
       layout.classList.add('layout-active');
     }
 
   }
 
-  if(e.target.closest('.alert-box-close')){
+  if (e.target.closest('.alert-box-close')) {
     alertBox.classList.remove('alert-box-active');
     layout.classList.remove('layout-active');
   }
 
-  if(e.target.closest('.hamburger')){
+  if (e.target.closest('.hamburger')) {
 
     document.querySelectorAll(".hamburger span")[0].classList.toggle("span-active-first");
     document.querySelectorAll(".hamburger span")[1].classList.toggle("span-active-second");
@@ -186,7 +180,7 @@ function showSuggestedCities() {
   }
 
   const foundCity = cities.filter(findCity)
-                          .map(mapCity);
+    .map(mapCity);
 
   for (let i = 0; i < 3; i++) {
     if (suggestionsCity[i]) {
@@ -208,8 +202,8 @@ function changeCordi(value) {
   const valueAsNumber = parseFloat(valueOfFound);
 }
 
-function closeAlertAndHamburger(e){
-  if(e.key == "Escape"){
+function closeAlertAndHamburger(e) {
+  if (e.key == "Escape") {
     alertBox.classList.remove('alert-box-active');
     layout.classList.remove('layout-active');
     document.querySelectorAll(".hamburger span")[0].classList.remove("span-active-first");
