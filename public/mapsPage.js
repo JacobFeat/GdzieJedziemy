@@ -32,6 +32,7 @@ const alertBox = document.querySelector('.alert-box');
 const alertBoxText = document.querySelector('.alert-box p');
 const alertBoxClose = document.querySelector('.alert-box-close');
 const layout = document.querySelector('.layout');
+const fadeOutMap = document.querySelector('.fade-out-map');
 
 const mediaQueryList = window.matchMedia("(max-width:650px)");
 
@@ -361,6 +362,8 @@ function initMap() {
 
 
   window.addEventListener('load', e => {
+    //page transition Animation
+    fadeOutMap.classList.add('fade-out-map-active');
     //get origin place on load
     const originPlace = window.localStorage.getItem('originPlace');
     originInput.value = originPlace;

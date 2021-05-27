@@ -12,6 +12,7 @@ const placeDistanceAll = document.querySelectorAll(".place-distance");
 const closeBackCard = document.querySelector(".close-back-card");
 const frontCardDot = document.querySelectorAll(".front-card-dot");
 const fadeOut = document.querySelector('.fade-out');
+const fadeInMap = document.querySelector('.fade-in-map');
 let suggestionsCity = suggestionsList.children;
 
 
@@ -144,6 +145,11 @@ document.addEventListener('click', (e) => {
                                     .map(keys => `{"lat": ${keys.coords.lat}, "lng": ${keys.coords.lng}}`)
 
     window.localStorage.setItem('currentDestination', searchPlace[0]);
+    e.preventDefault();
+    setTimeout(function() {
+      window.location.href = "mapsPage";
+    }, 500);
+    fadeInMap.classList.add('fade-in-map-active');
   }
 
   if (e.target.classList.contains('name')) {
@@ -186,6 +192,7 @@ document.addEventListener('click', (e) => {
   if(e.target.closest('.map-icon-link')){
     window.localStorage.setItem('originPlace', searchInput.value);
     window.localStorage.removeItem('currentDestination');
+    mapsPageTransition();
   }
 
   function SmoothVerticalScrolling(e, time, where) {
@@ -360,6 +367,10 @@ function calculateCordi(latValue, lngValue, object) {
 
 }
 
-function gitNew(){
-
-};
+function mapsPageTransition(){
+  e.preventDefault();
+  setTimeout(function() {
+    window.location.href = "mapsPage";
+  }, 500);
+  fadeInMap.classList.add('fade-in-map-active');
+}
