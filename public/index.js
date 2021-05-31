@@ -10,7 +10,12 @@ const alertBoxClose = document.querySelector('.alert-box-close');
 const layout = document.querySelector('.layout');
 busImg = document.querySelector('.bus-img');
 const alertBoxText = document.querySelector('.alert-box p');
+
 const fadeIn = document.querySelector('.fade-in');
+const hamburgerBg = document.querySelector('.hamburger-bg');
+const hamburgerLogo = document.querySelector('.hamburger-bg .logo');
+const myFace = document.querySelector('.hamburger-bg .my-face');
+const mapIcon = document.querySelector('.map-icon');
 
 
 window.addEventListener('load', () => {
@@ -141,7 +146,21 @@ document.addEventListener('click', (e) => {
 
   }
 
-
+const hamburgerList = document.querySelector('.hamburger-bg ul');
+  if(e.target.closest('li')){
+    e.preventDefault();
+    myFace.classList.add('my-face-list-active');
+    hamburgerLogo.classList.add('logo-list-active');
+    hamburgerList.style.transform="scaleY(0)";
+    document.querySelector('.hamburger').style.transform="scaleX(0)";
+    // console.log(e.target.closest('li').children[0].innerText);
+    if(e.target.closest('li').children[0].innerText == "Mapa"){
+      mapIcon.classList.add("map-icon-list-active");
+      setTimeout(function() {
+        window.location.href = "mapsPage";
+      }, 1000);
+    }
+  }
 
   if (e.target.closest('.alert-box-close')) {
     alertBox.classList.remove('alert-box-active');
