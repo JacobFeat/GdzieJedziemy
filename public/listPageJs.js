@@ -192,7 +192,11 @@ document.addEventListener('click', (e) => {
   if(e.target.closest('.map-icon-link')){
     window.localStorage.setItem('originPlace', searchInput.value);
     window.localStorage.removeItem('currentDestination');
-    mapsPageTransition();
+    e.preventDefault();
+    setTimeout(function() {
+      window.location.href = "mapsPage";
+    }, 500);
+    fadeInMap.classList.add('fade-in-map-active');
   }
 
   function SmoothVerticalScrolling(e, time, where) {
@@ -365,12 +369,4 @@ function calculateCordi(latValue, lngValue, object) {
     spotsList.querySelectorAll('.front-card')[i].querySelector('.place-distance').innerHTML = `${roundDistance}  km`;
   }
 
-}
-
-function mapsPageTransition(){
-  e.preventDefault();
-  setTimeout(function() {
-    window.location.href = "mapsPage";
-  }, 500);
-  fadeInMap.classList.add('fade-in-map-active');
 }

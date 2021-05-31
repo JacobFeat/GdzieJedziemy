@@ -105,10 +105,6 @@ document.addEventListener('mouseout', (e) => {
 document.addEventListener('click', (e) => {
   if (e.target.classList.contains('submit-button') || e.target.classList.contains('submit-button-arrow')) {
     e.preventDefault();
-    fadeIn.classList.add("fade-in-active");
-    setTimeout(function() {
-      window.location.href = "listPage";
-    }, 500);
 
     function sendCityName(name) {
       // window.localStorage.setItem('mySentCity', name.charAt(0).toUpperCase()+name.slice(1).toLowerCase());
@@ -116,6 +112,7 @@ document.addEventListener('click', (e) => {
         const [firstPartCity, secondPartCity] = name.split(" ");
         name = firstPartCity.charAt(0).toUpperCase() + firstPartCity.slice(1).toLowerCase() + " " + secondPartCity.charAt(0).toUpperCase() + secondPartCity.slice(1).toLowerCase();
         window.localStorage.setItem('mySentCity', name);
+
       } else {
         window.localStorage.setItem('mySentCity', name.charAt(0).toUpperCase() + name.slice(1).toLowerCase());
       }
@@ -129,14 +126,22 @@ document.addEventListener('click', (e) => {
       alertBox.classList.add('alert-box-active');
       layout.classList.add('layout-active');
     }
-    if (hasNumber.test(searchInput.value)) {
+    else if (hasNumber.test(searchInput.value)) {
       e.preventDefault();
       alertBoxText.innerHTML = "Miasto <span class='alert-box-error'>nie może</span> zawierać cyfry!";
       alertBox.classList.add('alert-box-active');
       layout.classList.add('layout-active');
     }
+    else{
+      fadeIn.classList.add("fade-in-active");
+      setTimeout(function() {
+        window.location.href = "listPage";
+      }, 500);
+    }
 
   }
+
+
 
   if (e.target.closest('.alert-box-close')) {
     alertBox.classList.remove('alert-box-active');
