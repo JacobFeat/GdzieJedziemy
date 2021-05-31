@@ -55,7 +55,6 @@ nav {
   font-size: 1.2em;
   font-weight: 800;
   margin: 0;
-  /* padding: 060px 0 0 40px; */
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -72,7 +71,6 @@ nav {
 }
 
 .hamburger {
-  /* border: 1px solid black; */
   width: 40px;
   height: 30px;
   display: flex;
@@ -80,14 +78,12 @@ nav {
   justify-content: space-evenly;
   cursor: pointer;
   z-index: 4;
-  /* mix-blend-mode: luminosity; */
+  transition: 0.3s;
 }
 
 .hamburger span {
-
   width: 100%;
   height: 10%;
-  /* background: var(--main-color); */
   background: #00786B;
   cursor: pointer;
   transition: transform 0.5s, opacity 0.5s, background 0.5s;
@@ -125,10 +121,19 @@ nav {
 }
 
 .hamburger-bg .logo {
+  position: relative;
+  top: 0;
+  transition: top 0.3s, transform 0.5s;
   color: white;
   z-index: 6;
   margin: 120px 0 0 30px;
   display: flex;
+}
+
+.logo-list-active{
+  top: 40vh !important;
+  /* opacity: 0; */
+  transform: scale(0.0);
 }
 
 .hamburger-bg .logo-circle {
@@ -141,6 +146,7 @@ nav {
   padding: 70px 0;
   text-align: center;
   display: block;
+  transition: 0.5s;
 }
 
 .hamburger-bg li {
@@ -196,12 +202,45 @@ nav {
 }
 
 .my-face {
+  position: relative;
+  top: 0;
+  transition: top 0.3s, transform 0.5s;
   font-size: 1em;
   color: #fff;
   margin: 0 0 44px;
   display: inline-block;
 }
 
+.my-face-list-active{
+  top: -40vh;
+  /* opacity: 0; */
+  transform: scale(0);
+}
+
+.map-icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  color: #fff;
+  font-size: 60px !important;
+  /* transition: 0.3s; */
+  /* transition-delay:  2s; */
+}
+
+.map-icon-list-active{
+  animation: icon-rise 0.4s forwards 0.5s;
+}
+
+@keyframes icon-rise {
+  0%{
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  100%{
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
 .span-active-first {
   background: #fff !important;
   transform: rotate(45deg) translate(-2px, -8px);
