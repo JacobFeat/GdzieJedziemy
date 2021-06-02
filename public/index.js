@@ -150,7 +150,7 @@ const hamburgerList = document.querySelector('.hamburger-bg ul');
   if(e.target.closest('li')){
     myFace.classList.add('my-face-list-active');
     hamburgerLogo.classList.add('logo-list-active');
-    hamburgerList.style.transform="scaleY(0)";
+    hamburgerList.style.transform="scale(0)";
     document.querySelector('.hamburger').style.transform="scaleX(0)";
     // console.log(e.target.closest('li').children[0].innerText);
     if(e.target.closest('li').children[0].innerText == "Mapa"){
