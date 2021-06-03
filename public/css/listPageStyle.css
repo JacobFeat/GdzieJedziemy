@@ -54,9 +54,9 @@ body {
 }
 
 .logo-circle {
-  width: 40px;
-  height: 40px;
-  border: 6px solid var(--main-color);
+  min-width: 40px;
+  min-height: 40px;
+  border: 4px solid var(--main-color);
   border-radius: 100%;
   display: block;
   box-sizing: content-box;
@@ -512,6 +512,23 @@ body {
   width: 80px;
 }
 
+.fade-out .logo{
+  font-family: 'Lora', serif;
+  z-index: 99;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.fade-out .logo-circle{
+  border: 4px solid #fff;
+  margin: 0 6px;
+}
+
 .fade-out-active{
   left: 100vw;
   transition: 0.4s ease;
@@ -525,7 +542,9 @@ body {
   left: 0vw;
   height: 100vh;
   width: 100vw;
-  background: var(--main-color);
+  background: linear-gradient(
+197.88deg
+, #08BDAA 20.42%, #16D9C4 99.54%);
   z-index: 99;
   display: flex;
   justify-content: center;
@@ -544,9 +563,9 @@ body {
   height: -webkit-fill-available;
 }
 
+
+
 /*-------- MEDIA QUERIES --------- */
-
-
 
 @media (orientation: portrait) {
 

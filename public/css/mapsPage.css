@@ -239,7 +239,37 @@ body {
   z-index: 3;
   pointer-events: all;
   visibility: visible;
+}
 
+.hamburger-bg .logo-center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.logo-list-active {
+  top: 36vh !important;
+  /* opacity: 0; */
+  transform: scale(0.0);
+}
+
+.logo-center-list-active{
+  animation: icon-rise 0.4s forwards 0.5s;
+}
+
+.map-icon-list-active {
+  animation: icon-rise 0.4s forwards 0.5s;
+}
+
+@keyframes icon-rise {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .hamburger-bg .logo {
@@ -253,6 +283,17 @@ body {
   text-decoration: none;
 }
 
+.map-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  color: #fff;
+  font-size: 60px !important;
+  /* transition: 0.3s; */
+  /* transition-delay:  2s; */
+}
+
 .hamburger-bg .logo-circle {
   border: 0.18em solid #fff;
 }
@@ -263,6 +304,8 @@ body {
   padding: 70px 0;
   text-align: center;
   display: block;
+  transition: 0.5s;
+
 }
 
 .hamburger-bg li {
@@ -324,7 +367,12 @@ body {
   display: inline-block;
 }
 
+.my-face-list-active {
+  top: -40vh;
+  /* opacity: 0; */
+  transform: scale(0);
 }
+
 
 .return-arrow {
   width: 49px;
@@ -804,6 +852,44 @@ div.gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom{
   transition-delay: 0.4s;
   height: -webkit-fill-available;
 }
+
+.logo-center {
+  z-index: 99;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+.logo-circle-center {
+  border: 4px solid #fff;
+  min-width: 40px;
+  min-height: 40px;
+  margin: 0 6px;
+  border-radius: 100%;
+  display: block;
+  box-sizing: content-box;
+}
+
+.fade-in-active {
+  left: 0;
+  transition: 0.4s ease;
+  height: -webkit-fill-available;
+}
+
+@keyframes fading {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+    display: none;
+  }
+}
+
 
 @media (max-width: 1100px) {
   .my-location-text {

@@ -34,6 +34,11 @@ const alertBoxClose = document.querySelector('.alert-box-close');
 const layout = document.querySelector('.layout');
 const fadeOutMap = document.querySelector('.fade-out-map');
 
+const hamburgerLogo = document.querySelector('.hamburger-bg .logo');
+const myFace = document.querySelector('.hamburger-bg .my-face');
+const mapIcon = document.querySelector('.map-icon');
+const logoCenterHamburger = document.querySelector('.hamburger-bg .logo-center');
+const hamburgerList = document.querySelector('.hamburger-bg ul');
 const mediaQueryList = window.matchMedia("(max-width:650px)");
 
 //add delete's input button when input is filling
@@ -60,7 +65,8 @@ function initMap() {
     mapTypeControl: false,
     // mapTypeId: "satellite",
     minZoom: 3,
-    styles: [{
+    styles: [
+      {
         "elementType": "geometry",
         "stylers": [{
           "color": "#f5f5f5"
@@ -586,6 +592,29 @@ document.addEventListener('click', (e) => {
     document.querySelectorAll(".hamburger span")[2].classList.toggle("span-active-third");
     document.querySelector(".hamburger-bg").classList.toggle("hamburger-bg-active");
   };
+
+
+  if(e.target.closest('.hamburger-bg li')){
+    myFace.classList.add('my-face-list-active');
+    hamburgerLogo.classList.add('logo-list-active');
+    hamburgerList.style.transform="scale(0)";
+    document.querySelector('.hamburger').style.transform="scaleX(0)";
+    // console.log(e.target.closest('li').children[0].innerText);
+    if(e.target.closest('li').children[0].innerText == "Mapa"){
+      e.preventDefault();
+      mapIcon.classList.add("map-icon-list-active");
+      setTimeout(function() {
+        window.location.href = "mapsPage";
+      }, 1000);
+    }
+    if(e.target.closest('li').children[0].innerText == "Strona Główna"){
+      e.preventDefault();
+      logoCenterHamburger.classList.add("logo-center-list-active");
+      setTimeout(function() {
+        window.location.href = "/";
+      }, 1000);
+    }
+  }
 });
 
 //close alert

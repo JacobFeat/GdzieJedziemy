@@ -16,6 +16,8 @@ const hamburgerBg = document.querySelector('.hamburger-bg');
 const hamburgerLogo = document.querySelector('.hamburger-bg .logo');
 const myFace = document.querySelector('.hamburger-bg .my-face');
 const mapIcon = document.querySelector('.map-icon');
+const logoCenterHamburger = document.querySelector('.hamburger-bg .logo-center');
+const hamburgerList = document.querySelector('.hamburger-bg ul');
 
 
 window.addEventListener('load', () => {
@@ -146,8 +148,7 @@ document.addEventListener('click', (e) => {
 
   }
 
-const hamburgerList = document.querySelector('.hamburger-bg ul');
-  if(e.target.closest('li')){
+  if(e.target.closest('.hamburger-bg li')){
     myFace.classList.add('my-face-list-active');
     hamburgerLogo.classList.add('logo-list-active');
     hamburgerList.style.transform="scale(0)";
@@ -162,7 +163,10 @@ const hamburgerList = document.querySelector('.hamburger-bg ul');
     }
     if(e.target.closest('li').children[0].innerText == "Strona Główna"){
       e.preventDefault();
-      console.log('hehe');
+      logoCenterHamburger.classList.add("logo-center-list-active");
+      setTimeout(function() {
+        window.location.href = "/";
+      }, 1000);
     }
   }
 
