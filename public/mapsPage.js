@@ -586,6 +586,14 @@ window.addEventListener('keydown', closeAlert);
 //active hamburger
 document.addEventListener('click', (e) => {
 
+  if(e.target.closest('.logo-link')){
+    e.preventDefault();
+    document.querySelector('.fade-out-welcome').style.top="0";
+    setTimeout(function() {
+      window.location.href = "/";
+    }, 500);
+  }
+  
   if (e.target.closest('.hamburger')) {
     document.querySelectorAll(".hamburger span")[0].classList.toggle("span-active-first");
     document.querySelectorAll(".hamburger span")[1].classList.toggle("span-active-second");

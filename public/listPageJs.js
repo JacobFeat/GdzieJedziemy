@@ -1,5 +1,4 @@
-
-
+const logo = document.querySelector(".logo-link");
 const searchInput = document.querySelector(".search");
 let suggestionsList = document.querySelector(".list-of-suggestions");
 const lookupIcon = document.querySelector(".lookup-icon");
@@ -101,8 +100,6 @@ document.addEventListener('click', (e) => {
     document.querySelector('.close-search').classList.remove('close-search-active');
   }
 
-
-
   //expand card and add margin bottom to expanded card
   if (e.target.closest('.front-card')) {
     //scroll to picked card
@@ -197,6 +194,14 @@ document.addEventListener('click', (e) => {
       window.location.href = "mapsPage";
     }, 500);
     fadeInMap.classList.add('fade-in-map-active');
+  }
+
+  if(e.target.closest('.logo-link')){
+    e.preventDefault();
+    document.querySelector('.fade-out-welcome').style.top="0";
+    setTimeout(function() {
+      window.location.href = "/";
+    }, 500);
   }
 
   function SmoothVerticalScrolling(e, time, where) {

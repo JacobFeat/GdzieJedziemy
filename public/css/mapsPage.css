@@ -854,6 +854,7 @@ div.gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom{
 }
 
 .logo-center {
+  font-family: 'Lora', serif;
   z-index: 99;
   color: #fff;
   font-size: 20px;
@@ -879,6 +880,23 @@ div.gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom{
   transition: 0.4s ease;
   height: -webkit-fill-available;
 }
+
+.fade-out-welcome{
+  position: fixed;
+  top: -100vh;
+  left: 00vw;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(197.88deg, #08BDAA 20.42%, #16D9C4 99.54%);
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  height: -webkit-fill-available;
+  pointer-events: none;
+}
+
 
 @keyframes fading {
   0%{

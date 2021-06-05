@@ -181,8 +181,16 @@ document.addEventListener('click', (e) => {
     document.querySelectorAll(".hamburger span")[1].classList.toggle("span-active-second");
     document.querySelectorAll(".hamburger span")[2].classList.toggle("span-active-third");
     document.querySelector(".hamburger-bg").classList.toggle("hamburger-bg-active");
-
   };
+
+  if (e.target.closest('nav .logo')){
+    console.log("hi");
+    e.preventDefault();
+    document.querySelector('.fade-out-welcome').style.top="0";
+    setTimeout(function() {
+      window.location.href = "/";
+    }, 500);
+  }
 });
 
 //close alert on Escape key
