@@ -98,6 +98,7 @@ document.addEventListener('click', (e) => {
     searchInput.value = "";
     suggestionsList.style.display="none";
     document.querySelector('.close-search').classList.remove('close-search-active');
+    searchInput.focus();
   }
 
   //expand card and add margin bottom to expanded card

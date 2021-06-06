@@ -680,6 +680,24 @@ input::placeholder {
   }
 }
 
+@media (max-width:360px) {
+  .bus-img-animation {
+    right: -140px;
+  }
+
+  .search-animation {
+    width: 240px;
+  }
+
+  .submit-button-animation{
+    left: 205px;
+  }
+
+  .list-of-suggestions{
+    width: 240px;
+  }
+}
+
 @media (min-width:430px) {
   .main-container {
     background-image: url('../images/bg-small6.svg');

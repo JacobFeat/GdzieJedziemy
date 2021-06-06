@@ -4664,6 +4664,17 @@
         "population_proper": ""
     }, 
     {
+        "city": "Libi\u0105\u017c", 
+        "lat": "50.1036", 
+        "lng": "19.3156", 
+        "country": "Poland", 
+        "iso2": "PL", 
+        "admin_name": "Ma\u0142opolskie",
+        "capital": "minor", 
+        "population": "", 
+        "population_proper": ""
+    }, 
+    {
         "city": "\u0141obez", 
         "lat": "53.6392", 
         "lng": "15.6214", 
