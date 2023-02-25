@@ -1,6 +1,6 @@
 # GdzieJedziemy
 
-**That was my first serious project which I'm very proud of but I know now that a lot of things I could do better 😅 
+**That was my first serious project which I'm very proud of but I know now that a lot of things I could do better 😅**
 
 A project that allows people to find an awesome place where they can spend their time when they get bored.
 
