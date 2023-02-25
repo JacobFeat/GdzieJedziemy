@@ -1,4 +1,7 @@
 # GdzieJedziemy
+
+# That was my first serious project which I'm very proud of but I know now that a lot of things I could do better 😅 
+
 A project that allows people to find an awesome place where they can spend their time when they get bored.
 
 Main page's and list page's input use JSON file of Polish cities. That was a good opportunity to learn e.g. fetch.
